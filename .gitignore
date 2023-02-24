@@ -1,0 +1,8 @@
+# debt-detective
+debt-detective/node_modules
+debt-detective/out
+debt-detective/dist
+debt-detective/.vscode-debt-detective/
+debt-detective/*.vsix
+
+#backend
