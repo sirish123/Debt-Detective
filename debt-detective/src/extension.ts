@@ -1,26 +1,67 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
+import { PkgInstaller } from "./pkgInstaller";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+async function getDiagnostics(
+  doc: vscode.TextDocument
+): Promise<vscode.Diagnostic[]> {
+  const text = doc.getText();
+  const diagnostics = new Array<vscode.Diagnostic>();
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "debt-detective" is now active!');
+  const textArr: string[] = text.split(/\r\n|\n/);
+  const packages = textArr;
+  console.log(packages);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('debt-detective.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Debt Detective!');
-	});
+  for (let i = 0; i < packages.length; i++) {
+    const pkg = packages[i];
 
-	context.subscriptions.push(disposable);
+    diagnostics.push({
+      severity: vscode.DiagnosticSeverity.Information,
+      message: `Package ${pkg} is not installed`,
+      code: "pkg-installer",
+      source: "pkg-installer",
+      range: new vscode.Range(i, 0, pkg.length, i),
+    });
+  }
+
+  return diagnostics;
 }
 
-// This method is called when your extension is deactivated
+export async function activate(context: vscode.ExtensionContext) {
+  const diagnosticCollection =
+    vscode.languages.createDiagnosticCollection("pkg-installer");
+
+  const handler = async (doc: vscode.TextDocument) => {
+    if (!doc.fileName.endsWith(".js")) {
+      return;
+    }
+    //console.log("handler");
+    //console.log(doc.fileName);
+    const diagnostics = await getDiagnostics(doc);
+    diagnosticCollection.set(doc.uri, diagnostics);
+    console.log(diagnostics);
+  };
+
+  if (vscode.window.activeTextEditor) {
+    await handler(vscode.window.activeTextEditor.document);
+  }
+
+  const didOpen = vscode.workspace.onDidOpenTextDocument((doc) => handler(doc));
+  const didChange = vscode.workspace.onDidChangeTextDocument((e) =>
+    handler(e.document)
+  );
+  const didSave = vscode.workspace.onDidSaveTextDocument((doc) => handler(doc));
+  const codeActionProvider = vscode.languages.registerCodeActionsProvider(
+    "javascript",
+    new PkgInstaller(context)
+  );
+
+  context.subscriptions.push(
+    diagnosticCollection,
+    didOpen,
+    didSave,
+    didChange,
+    codeActionProvider
+  );
+}
+
 export function deactivate() {}
