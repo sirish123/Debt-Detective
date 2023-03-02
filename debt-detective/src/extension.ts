@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { PkgInstaller } from "./pkgInstaller";
+import { SidebarDataProvider } from "./sidebarDataProvider";
 
 async function getDiagnostics(
   doc: vscode.TextDocument
@@ -9,7 +10,7 @@ async function getDiagnostics(
 
   const textArr: string[] = text.split(/\r\n|\n/);
   const packages = textArr;
-  console.log(packages);
+  //console.log(packages);
 
   for (let i = 0; i < packages.length; i++) {
     const pkg = packages[i];
@@ -38,7 +39,7 @@ export async function activate(context: vscode.ExtensionContext) {
     //console.log(doc.fileName);
     const diagnostics = await getDiagnostics(doc);
     diagnosticCollection.set(doc.uri, diagnostics);
-    console.log(diagnostics);
+    // console.log(diagnostics);
   };
 
   if (vscode.window.activeTextEditor) {
@@ -54,6 +55,18 @@ export async function activate(context: vscode.ExtensionContext) {
     "javascript",
     new PkgInstaller(context)
   );
+
+  const rootPath =
+    vscode.workspace.workspaceFolders &&
+    vscode.workspace.workspaceFolders.length > 0
+      ? vscode.workspace.workspaceFolders[0].uri.fsPath
+      : "";
+
+  const sidebarDataProvider = new SidebarDataProvider(rootPath);
+  vscode.window.registerTreeDataProvider("debt-detective", sidebarDataProvider);
+  vscode.window.createTreeView("debt-detective", {
+    treeDataProvider: sidebarDataProvider,
+  });
 
   context.subscriptions.push(
     diagnosticCollection,
