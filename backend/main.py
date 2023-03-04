@@ -23,7 +23,7 @@ async def root():
 async def osv():
     
     url = "https://api.osv.dev/v1/query"
-    data = '{"version": "2.4.1", "package": {"name": "jinja2", "ecosystem": "PyPI"}}'
+    data = '{"version": "0.9.6", "package": {"name": "numpy", "ecosystem": "PyPI"}}'
 
     response = requests.post(url, data=data)
     
