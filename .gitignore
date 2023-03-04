@@ -6,3 +6,4 @@ debt-detective/.vscode-debt-detective/
 debt-detective/*.vsix
 venv
 #backend
+__pycache__
