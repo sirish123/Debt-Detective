@@ -1,6 +1,7 @@
-from fastapi import FastAPI;
+from fastapi import FastAPI, Request;
 from typing import Union;
 import requests
+
 
 app = FastAPI();
 
@@ -28,3 +29,15 @@ async def osv():
     response = requests.post(url, data=data)
     
     return response.json()
+
+
+@app.get("/pkg")
+async def pkg(request: Request): 
+    data = request.query_params
+
+    for key, value in data.items():
+        print(key)
+        print(value)
+
+
+    return {"message": "Hello World"}
