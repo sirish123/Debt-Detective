@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request;
 from typing import Union;
 import requests
 
+
 app = FastAPI();
 
 #enable CORS
@@ -36,3 +37,15 @@ async def safety(packages: Request):
     return {
         "data": packages_info
     }
+
+
+@app.get("/pkg")
+async def pkg(request: Request): 
+    data = request.query_params
+
+    for key, value in data.items():
+        print(key)
+        print(value)
+
+
+    return {"message": "Hello World"}
