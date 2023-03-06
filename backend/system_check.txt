@@ -1,0 +1,257 @@
+{
+    "report_meta": {
+        "scan_target": "files",
+        "scanned": [
+            "requirements.txt"
+        ],
+        "policy_file": null,
+        "policy_file_source": "local",
+        "api_key": false,
+        "local_database_path": null,
+        "safety_version": "2.3.5",
+        "timestamp": "2023-03-06 11:07:45",
+        "packages_found": 41,
+        "vulnerabilities_found": 1,
+        "vulnerabilities_ignored": 0,
+        "remediations_recommended": 0,
+        "telemetry": {
+            "os_type": "Windows",
+            "os_release": "10",
+            "os_description": "Windows-10-10.0.22621-SP0",
+            "python_version": "3.9.1",
+            "safety_command": "check",
+            "safety_options": {
+                "files": {
+                    "-r": 1
+                },
+                "output": {
+                    "--output": 1
+                }
+            },
+            "safety_version": "2.3.5",
+            "safety_source": "cli"
+        },
+        "git": {
+            "branch": "master",
+            "tag": "",
+            "commit": "64fa4e40bb4c7716e77311bea688eca2e9ed6bb7",
+            "dirty": true,
+            "origin": "https://github.com/Ganesh-P03/SE_tool_team5.git"
+        },
+        "project": null,
+        "json_version": 1
+    },
+    "scanned_packages": {
+        "anyio": {
+            "name": "anyio",
+            "version": "3.6.2"
+        },
+        "astroid": {
+            "name": "astroid",
+            "version": "2.14.2"
+        },
+        "bandit": {
+            "name": "bandit",
+            "version": "1.7.4"
+        },
+        "certifi": {
+            "name": "certifi",
+            "version": "2022.12.7"
+        },
+        "charset-normalizer": {
+            "name": "charset-normalizer",
+            "version": "3.0.1"
+        },
+        "click": {
+            "name": "click",
+            "version": "8.1.3"
+        },
+        "colorama": {
+            "name": "colorama",
+            "version": "0.4.6"
+        },
+        "dill": {
+            "name": "dill",
+            "version": "0.3.6"
+        },
+        "dparse": {
+            "name": "dparse",
+            "version": "0.6.2"
+        },
+        "fastapi": {
+            "name": "fastapi",
+            "version": "0.92.0"
+        },
+        "gitdb": {
+            "name": "gitdb",
+            "version": "4.0.10"
+        },
+        "GitPython": {
+            "name": "GitPython",
+            "version": "3.1.31"
+        },
+        "h11": {
+            "name": "h11",
+            "version": "0.14.0"
+        },
+        "idna": {
+            "name": "idna",
+            "version": "3.4"
+        },
+        "insecure-package": {
+            "name": "insecure-package",
+            "version": "0.1.0"
+        },
+        "isort": {
+            "name": "isort",
+            "version": "5.12.0"
+        },
+        "lazy-object-proxy": {
+            "name": "lazy-object-proxy",
+            "version": "1.9.0"
+        },
+        "mccabe": {
+            "name": "mccabe",
+            "version": "0.7.0"
+        },
+        "packaging": {
+            "name": "packaging",
+            "version": "21.3"
+        },
+        "pbr": {
+            "name": "pbr",
+            "version": "5.11.1"
+        },
+        "platformdirs": {
+            "name": "platformdirs",
+            "version": "3.1.0"
+        },
+        "pydantic": {
+            "name": "pydantic",
+            "version": "1.10.5"
+        },
+        "pylint": {
+            "name": "pylint",
+            "version": "2.16.3"
+        },
+        "pyparsing": {
+            "name": "pyparsing",
+            "version": "3.0.9"
+        },
+        "PyYAML": {
+            "name": "PyYAML",
+            "version": "6.0"
+        },
+        "requests": {
+            "name": "requests",
+            "version": "2.28.2"
+        },
+        "ruamel.yaml": {
+            "name": "ruamel.yaml",
+            "version": "0.17.21"
+        },
+        "ruamel.yaml.clib": {
+            "name": "ruamel.yaml.clib",
+            "version": "0.2.7"
+        },
+        "safety": {
+            "name": "safety",
+            "version": "2.3.5"
+        },
+        "smmap": {
+            "name": "smmap",
+            "version": "5.0.0"
+        },
+        "sniffio": {
+            "name": "sniffio",
+            "version": "1.3.0"
+        },
+        "starlette": {
+            "name": "starlette",
+            "version": "0.25.0"
+        },
+        "stevedore": {
+            "name": "stevedore",
+            "version": "5.0.0"
+        },
+        "toml": {
+            "name": "toml",
+            "version": "0.10.2"
+        },
+        "tomli": {
+            "name": "tomli",
+            "version": "2.0.1"
+        },
+        "tomlkit": {
+            "name": "tomlkit",
+            "version": "0.11.6"
+        },
+        "typing": {
+            "name": "typing",
+            "version": "3.7.4.3"
+        },
+        "typing-extensions": {
+            "name": "typing-extensions",
+            "version": "4.5.0"
+        },
+        "urllib3": {
+            "name": "urllib3",
+            "version": "1.26.14"
+        },
+        "uvicorn": {
+            "name": "uvicorn",
+            "version": "0.20.0"
+        },
+        "wrapt": {
+            "name": "wrapt",
+            "version": "1.15.0"
+        }
+    },
+    "affected_packages": {
+        "insecure-package": {
+            "name": "insecure-package",
+            "version": "0.1.0",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        }
+    },
+    "announcements": [],
+    "vulnerabilities": [
+        {
+            "vulnerability_id": "25853",
+            "package_name": "insecure-package",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<0.2.0",
+            "all_vulnerable_specs": [
+                "<0.2.0"
+            ],
+            "analyzed_version": "0.1.0",
+            "advisory": "This is an insecure package with lots of exploitable security vulnerabilities.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": null,
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/25853/f17"
+        }
+    ],
+    "ignored_vulnerabilities": [],
+    "remediations": {
+        "insecure-package": {
+            "current_version": "0.1.0",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=0.1.0"
+        }
+    }
+}
