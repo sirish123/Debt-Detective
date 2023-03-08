@@ -1,12 +1,20 @@
 from fastapi import FastAPI, Request;
-from typing import Union;
+from typing import Union
 import requests
-
-
+from fastapi import FastAPI
+import json
+import sys;
 app = FastAPI();
+'''
+libaries.io -> Github stars and forks, Number of dependants and number of items dependant on it
+Safety -> Vulnerabilities, package name , version, latest safe package version
+depricated packages-> package name, version, latest version, reason for deprication
+Stackoverflow give the top 10 questions
+pipdeptree -> give the problematic version list
 
+'''
 #enable CORS
-@app.middleware("http")
+@app.middleware("http")   
 async def add_cors_headers(request, call_next):
     response = await call_next(request)
     response.headers["Access-Control-Allow-Origin"] = "*"
@@ -16,8 +24,14 @@ async def add_cors_headers(request, call_next):
 
 # test route
 @app.get("/")
-async def root():
-    return {"message": "Hello World"}
+async def read_root():
+    package = "Pypi";
+    name = "numpy";
+    # url = "https://libraries.io/api/%s/%s?api=7b7f69d0b46f645c7cfc7c6231db6ae6?",%(package,name);
+    url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name="numpy");
+    print(url);
+    data = '{"api_key" = "7b7f69d0b46f645c7cfc7c6231db6ae6"}';
+    return requests.get(url).json();
 
 # gets data from osv database for the given package
 @app.get("/osv")
