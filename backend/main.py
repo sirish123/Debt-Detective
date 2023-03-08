@@ -5,9 +5,16 @@ from fastapi import FastAPI
 import json
 import sys;
 app = FastAPI();
-password = "nigga";
+password = "nigga";'''
+libaries.io -> Github stars and forks, Number of dependants and number of items dependant on it
+Safety -> Vulnerabilities, package name , version, latest safe package version
+depricated packages-> package name, version, latest version, reason for deprication
+Stackoverflow give the top 10 questions
+pipdeptree -> give the problematic version list
+
+'''
 #enable CORS
-@app.middleware("http")
+@app.middleware("http")   
 async def add_cors_headers(request, call_next):
     response = await call_next(request)
     response.headers["Access-Control-Allow-Origin"] = "*"
