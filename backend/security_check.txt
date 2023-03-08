@@ -1,33 +1,55 @@
 {
   "errors": [],
-  "generated_at": "2023-03-06T05:37:46Z",
+  "generated_at": "2023-03-08T10:18:19Z",
   "metrics": {
     "_totals": {
       "CONFIDENCE.HIGH": 0,
       "CONFIDENCE.LOW": 0,
-      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.MEDIUM": 1,
       "CONFIDENCE.UNDEFINED": 0,
       "SEVERITY.HIGH": 0,
-      "SEVERITY.LOW": 0,
+      "SEVERITY.LOW": 1,
       "SEVERITY.MEDIUM": 0,
       "SEVERITY.UNDEFINED": 0,
-      "loc": 24,
+      "loc": 42,
       "nosec": 0,
       "skipped_tests": 0
     },
     "main.py": {
       "CONFIDENCE.HIGH": 0,
       "CONFIDENCE.LOW": 0,
-      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.MEDIUM": 1,
       "CONFIDENCE.UNDEFINED": 0,
       "SEVERITY.HIGH": 0,
-      "SEVERITY.LOW": 0,
+      "SEVERITY.LOW": 1,
       "SEVERITY.MEDIUM": 0,
       "SEVERITY.UNDEFINED": 0,
-      "loc": 24,
+      "loc": 42,
       "nosec": 0,
       "skipped_tests": 0
     }
   },
-  "results": []
+  "results": [
+    {
+      "code": "7 app = FastAPI();\n8 password = \"nigga\";\n9 #enable CORS\n10 @app.middleware(\"http\")\n11 async def add_cors_headers(request, call_next):\n",
+      "col_offset": 11,
+      "filename": "main.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'nigga'",
+      "line_number": 8,
+      "line_range": [
+        8,
+        9,
+        10
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    }
+  ]
 }

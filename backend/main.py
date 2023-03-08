@@ -5,7 +5,7 @@ from fastapi import FastAPI
 import json
 import sys;
 app = FastAPI();
-
+password = "nigga";
 #enable CORS
 @app.middleware("http")
 async def add_cors_headers(request, call_next):
@@ -20,7 +20,6 @@ async def add_cors_headers(request, call_next):
 async def read_root():
     package = "Pypi";
     name = "numpy";
-    # url = "https://libraries.io/api/%s/%s?api=7b7f69d0b46f645c7cfc7c6231db6ae6?",%(package,name);
     url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name="numpy");
     print(url);
     data = '{"api_key" = "7b7f69d0b46f645c7cfc7c6231db6ae6"}';
@@ -49,10 +48,7 @@ async def safety(packages: Request):
 @app.get("/pkg")
 async def pkg(request: Request): 
     data = request.query_params
-
     for key, value in data.items():
         print(key)
         print(value)
-
-
     return {"message": "Hello World"}
