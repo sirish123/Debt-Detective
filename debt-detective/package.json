@@ -1,60 +1,87 @@
 {
-  "name": "debt-detective",
-  "displayName": "Debt Detective",
-  "description": "",
-  "version": "0.0.1",
+  "name": "vscode-webview-react",
+  "version": "0.1.0",
   "engines": {
-    "vscode": "^1.75.0"
+    "vscode": "^1.23.0"
   },
-  "categories": [
-    "Other"
-  ],
+  "publisher": "rebornix",
   "activationEvents": [
     "onLanguage:python"
   ],
-  "main": "./out/extension.js",
+  "main": "./build/ext-src/extension.js",
   "contributes": {
-    "views": {
-      "explorer": [
+    "commands": [
+      {
+        "command": "react-webview.start",
+        "title": "Start React Webview",
+        "category": "React"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
         {
-          "id": "debt-detective",
-          "name": "Debt Detective"
+          "id": "webview",
+          "title": "Example for webview",
+          "icon": "./assets/extension-icon.png"
         }
       ]
     },
-    "commands": [
-      {
-        "command": "debt-detective.helloWorld",
-        "title": "Hello World"
-      }
-    ]
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
-  },
-  "devDependencies": {
-    "@types/glob": "^8.0.1",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "16.x",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "@types/vscode": "^1.75.0",
-    "@typescript-eslint/eslint-plugin": "^5.49.0",
-    "@typescript-eslint/parser": "^5.49.0",
-    "@vscode/test-electron": "^2.2.2",
-    "eslint": "^8.33.0",
-    "glob": "^8.1.0",
-    "mocha": "^10.1.0",
-    "typescript": "^4.9.4"
+    "views": {
+      "webview": [
+        {
+          "type": "webview",
+          "id": "react-webview.webview",
+          "name": "Webview",
+          "icon": "src/assets/extension-icon.png"
+        }
+      ]
+    }
   },
   "dependencies": {
+    "@types/react-dom": "^17.0.11",
     "axios": "^1.3.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  }
+    "bootstrap": "^5.3.0-alpha1",
+    "dotenv-webpack": "^7.1.0",
+    "module-alias": "^2.2.2",
+    "nodemon": "^2.0.21",
+    "path": "^0.12.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "recharts": "^2.4.3",
+    "terser": "^5.15.0",
+    "yarn": "^1.22.19"
+  },
+  "resolutions": {},
+  "scripts": {
+    "vscode:prepublish": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
+    "start": "react-scripts start",
+    "build": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/jest": "^23.3.13",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.64.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "@vscode/test-electron": "^2.1.2",
+    "eslint": "^8.9.0",
+    "glob": "^7.2.0",
+    "mocha": "^9.2.1",
+    "react-scripts": "^5.0.1",
+    "rewire": "^6.0.0",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

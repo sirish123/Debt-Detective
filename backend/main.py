@@ -1,9 +1,8 @@
 from fastapi import FastAPI, Request;
 from typing import Union
 import requests
-from fastapi import FastAPI
 import json
-import sys;
+import sys
 app = FastAPI();
 '''
 libaries.io -> Github stars and forks, Number of dependants and number of items dependant on it, depricated packages
