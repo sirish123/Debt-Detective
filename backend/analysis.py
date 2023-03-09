@@ -7,5 +7,8 @@ if __name__ == '__main__':
     with open(input_file, "r") as f:
         input_data = f.read()
     python_dict= json.loads(input_data);
-    # print(python_dict);
-    print(python_dict["affected_packages"]);
+    returnDict = {};
+    # Safety -> Vulnerabilities, package name , version, latest safe package version
+    returnDict["vulnerabilities"] = python_dict["vulnerabilities"];
+    jsonObject = json.dumps(returnDict,indent=0);
+    print(jsonObject);

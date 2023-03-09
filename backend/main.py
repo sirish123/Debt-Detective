@@ -5,13 +5,12 @@ from fastapi import FastAPI
 import json
 import sys;
 app = FastAPI();
-password = "nigga";'''
-libaries.io -> Github stars and forks, Number of dependants and number of items dependant on it
+'''
+libaries.io -> Github stars and forks, Number of dependants and number of items dependant on it, depricated packages
 Safety -> Vulnerabilities, package name , version, latest safe package version
 depricated packages-> package name, version, latest version, reason for deprication
 Stackoverflow give the top 10 questions
 pipdeptree -> give the problematic version list
-
 '''
 #enable CORS
 @app.middleware("http")   
@@ -25,12 +24,22 @@ async def add_cors_headers(request, call_next):
 # test route
 @app.get("/")
 async def read_root():
-    package = "Pypi";
-    name = "numpy";
-    url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name="numpy");
-    print(url);
-    data = '{"api_key" = "7b7f69d0b46f645c7cfc7c6231db6ae6"}';
-    return requests.get(url).json();
+    f = open("requirements.txt","r");
+    dictVal = [];
+    with open("requirements.txt", "r") as f:
+        curr_string = f.read();
+        [name,version] = curr_string.split('==');
+        url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name=name);
+        pythonDict = json.loads((requests.get(url)).text)
+        returnDict = {}
+        version = "";
+        returnDict["stars"] = pythonDict["stars"]
+        returnDict["forks"] = pythonDict["forks"]
+        returnDict["dependents_count"] = pythonDict["dependents_count"];
+        returnDict["is_deprecated"] = not (version == pythonDict["latest_release_number"]  or version == pythonDict["latest_stable_release_number"])
+        jsonObject = json.dumps(returnDict);
+        dictVal.append(jsonObject);
+    return {};
 
 # gets data from osv database for the given package
 @app.get("/osv")
@@ -46,7 +55,6 @@ async def osv():
 @app.post("/safety")
 async def safety(packages: Request):
     packages_info = await packages.json()
-    
     return {
         "data": packages_info
     }
