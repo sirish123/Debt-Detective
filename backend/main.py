@@ -3,6 +3,9 @@ from typing import Union
 import requests
 import json
 import sys
+from ratelimit import limits,sleep_and_retry
+CALLS = 30;
+RATE_LIMIT = 60;
 app = FastAPI();
 '''
 libaries.io -> Github stars and forks, Number of dependants and number of items dependant on it, depricated packages
@@ -21,24 +24,39 @@ async def add_cors_headers(request, call_next):
     return response
 
 # test route
+@sleep_and_retry
+@limits(calls=CALLS,period=RATE_LIMIT)
 @app.get("/")
 async def read_root():
-    f = open("requirements.txt","r");
-    dictVal = [];
-    with open("requirements.txt", "r") as f:
-        curr_string = f.read();
-        [name,version] = curr_string.split('==');
-        url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name=name);
-        pythonDict = json.loads((requests.get(url)).text)
-        returnDict = {}
-        version = "";
-        returnDict["stars"] = pythonDict["stars"]
-        returnDict["forks"] = pythonDict["forks"]
-        returnDict["dependents_count"] = pythonDict["dependents_count"];
-        returnDict["is_deprecated"] = not (version == pythonDict["latest_release_number"]  or version == pythonDict["latest_stable_release_number"])
-        jsonObject = json.dumps(returnDict);
-        dictVal.append(jsonObject);
-    return {};
+        input_data = "";
+        with open("system_check.txt", "r") as f:
+            input_data = f.read()
+        python_dict_vul= json.loads(input_data);
+        dictVal = [];
+        with open("requirements.txt", "r") as f:
+            for dependency in f:
+                curr_string  = dependency[:-1];
+                [name,version] = curr_string.split('=='); 
+                # dictVal.append(name+"*"+version);
+                url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name=name);
+                # dictVal.append(url);
+                if(url==""):
+                    continue;
+                pythonDic = ((requests.get(url)));
+                try:
+                    pythonDict = pythonDic.json();
+                    returnDict = {}
+                    version = "";
+                    returnDict["name"] = name;
+                    returnDict["stars"] = pythonDict["stars"]
+                    returnDict["forks"] = pythonDict["forks"]
+                    returnDict["dependents_count"] = pythonDict["dependents_count"];
+                    returnDict["is_deprecated"] = not (version == pythonDict["latest_release_number"]  or version == pythonDict["latest_stable_release_number"])
+                    dictVal.append(returnDict);
+                except:
+                    continue;
+        return {"libio":dictVal ,  "vulnerabilities":python_dict_vul["vulnerabilities"]};
+        return {"arr": dictVal}; 
 
 # gets data from osv database for the given package
 @app.get("/osv")
