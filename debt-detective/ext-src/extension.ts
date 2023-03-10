@@ -54,7 +54,7 @@ export function activate(context: vscode.ExtensionContext) {
       return;
     }
     console.log("inside handler");
-    getDepOfPkg(doc);
+    //getDepOfPkg(doc);
   };
 
   if (vscode.window.activeTextEditor) {
@@ -104,21 +104,31 @@ export function activate(context: vscode.ExtensionContext) {
 
       message = data.data["message"];
 
-      context.subscriptions.push(
-        vscode.window.registerWebviewViewProvider(
-          "react-webview.webview",
-          new ReactPanel(
-            context.extensionUri,
-            context.extensionPath,
-            message,
-            vscode.ViewColumn.One
-          )
-        )
-      );
+      // context.subscriptions.push(
+      //   vscode.window.registerWebviewViewProvider(
+      //     "react-webview.webview",
+      //     new ReactPanel(
+      //       context.extensionUri,
+      //       context.extensionPath,
+      //       message,
+      //       vscode.ViewColumn.One
+      //     )
+      //   )
+      // );
     } else {
       console.log("no file");
     }
   });
 
-  context.subscriptions.push(didSave, onDidEndTask);
+  context.subscriptions.push(didSave, onDidEndTask,
+    vscode.window.registerWebviewViewProvider(
+      "react-webview.webview",
+      new ReactPanel(
+        context.extensionUri,
+        context.extensionPath,
+        message,
+        vscode.ViewColumn.One
+      )
+    )
+  );
 }
