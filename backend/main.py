@@ -26,37 +26,45 @@ async def add_cors_headers(request, call_next):
 # test route
 @sleep_and_retry
 @limits(calls=CALLS,period=RATE_LIMIT)
-@app.get("/")
-async def read_root():
+@app.post("/")
+async def read_root(request: Request):
+        for key,value in request.query_params.items():
+            print(key,value)
+        dependency_list = request.query_params["val"].split(",")
+        
         input_data = "";
         with open("system_check.txt", "r") as f:
             input_data = f.read()
         python_dict_vul= json.loads(input_data);
         dictVal = [];
-        with open("requirements.txt", "r") as f:
-            for dependency in f:
-                curr_string  = dependency[:-1];
-                [name,version] = curr_string.split('=='); 
-                # dictVal.append(name+"*"+version);
-                url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name=name);
-                # dictVal.append(url);
-                if(url==""):
-                    continue;
-                pythonDic = ((requests.get(url)));
-                try:
-                    pythonDict = pythonDic.json();
-                    returnDict = {}
-                    version = "";
-                    returnDict["name"] = name;
-                    returnDict["stars"] = pythonDict["stars"]
-                    returnDict["forks"] = pythonDict["forks"]
-                    returnDict["dependents_count"] = pythonDict["dependents_count"];
-                    returnDict["is_deprecated"] = not (version == pythonDict["latest_release_number"]  or version == pythonDict["latest_stable_release_number"])
-                    dictVal.append(returnDict);
-                except:
-                    continue;
+        
+        for dependency in dependency_list:
+            curr_string  = dependency[:-1]
+            try:
+                [name,version] = curr_string.split('==')
+                print(name,version)
+            except:
+                return {"error":curr_string}
+            # dictVal.append(name+"*"+version);
+            url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name=name);
+            # dictVal.append(url);
+            if(url==""):
+                continue;
+            pythonDic = ((requests.get(url)));
+            try:
+                pythonDict = pythonDic.json();
+                returnDict = {}
+                version = "";
+                returnDict["name"] = name;
+                returnDict["stars"] = pythonDict["stars"]
+                returnDict["forks"] = pythonDict["forks"]
+                returnDict["dependents_count"] = pythonDict["dependents_count"];
+                returnDict["is_deprecated"] = not (version == pythonDict["latest_release_number"]  or version == pythonDict["latest_stable_release_number"])
+                dictVal.append(returnDict);
+            except:
+                continue;
         return {"libio":dictVal ,  "vulnerabilities":python_dict_vul["vulnerabilities"]};
-        return {"arr": dictVal}; 
+        
 
 # gets data from osv database for the given package
 @app.get("/osv")
