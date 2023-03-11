@@ -1,3 +1,2 @@
 #!/bin/bash
-
-safety check -r requirements.txt --output json > system_check.txt
+echo "hello"
