@@ -23,9 +23,18 @@ async function getDepOfPkg(doc: vscode.TextDocument) {
     }
   }
 
+  //shell execution for all packages
+  // pipdeptree -p <pkg1> <pkg2> <pkg3> > output.txt
+
   const shellExec = new vscode.ShellExecution(
-    `venv\\Scripts\\activate && pipdeptree -p ${packages[0]} > output.txt`
+    `venv\\Scripts\\activate && pipdeptree -p ${packages.join(
+      ","
+    )} > output.txt`
   );
+
+  // const shellExec = new vscode.ShellExecution(
+  //   `venv\\Scripts\\activate && pipdeptree -p ${packages[0]} > output.txt`
+  // );
 
   message = "updating2...";
   vscode.tasks.executeTask(
@@ -40,13 +49,13 @@ async function getDepOfPkg(doc: vscode.TextDocument) {
   );
 }
 
-export async function makeApiCall(required: { [key: string]: string }) {
-  const data = await axios.get(`http://127.00.1:8000/pkg`, {
-    params: { required },
-  });
-  console.log(data);
-  message = "done";
-}
+// export async function makeApiCall(required: { [key: string]: string }) {
+//   const data = await axios.get(`http://127.00.1:8000/pkg`, {
+//     params: { required },
+//   });
+//   console.log(data);
+//   message = "done";
+// }
 
 export function activate(context: vscode.ExtensionContext) {
   const handler = (doc: vscode.TextDocument) => {
@@ -54,7 +63,7 @@ export function activate(context: vscode.ExtensionContext) {
       return;
     }
     console.log("inside handler");
-    //getDepOfPkg(doc);
+    getDepOfPkg(doc);
   };
 
   if (vscode.window.activeTextEditor) {
@@ -97,38 +106,51 @@ export function activate(context: vscode.ExtensionContext) {
           }
         }
       }
-      console.log(required);
-      const data = await axios.get(`http://127.00.1:8000/pkg`, {
-        params: { required },
-      });
 
-      message = data.data["message"];
+      let temp: string = "";
 
-      // context.subscriptions.push(
-      //   vscode.window.registerWebviewViewProvider(
-      //     "react-webview.webview",
-      //     new ReactPanel(
-      //       context.extensionUri,
-      //       context.extensionPath,
-      //       message,
-      //       vscode.ViewColumn.One
-      //     )
-      //   )
-      // );
+      for (const [key, value] of Object.entries(required)) {
+        temp += `${key}==${value},`;
+      }
+      if (temp[temp.length - 1] === ",") temp = temp.slice(0, -1);
+      console.log(temp);
+
+      //post to localhost:8000 with query param {val: temp}
+
+      let url: string = "http://localhost:8000";
+
+      //make url as localhost:8000?val=temp
+      url += `?val=${temp}`;
+      console.log(url);
+      try {
+        const data = await axios.post(url);
+
+        message = "received data";
+        console.log(data);
+        if (data) {
+          if (data.data["libio"].length > 0) {
+            message = data.data["libio"][0]["dependents_count"];
+          }
+        }
+      } catch (err) {
+        message = "received";
+      }
+
+      context.subscriptions.push(
+        vscode.window.registerWebviewViewProvider(
+          "react-webview.webview",
+          new ReactPanel(
+            context.extensionUri,
+            context.extensionPath,
+            message,
+            vscode.ViewColumn.One
+          )
+        )
+      );
     } else {
       console.log("no file");
     }
   });
 
-  context.subscriptions.push(didSave, onDidEndTask,
-    vscode.window.registerWebviewViewProvider(
-      "react-webview.webview",
-      new ReactPanel(
-        context.extensionUri,
-        context.extensionPath,
-        message,
-        vscode.ViewColumn.One
-      )
-    )
-  );
+  context.subscriptions.push(didSave, onDidEndTask);
 }
