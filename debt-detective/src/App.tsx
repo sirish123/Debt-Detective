@@ -35,10 +35,7 @@ class App extends React.Component<
       <div className="App bg-dark">
         <p>
           {JSON.parse(this.props.parameter!).map((obj: any) => (
-            <>
-              <div>Name: {obj.scores[0]}</div>
-              <div>NAme:{obj.community[0].PkgName}</div>
-            </>
+            <Debt data={obj} />
           ))}
         </p>
 

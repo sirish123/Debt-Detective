@@ -9,16 +9,16 @@
         "api_key": false,
         "local_database_path": null,
         "safety_version": "2.3.5",
-        "timestamp": "2023-03-12 20:40:29",
-        "packages_found": 11,
-        "vulnerabilities_found": 25,
+        "timestamp": "2023-03-12 21:43:32",
+        "packages_found": 45,
+        "vulnerabilities_found": 33,
         "vulnerabilities_ignored": 0,
         "remediations_recommended": 0,
         "telemetry": {
             "os_type": "Windows",
             "os_release": "10",
             "os_description": "Windows-10-10.0.22621-SP0",
-            "python_version": "3.9.1",
+            "python_version": "3.9.12",
             "safety_command": "check",
             "safety_options": {
                 "files": {
@@ -34,7 +34,7 @@
         "git": {
             "branch": "master",
             "tag": "",
-            "commit": "89b33aea19796a981b9738bc493592dc82161a75",
+            "commit": "e5bcf05e58afa6d1b731ca128589b4eec59a2405",
             "dirty": true,
             "origin": "https://github.com/Ganesh-P03/SE_tool_team5.git"
         },
@@ -42,55 +42,251 @@
         "json_version": 1
     },
     "scanned_packages": {
-        "fastapi": {
-            "name": "fastapi",
-            "version": "0.92.0"
+        "pandas": {
+            "name": "pandas",
+            "version": "1.4.2"
         },
-        "pydantic": {
-            "name": "pydantic",
-            "version": "1.10.5"
+        "numpy": {
+            "name": "numpy",
+            "version": "1.21.5"
         },
-        "typingextensions": {
-            "name": "typingextensions",
-            "version": "4.5.0"
+        "pythondateutil": {
+            "name": "pythondateutil",
+            "version": "2.8.2"
         },
-        "starlette": {
-            "name": "starlette",
-            "version": "0.25.0"
+        "six": {
+            "name": "six",
+            "version": "1.16.0"
         },
-        "anyio": {
-            "name": "anyio",
-            "version": "3.6.2"
+        "pytz": {
+            "name": "pytz",
+            "version": "2021.3"
+        },
+        "tensorflow": {
+            "name": "tensorflow",
+            "version": "2.10.0"
+        },
+        "abslpy": {
+            "name": "abslpy",
+            "version": "1.2.0"
+        },
+        "astunparse": {
+            "name": "astunparse",
+            "version": "1.6.3"
+        },
+        "wheel": {
+            "name": "wheel",
+            "version": "0.37.1"
+        },
+        "flatbuffers": {
+            "name": "flatbuffers",
+            "version": "22.9.24"
+        },
+        "gast": {
+            "name": "gast",
+            "version": "0.4.0"
+        },
+        "googlepasta": {
+            "name": "googlepasta",
+            "version": "0.2.0"
+        },
+        "grpcio": {
+            "name": "grpcio",
+            "version": "1.42.0"
+        },
+        "h5py": {
+            "name": "h5py",
+            "version": "3.6.0"
+        },
+        "keras": {
+            "name": "keras",
+            "version": "2.10.0"
+        },
+        "keraspreprocessing": {
+            "name": "keraspreprocessing",
+            "version": "1.1.2"
+        },
+        "libclang": {
+            "name": "libclang",
+            "version": "14.0.6"
+        },
+        "opteinsum": {
+            "name": "opteinsum",
+            "version": "3.3.0"
+        },
+        "packaging": {
+            "name": "packaging",
+            "version": "21.3"
+        },
+        "pyparsing": {
+            "name": "pyparsing",
+            "version": "3.0.4"
+        },
+        "protobuf": {
+            "name": "protobuf",
+            "version": "3.19.1"
+        },
+        "setuptools": {
+            "name": "setuptools",
+            "version": "61.2.0"
+        },
+        "tensorboard": {
+            "name": "tensorboard",
+            "version": "2.10.1"
+        },
+        "googleauth": {
+            "name": "googleauth",
+            "version": "1.33.0"
+        },
+        "cachetools": {
+            "name": "cachetools",
+            "version": "4.2.2"
+        },
+        "pyasn1modules": {
+            "name": "pyasn1modules",
+            "version": "0.2.8"
+        },
+        "pyasn1": {
+            "name": "pyasn1",
+            "version": "0.4.8"
+        },
+        "rsa": {
+            "name": "rsa",
+            "version": "4.7.2"
+        },
+        "googleauthoauthlib": {
+            "name": "googleauthoauthlib",
+            "version": "0.5.3"
+        },
+        "requestsoauthlib": {
+            "name": "requestsoauthlib",
+            "version": "1.3.1"
+        },
+        "oauthlib": {
+            "name": "oauthlib",
+            "version": "3.2.1"
+        },
+        "requests": {
+            "name": "requests",
+            "version": "2.27.1"
+        },
+        "certifi": {
+            "name": "certifi",
+            "version": "2022.9.14"
+        },
+        "charsetnormalizer": {
+            "name": "charsetnormalizer",
+            "version": "2.0.4"
         },
         "idna": {
             "name": "idna",
             "version": "3.4"
         },
-        "sniffio": {
-            "name": "sniffio",
-            "version": "1.3.0"
-        },
-        "certifi": {
-            "name": "certifi",
-            "version": "2022.12.7"
-        },
-        "charsetnormalizer": {
-            "name": "charsetnormalizer",
-            "version": "3.0.1"
-        },
         "urllib3": {
             "name": "urllib3",
-            "version": "1.26.14"
+            "version": "1.26.9"
         },
-        "tensorflow": {
-            "name": "tensorflow",
+        "markdown": {
+            "name": "markdown",
+            "version": "3.3.4"
+        },
+        "tensorboarddataserver": {
+            "name": "tensorboarddataserver",
+            "version": "0.6.1"
+        },
+        "tensorboardpluginwit": {
+            "name": "tensorboardpluginwit",
+            "version": "1.8.1"
+        },
+        "werkzeug": {
+            "name": "werkzeug",
+            "version": "2.0.3"
+        },
+        "tensorflowestimator": {
+            "name": "tensorflowestimator",
             "version": "2.10.0"
+        },
+        "tensorflowiogcsfilesystem": {
+            "name": "tensorflowiogcsfilesystem",
+            "version": "0.27.0"
+        },
+        "termcolor": {
+            "name": "termcolor",
+            "version": "2.0.1"
+        },
+        "typingextensions": {
+            "name": "typingextensions",
+            "version": "4.1.1"
+        },
+        "wrapt": {
+            "name": "wrapt",
+            "version": "1.12.1"
         }
     },
     "affected_packages": {
+        "numpy": {
+            "name": "numpy",
+            "version": "1.21.5",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
         "tensorflow": {
             "name": "tensorflow",
             "version": "2.10.0",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "wheel": {
+            "name": "wheel",
+            "version": "0.37.1",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "keras": {
+            "name": "keras",
+            "version": "2.10.0",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "protobuf": {
+            "name": "protobuf",
+            "version": "3.19.1",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "setuptools": {
+            "name": "setuptools",
+            "version": "61.2.0",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "certifi": {
+            "name": "certifi",
+            "version": "2022.9.14",
             "found": "requirements.txt",
             "insecure_versions": [],
             "secure_versions": [],
@@ -101,6 +297,72 @@
     },
     "announcements": [],
     "vulnerabilities": [
+        {
+            "vulnerability_id": "44717",
+            "package_name": "numpy",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<1.22.0",
+            "all_vulnerable_specs": [
+                "<1.22.0"
+            ],
+            "analyzed_version": "1.21.5",
+            "advisory": "Numpy 1.22.0 includes a fix for CVE-2021-34141: An incomplete string comparison in the numpy.core component in NumPy before 1.22.0 allows attackers to trigger slightly incorrect copying by constructing specific string objects. \r\nNOTE: the vendor states that this reported code behavior is \"completely harmless.\"\r\nhttps://github.com/numpy/numpy/issues/18993",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2021-34141",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/44717/f17"
+        },
+        {
+            "vulnerability_id": "44716",
+            "package_name": "numpy",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<1.22.0",
+            "all_vulnerable_specs": [
+                "<1.22.0"
+            ],
+            "analyzed_version": "1.21.5",
+            "advisory": "Numpy 1.22.0 includes a fix for CVE-2021-41496: Buffer overflow in the array_from_pyobj function of fortranobject.c, which allows attackers to conduct a Denial of Service attacks by carefully constructing an array with negative values. \r\nNOTE: The vendor does not agree this is a vulnerability; the negative dimensions can only be created by an already privileged user (or internally).\r\nhttps://github.com/numpy/numpy/issues/19000",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2021-41496",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/44716/f17"
+        },
+        {
+            "vulnerability_id": "44715",
+            "package_name": "numpy",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<1.22.2",
+            "all_vulnerable_specs": [
+                "<1.22.2"
+            ],
+            "analyzed_version": "1.21.5",
+            "advisory": "Numpy 1.22.2  includes a fix for CVE-2021-41495: Null Pointer Dereference vulnerability exists in numpy.sort in NumPy in the PyArray_DescrNew function due to missing return-value validation, which allows attackers to conduct DoS attacks by repetitively creating sort arrays. \r\nNOTE: While correct that validation is missing, an error can only occur due to an exhaustion of memory. If the user can exhaust memory, they are already privileged. Further, it should be practically impossible to construct an attack which can target the memory exhaustion to occur at exactly this place.\r\nhttps://github.com/numpy/numpy/issues/19038",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2021-41495",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/44715/f17"
+        },
         {
             "vulnerability_id": "51946",
             "package_name": "tensorflow",
@@ -697,16 +959,171 @@
             "severity": null,
             "affected_versions": [],
             "more_info_url": "https://pyup.io/v/51957/f17"
+        },
+        {
+            "vulnerability_id": "51499",
+            "package_name": "wheel",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<0.38.1",
+            "all_vulnerable_specs": [
+                "<0.38.1"
+            ],
+            "analyzed_version": "0.37.1",
+            "advisory": "Wheel 0.38.1 includes a fix for CVE-2022-40898: An issue discovered in Python Packaging Authority (PyPA) Wheel 0.37.1 and earlier allows remote attackers to cause a denial of service via attacker controlled input to wheel cli.\r\nhttps://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-40898",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51499/f17"
+        },
+        {
+            "vulnerability_id": "51516",
+            "package_name": "keras",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<2.11.0rc1",
+            "all_vulnerable_specs": [
+                "<2.11.0rc1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Keras 2.11.0rc1 adds explicit permissions section to workflows to restrict the damage if a compromise occurs.\r\nhttps://github.com/keras-team/keras/pull/17050",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": null,
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51516/f17"
+        },
+        {
+            "vulnerability_id": "51167",
+            "package_name": "protobuf",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=3.19.0rc0,<3.19.5",
+            "all_vulnerable_specs": [
+                "<3.18.3",
+                ">=3.19.0rc0,<3.19.5",
+                ">=3.20.0rc0,<3.20.2",
+                ">=4.0.0rc0,<4.21.6"
+            ],
+            "analyzed_version": "3.19.1",
+            "advisory": "Protobuf 3.18.3, 3.19.5, 3.20.2 and 4.21.6 include a fix for CVE-2022-1941: A parsing vulnerability for the MessageSet type in the ProtocolBuffers versions prior to and including 3.16.1, 3.17.3, 3.18.2, 3.19.4, 3.20.1 and 3.21.5 for protobuf-cpp, and versions prior to and including 3.16.1, 3.17.3, 3.18.2, 3.19.4, 3.20.1 and 4.21.5 for protobuf-python can lead to out of memory failures. A specially crafted message with multiple key-value per elements creates parsing issues, and can lead to a Denial of Service against services receiving unsanitized input.\r\nhttps://github.com/protocolbuffers/protobuf/security/advisories/GHSA-8gq9-2x98-w8hf",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-1941",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51167/f17"
+        },
+        {
+            "vulnerability_id": "52495",
+            "package_name": "setuptools",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<65.5.1",
+            "all_vulnerable_specs": [
+                "<65.5.1"
+            ],
+            "analyzed_version": "61.2.0",
+            "advisory": "Setuptools 65.5.1 includes a fix for CVE-2022-40897: Python Packaging Authority (PyPA) setuptools before 65.5.1 allows remote attackers to cause a denial of service via HTML in a crafted package or custom PackageIndex page. There is a Regular Expression Denial of Service (ReDoS) in package_index.py.\r\nhttps://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-40897",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/52495/f17"
+        },
+        {
+            "vulnerability_id": "52365",
+            "package_name": "certifi",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<2022.12.07",
+            "all_vulnerable_specs": [
+                "<2022.12.07"
+            ],
+            "analyzed_version": "2022.9.14",
+            "advisory": "Certifi 2022.12.07 includes a fix for CVE-2022-23491: Certifi 2022.12.07 removes root certificates from \"TrustCor\" from the root store. These are in the process of being removed from Mozilla's trust store. TrustCor's root certificates are being removed pursuant to an investigation prompted by media reporting that TrustCor's ownership also operated a business that produced spyware. Conclusions of Mozilla's investigation can be found in the linked google group discussion.\r\nhttps://github.com/certifi/python-certifi/security/advisories/GHSA-43fp-rhv2-5gv8\r\nhttps://groups.google.com/a/mozilla.org/g/dev-security-policy/c/oxX69KFvsm4/m/yLohoVqtCgAJ",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-23491",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/52365/f17"
         }
     ],
     "ignored_vulnerabilities": [],
     "remediations": {
+        "numpy": {
+            "current_version": "1.21.5",
+            "vulnerabilities_found": 3,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=1.21.5"
+        },
         "tensorflow": {
             "current_version": "2.10.0",
             "vulnerabilities_found": 25,
             "recommended_version": null,
             "other_recommended_versions": [],
             "more_info_url": "https://pyup.io/?from=2.10.0"
+        },
+        "wheel": {
+            "current_version": "0.37.1",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=0.37.1"
+        },
+        "keras": {
+            "current_version": "2.10.0",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=2.10.0"
+        },
+        "protobuf": {
+            "current_version": "3.19.1",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=3.19.1"
+        },
+        "setuptools": {
+            "current_version": "61.2.0",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=61.2.0"
+        },
+        "certifi": {
+            "current_version": "2022.9.14",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=2022.9.14"
         }
     }
 }
