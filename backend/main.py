@@ -1,9 +1,12 @@
+import logging
+import traceback
 from fastapi import FastAPI, Request;
 from typing import Union
 import requests
 import json
 import sys
 from ratelimit import limits,sleep_and_retry
+import subprocess
 CALLS = 30;
 RATE_LIMIT = 60;
 app = FastAPI();
@@ -31,8 +34,16 @@ async def read_root(request: Request):
         for key,value in request.query_params.items():
             print(key,value)
         dependency_list = request.query_params["val"].split(",")
-        
         input_data = "";
+
+        with open ("requirements.txt","w+") as f:
+            for items in dependency_list:
+                f.write(items+"\n");
+        try:
+            subprocess.call("script.sh",shell=True);
+        except Exception as e:
+            logging.error(traceback.format_exc())
+            return {"no":"error"}
         with open("system_check.txt", "r") as f:
             input_data = f.read()
         python_dict_vul= json.loads(input_data);
