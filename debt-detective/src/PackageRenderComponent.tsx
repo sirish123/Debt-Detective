@@ -11,7 +11,7 @@ const PackageRenderComponent = (props: any) => {
                             <h5 className="text-start col-6">{item.package_name}</h5>
                             <h5 className="text-end col-6">{item.CVE}</h5>
                         </div>
-                        <p>{item.advisory}</p>
+                        <p className="text-start Adivsory">{item.advisory}</p>
                     </div>
                 );
             })}

@@ -27,6 +27,10 @@
   margin-right: 8px;
 }
 
+.Advisory{
+  overflow-x: hidden;
+}
+
 .Parameter-Box{
   border: 3px solid white;
 }
