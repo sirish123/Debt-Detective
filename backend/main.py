@@ -77,18 +77,22 @@ def calcalculateLibrariesIOScore(pythonDict,name,versionsArray):
     #contributors
     except:
         currScore+=0
+    # try:
+    #     url = "https://libraries.io/api/{source}/{name}/dependent_repositories?api_key=7b7f69d0b46f645c7cfc7c6231db6ae6".format(source="Pypi",name=name);
+    #     dict2 = requests.get(url).json();
+    #     currScore += math.ceil(math.log2(dict2["contributions_count"]))
+    # except:
     try:
-        url = "https://libraries.io/api/{source}/{name}/dependent_repositories?api_key=7b7f69d0b46f645c7cfc7c6231db6ae6".format(source="Pypi",name=name);
-        dict2 = requests.get(url).json();
-        currScore += math.ceil(math.log2(dict2["contributions_count"]))
-    except:
         currScore += dict["contributors"]
+    except:
+        currScore+=0
     return currScore
 
 # test route
 @app.post("/")
 async def read_root(request: Request):
         communityScore = 0
+        count = 0
         dependency_list = request.query_params["val"].split(",")
         input_data = ""
 
@@ -104,8 +108,6 @@ async def read_root(request: Request):
             input_data = f.read()
         python_dict_vul= json.loads(input_data);
         dictVal = [];
-
-        
         for dependency in dependency_list:
             curr_string  = dependency[:-1]
             try:
@@ -130,17 +132,21 @@ async def read_root(request: Request):
                 returnDict["forks"] = pythonDict["forks"]
                 returnDict["score"] = score
                 dictVal.append(returnDict);
+                count +=1
             except:
                 continue;
-        python_vulnerable_packages = {};
+        vulnArray =[]
         if(len(python_dict_vul["vulnerabilities"])!=0):
-            python_vulnerable_packages["CVE"] = python_dict_vul["vulnerabilities"]["CVE"]
-            python_vulnerable_packages["advisory"] = python_dict_vul["vulnerabilities"]["advisory"]
-            python_vulnerable_packages["package_name"] = name
-            python_vulnerable_packages["analyzed_version"] = version
+            for i in range(len(python_dict_vul["vulnerabilities"])):
+                python_vulnerable_packages = {}
+                python_vulnerable_packages["CVE"] = python_dict_vul["vulnerabilities"][i]["CVE"]
+                python_vulnerable_packages["advisory"] = python_dict_vul["vulnerabilities"][i]["advisory"]
+                python_vulnerable_packages["package_name"] = name
+                python_vulnerable_packages["analyzed_version"] = version
+                vulnArray.append(python_vulnerable_packages);
         scores = [0 for x in range(5)]
-        scores[0] = communityScore
-        return {"scores":scores,"community":dictVal ,"vpkg":python_vulnerable_packages};
+        scores[0] = communityScore/count
+        return {"scores":scores,"community":dictVal ,"vpkg":vulnArray};
         
 
 # gets data from osv database for the given package
