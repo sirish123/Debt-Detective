@@ -13,7 +13,7 @@ class App extends React.Component<
   }
 
   data = {
-    scores: [45, 20, 80, 0, 0],
+    scores: [45, 20, 75, 53, 32],
     vpkg: [
       {
         CVE: "CVE-2022-41896",
