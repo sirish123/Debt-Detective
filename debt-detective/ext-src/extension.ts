@@ -188,13 +188,20 @@ export function activate(context: vscode.ExtensionContext) {
         jsonObject.push(data.data);
 
         //write to json file
+        if (!vscode.workspace.workspaceFolders) return;
+        else {
+          //create a json file named analysis.json
+          const jsonPath =
+            vscode.workspace.workspaceFolders[0].uri.fsPath + "\\analysis.json";
+          fs.writeFileSync(jsonPath, JSON.stringify(jsonObject, null, 2));
+        }
 
         message = "received data";
         console.log(data);
       } catch (err) {
         console.log("catched error");
         jsonObject.push({
-          scores: [50.1, 0, 0, 0, 0],
+          scores: [20, 0, 0, 0, 0],
           community: [
             {
               PkgName: "pandas",
