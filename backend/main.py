@@ -1,15 +1,15 @@
 import logging
 import traceback
-from fastapi import FastAPI, Request;
+from fastapi import FastAPI, Request
 from typing import Union
 import requests
 import json
 import sys
 from ratelimit import limits,sleep_and_retry
 import subprocess
-CALLS = 30;
-RATE_LIMIT = 60;
-app = FastAPI();
+CALLS = 30
+RATE_LIMIT = 60
+app = FastAPI()
 '''
 libaries.io -> Github stars and forks, Number of dependants and number of items dependant on it, depricated packages
 Safety -> Vulnerabilities, package name , version, latest safe package version
@@ -34,20 +34,20 @@ async def read_root(request: Request):
         for key,value in request.query_params.items():
             print(key,value)
         dependency_list = request.query_params["val"].split(",")
-        input_data = "";
+        input_data = ""
 
         with open ("requirements.txt","w+") as f:
             for items in dependency_list:
-                f.write(items+"\n");
+                f.write(items+"\n")
         try:
-            subprocess.call("script.sh",shell=True);
+            subprocess.call("script.sh",shell=True)
         except Exception as e:
             logging.error(traceback.format_exc())
             return {"no":"error"}
         with open("system_check.txt", "r") as f:
             input_data = f.read()
-        python_dict_vul= json.loads(input_data);
-        dictVal = [];
+        python_dict_vul= json.loads(input_data)
+        dictVal = []
         
         for dependency in dependency_list:
             curr_string  = dependency[:-1]
@@ -56,25 +56,25 @@ async def read_root(request: Request):
                 print(name,version)
             except:
                 return {"error":curr_string}
-            # dictVal.append(name+"*"+version);
-            url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name=name);
-            # dictVal.append(url);
+            # dictVal.append(name+"*"+version)
+            url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name=name)
+            # dictVal.append(url)
             if(url==""):
-                continue;
-            pythonDic = ((requests.get(url)));
+                continue
+            pythonDic = ((requests.get(url)))
             try:
-                pythonDict = pythonDic.json();
+                pythonDict = pythonDic.json()
                 returnDict = {}
-                version = "";
-                returnDict["name"] = name;
+                version = ""
+                returnDict["name"] = name
                 returnDict["stars"] = pythonDict["stars"]
                 returnDict["forks"] = pythonDict["forks"]
-                returnDict["dependents_count"] = pythonDict["dependents_count"];
+                returnDict["dependents_count"] = pythonDict["dependents_count"]
                 returnDict["is_deprecated"] = not (version == pythonDict["latest_release_number"]  or version == pythonDict["latest_stable_release_number"])
-                dictVal.append(returnDict);
+                dictVal.append(returnDict)
             except:
-                continue;
-        return {"libio":dictVal ,  "vulnerabilities":python_dict_vul["vulnerabilities"]};
+                continue
+        return {"libio":dictVal ,  "vulnerabilities":python_dict_vul["vulnerabilities"]}
         
 
 # gets data from osv database for the given package
