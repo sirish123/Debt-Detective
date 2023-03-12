@@ -11,27 +11,27 @@ import {
 const SummaryGraph = (props: any) => {
   const data = [
     {
-      name: "PackageVulnerability",
+      name: "Pkg-Vulnerability",
       A: props.data.scores[0],
       fullMark: 100,
     },
     {
-      name: "Community",
+      name: "Activeness",
       A: props.data.scores[1],
       fullMark: 100,
     },
     {
-      name: "CodingStandard",
+      name: "Coding-Standard",
       A: props.data.scores[2],
       fullMark: 100,
     },
     {
-      name: "CodeSecurity",
+      name: "Code-Security",
       A: props.data.scores[3],
       fullMark: 100,
     },
     {
-      name: "DeadCode",
+      name: "Dead-Code",
       A: props.data.scores[4],
       fullMark: 100,
     },
@@ -39,9 +39,8 @@ const SummaryGraph = (props: any) => {
 
   return (
     <div className="">
-      <h3 className="text-light text-center">Analysis By Debt Detective</h3>
 
-      <div className="Score_Graph d-flex align-items-center justify-content-center m-3 p-1 rounded">
+      <div className="d-flex align-items-center justify-content-center m-3 rounded">
         <RadarChart
           cx={200}
           cy={150}
