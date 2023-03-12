@@ -1,6 +1,6 @@
 import logging
 import traceback
-from fastapi import FastAPI, Request;
+from fastapi import FastAPI, Request
 from typing import Union
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
@@ -90,11 +90,11 @@ def calcalculateLibrariesIOScore(pythonDict,name,versionsArray):
 async def read_root(request: Request):
         communityScore = 0
         dependency_list = request.query_params["val"].split(",")
-        input_data = "";
+        input_data = ""
 
         with open ("requirements.txt","w+") as f:
             for items in dependency_list:
-                f.write(items+"\n");
+                f.write(items+"\n")
         try:
             subprocess.run("safety check -r requirements.txt --output json > system_check.txt",shell=True)
         except Exception as e:
@@ -113,14 +113,14 @@ async def read_root(request: Request):
                 packages_arr.append(name)
             except:
                 return {"error":curr_string}
-            # dictVal.append(name+"*"+version);
-            url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name=name);
-            # dictVal.append(url);
+            # dictVal.append(name+"*"+version)
+            url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name=name)
+            # dictVal.append(url)
             if(url==""):
-                continue;
-            pythonDic = ((requests.get(url)));
+                continue
+            pythonDic = ((requests.get(url)))
             try:
-                pythonDict = pythonDic.json();
+                pythonDict = pythonDic.json()
                 returnDict = {}
                 version = "";
                 score = calcalculateLibrariesIOScore(pythonDict,name,pythonDict["versions"]);

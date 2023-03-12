@@ -1,11 +1,21 @@
 import * as vscode from "vscode";
 import ReactPanel from "./panel";
 import axios from "axios";
+import * as fs from "fs";
 
 export let required: { [key: string]: string } = {};
 
-let message = "Hello World from React";
+declare module namespace {
+  export interface SecurityObject {
+    vId: string;
+    cVersion: string;
+    pkgName: string;
+    CVE: string;
+    advisory: string;
+  }
+}
 
+let message = "omk";
 async function getDepOfPkg(doc: vscode.TextDocument) {
   const text = doc.getText();
 
@@ -62,13 +72,56 @@ export function activate(context: vscode.ExtensionContext) {
     if (!doc.fileName.endsWith(".py")) {
       return;
     }
+    if (!vscode.workspace.workspaceFolders) return;
+
+    const venvPath = vscode.workspace.workspaceFolders[0].uri.fsPath + "\\venv";
+
+    if (!fs.existsSync(venvPath)) {
+      return;
+    }
+
     console.log("inside handler");
-    getDepOfPkg(doc);
+
+    //getDepOfPkg(doc);
   };
 
   if (vscode.window.activeTextEditor) {
     handler(vscode.window.activeTextEditor.document);
   }
+
+  const venvHelper = vscode.commands.registerCommand(
+    "debtdetective.venv",
+    () => {
+      if (!vscode.workspace.workspaceFolders) return;
+
+      //check if venv exists
+      const venvPath =
+        vscode.workspace.workspaceFolders[0].uri.fsPath + "\\venv";
+
+      if (fs.existsSync(venvPath)) {
+        vscode.window.showInformationMessage("Venv already exists");
+        return;
+      }
+
+      vscode.window.showInformationMessage("Installing Venv");
+      const shellExec = new vscode.ShellExecution(
+        "conda activate base && python -m venv venv && venv\\Scripts\\activate && pip install -r requirements.txt"
+      );
+
+      vscode.tasks.executeTask(
+        new vscode.Task(
+          { type: "venv" },
+          vscode.TaskScope.Workspace,
+          "Venv",
+          "Venv",
+          shellExec,
+          "venv"
+        )
+      );
+
+      vscode.window.showInformationMessage("Venv installed");
+    }
+  );
 
   const didSave = vscode.workspace.onDidSaveTextDocument((doc) => handler(doc));
 
@@ -122,15 +175,15 @@ export function activate(context: vscode.ExtensionContext) {
       //make url as localhost:8000?val=temp
       url += `?val=${temp}`;
       console.log(url);
+      let req_msg: string = "hello";
       try {
         const data = await axios.post(url);
 
         message = "received data";
         console.log(data);
+
         if (data) {
-          if (data.data["libio"].length > 0) {
-            message = data.data["libio"][0]["dependents_count"];
-          }
+          req_msg = JSON.stringify(data.data);
         }
       } catch (err) {
         message = "received";
@@ -142,7 +195,7 @@ export function activate(context: vscode.ExtensionContext) {
           new ReactPanel(
             context.extensionUri,
             context.extensionPath,
-            message,
+            req_msg,
             vscode.ViewColumn.One
           )
         )
@@ -152,5 +205,20 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
-  context.subscriptions.push(didSave, onDidEndTask);
+  message = "hello";
+
+  context.subscriptions.push(
+    didSave,
+    onDidEndTask,
+    venvHelper,
+    vscode.window.registerWebviewViewProvider(
+      "react-webview.webview",
+      new ReactPanel(
+        context.extensionUri,
+        context.extensionPath,
+        message,
+        vscode.ViewColumn.One
+      )
+    )
+  );
 }
