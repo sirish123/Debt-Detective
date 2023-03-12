@@ -136,16 +136,46 @@ async def read_root(request: Request):
             except:
                 continue;
         vulnArray =[]
+        vulCount =0
+        vulScore = 0
         if(len(python_dict_vul["vulnerabilities"])!=0):
             for i in range(len(python_dict_vul["vulnerabilities"])):
                 python_vulnerable_packages = {}
                 python_vulnerable_packages["CVE"] = python_dict_vul["vulnerabilities"][i]["CVE"]
-                python_vulnerable_packages["advisory"] = python_dict_vul["vulnerabilities"][i]["advisory"]
+                if(python_vulnerable_packages["CVE"]==0):
+                    continue;
+                python_vulnerable_packages["advisory"] = python_dict_vul["vulnerabilities"][i]["advisory"].replace("'","");
+                # python_vulnerable_packages["advisory"] 
+                # new_string = python_vulnerable_packages["advisory"].replace("'","")
                 python_vulnerable_packages["package_name"] = name
                 python_vulnerable_packages["analyzed_version"] = version
                 vulnArray.append(python_vulnerable_packages);
-        scores = [0 for x in range(5)]
-        scores[0] = communityScore/count
+                try:
+                    url = "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId={cve}".format(cve = python_vulnerable_packages["CVE"])
+                    x=0;
+                    cveDict = requests.get(url).json()
+                    tempes =0
+                    tempis =0
+                    # return {"randasdf":cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"][0]["exploitabilityScore"]}
+                    for i in range(len(cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"])):
+                        # return {"randasdf":cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"][1]["exploitabilityScore"]}
+                        tempes += cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"][i]["exploitabilityScore"];
+                        tempis += cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"][i]["impactScore"];
+                        vulCount +=1
+                    # return {"pass":"complete"}
+                    vulScore += (tempis + tempes)
+
+                except:
+                    logging.error(traceback.format_exc())
+                    # return {"CVE":[name,x,len(cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"])]}
+                    continue;
+        # scores = [0.0 for x in range(5)]
+        scores = [];
+        scores.append(communityScore/count);
+        if(vulCount!=0):
+            scores.append((vulScore/vulCount)*10);
+        for i in range(3):
+            scores.append(0)
         return {"scores":scores,"community":dictVal ,"vpkg":vulnArray};
         
 
