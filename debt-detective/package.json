@@ -15,6 +15,11 @@
         "command": "react-webview.start",
         "title": "Start React Webview",
         "category": "React"
+      },
+      {
+        "command": "debtdetective.venv",
+        "title": "Create Virtual Environment",
+        "category": "Debt Detective"
       }
     ],
     "viewsContainers": {
