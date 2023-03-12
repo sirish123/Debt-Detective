@@ -6,7 +6,7 @@ import CommunityRenderaComponent from "./CommunityRenderComponent";
 const Debt = (props: any) => {
   const [curSelect, setCurSelect] = useState(0);
   function getColor(i : any){
-    return props.data.scores[i] >= 70 ? "danger" : props.data.scores[0] >= 40 ? "warning" : "success";
+    return props.data.scores[i] >= 70 ? "danger" : (props.data.scores[i] >= 40 ? "warning" : "success");
   }
   const pkg_vul_status = getColor(0);
   const activeness_status = getColor(1);
