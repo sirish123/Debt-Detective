@@ -9,7 +9,7 @@
         "api_key": false,
         "local_database_path": null,
         "safety_version": "2.3.5",
-        "timestamp": "2023-03-12 17:34:52",
+        "timestamp": "2023-03-12 17:44:19",
         "packages_found": 11,
         "vulnerabilities_found": 25,
         "vulnerabilities_ignored": 0,
@@ -34,7 +34,7 @@
         "git": {
             "branch": "master",
             "tag": "",
-            "commit": "75fa78f0ed026d499fe8aa6016ee07069fc77b41",
+            "commit": "4a508ec0ac03722231d59747ad5019d506092f63",
             "dirty": true,
             "origin": "https://github.com/Ganesh-P03/SE_tool_team5.git"
         },

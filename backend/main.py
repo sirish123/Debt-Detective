@@ -108,8 +108,6 @@ async def read_root(request: Request):
             input_data = f.read()
         python_dict_vul= json.loads(input_data);
         dictVal = [];
-
-        vulnArray = []
         for dependency in dependency_list:
             curr_string  = dependency[:-1]
             try:
@@ -137,14 +135,15 @@ async def read_root(request: Request):
                 count +=1
             except:
                 continue;
-        python_vulnerable_packages = {};
+        vulnArray =[]
         if(len(python_dict_vul["vulnerabilities"])!=0):
             for i in range(len(python_dict_vul["vulnerabilities"])):
+                python_vulnerable_packages = {}
                 python_vulnerable_packages["CVE"] = python_dict_vul["vulnerabilities"][i]["CVE"]
                 python_vulnerable_packages["advisory"] = python_dict_vul["vulnerabilities"][i]["advisory"]
                 python_vulnerable_packages["package_name"] = name
                 python_vulnerable_packages["analyzed_version"] = version
-            vulnArray.append(python_vulnerable_packages);
+                vulnArray.append(python_vulnerable_packages);
         scores = [0 for x in range(5)]
         scores[0] = communityScore/count
         return {"scores":scores,"community":dictVal ,"vpkg":vulnArray};
