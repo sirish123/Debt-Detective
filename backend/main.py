@@ -167,7 +167,7 @@ async def safety(packages: Request):
 @app.get("/stack")
 def scrapeStack():
     # print(packages_arr)
-    packages_arr = ["numpy", "pandas"]  
+    packages_arr = ["numpy", "pandas","tensorflow","requests"]   
     final_votes = []
     final_questions = []
     def getresults(package):
@@ -216,7 +216,7 @@ def scrapeStack():
     # keys = list(questions_dict.keys())
     # values = list(questions_dict.values())
     sorted_dict = dict(sorted(questions_dict.items(), key=lambda x: x[1], reverse=True)) 
-    sorted_dict = dict(list(questions_dict.items())[:10]) 
+    sorted_dict = dict(list(sorted_dict.items())[:10]) 
     # print(sorted_dict)
     # res = json.dump(sorted_dict)
     return {"res" : sorted_dict}  
