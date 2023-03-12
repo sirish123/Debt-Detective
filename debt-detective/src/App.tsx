@@ -12,57 +12,6 @@ class App extends React.Component<
     super(props);
   }
 
-  data = {
-    scores: [45, 20, 80, 0, 0],
-    vpkg: [
-      {
-        CVE: "CVE-2022-41896",
-        advisory:
-          "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41896: If 'ThreadUnsafeUnigramCandidateSampler' is given input 'filterbank_channel_count' greater than the allowed max size, TensorFlow will crash.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-rmg2-f698-wq35",
-        package_name: "tensorflow",
-        analyzed_version: "2.10.0",
-      },
-      {
-        CVE: "CVE-2022-41896",
-        advisory:
-          "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41896: If 'ThreadUnsafeUnigramCandidateSampler' is given input 'filterbank_channel_count' greater than the allowed max size, TensorFlow will crash.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-rmg2-f698-wq35",
-        package_name: "tensorflow",
-        analyzed_version: "2.10.0",
-      },
-    ],
-    stack: [
-      "https://stackoverflow.com/questions/tagged/python",
-      "https://stackoverflow.com/questions/18754276/python-for-beginners",
-      "https://stackoverflow.blog/2021/07/14/getting-started-with-python/",
-    ],
-    community: [
-      {
-        pkgName: "tensorflow",
-        forks: "100",
-        stars: "200",
-        score: "300",
-      },
-      {
-        pkgName: "tensorflow",
-        forks: "300",
-        stars: "100",
-        score: "400",
-      },
-      {
-        pkgName: "tensorflow",
-        forks: "150",
-        stars: "50",
-        score: "300",
-      },
-      {
-        pkgName: "tensorflow",
-        forks: "180",
-        stars: "20",
-        score: "300",
-      },
-    ],
-  };
-
   // renderBody = () => {
   //   if (this.props.parameter != null) {
   //     let req_json: any;
@@ -84,7 +33,16 @@ class App extends React.Component<
   public render() {
     return (
       <div className="App bg-dark">
-        <Debt data={this.data} />
+        <p>
+          {JSON.parse(this.props.parameter!).map((obj: any) => (
+            <>
+              <div>Name: {obj.scores[0]}</div>
+              <div>NAme:{obj.community[0].PkgName}</div>
+            </>
+          ))}
+        </p>
+
+        {/* <Debt data={JSON.parse(this.props.parameter!).get(0)} /> */}
       </div>
     );
   }

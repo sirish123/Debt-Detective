@@ -156,7 +156,7 @@ class ReactPanel implements WebviewViewProvider {
               <body>
                   <noscript>You need to enable JavaScript to run this app.</noscript>
                   
-                  <div id="root" parameter="${this._data}"></div>
+                  <div id="root" parameter='${this._data}'></div>
                   
                   <script nonce="${nonce}" src="${scriptUri}"></script>
               </body>
