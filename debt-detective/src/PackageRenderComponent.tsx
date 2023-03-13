@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const PackageRenderComponent = (props: any) => {
     return (
+        // Rendered when the user clicks on the Package Vulnerability and Security parameter
         <div className="p-2 mt-3">
             <h4 className="text-light mt-3 mb-4">Package Vulnerability and Security</h4>
             {props.data.vpkg.map((item: any) => {

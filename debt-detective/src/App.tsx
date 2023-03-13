@@ -34,6 +34,7 @@ class App extends React.Component<
     return (
       <div className="App bg-dark">
         <p>
+          {/* The "parameter" prop is parsed as JSON and then mapped through to render a list of "Debt" components */}
           {JSON.parse(this.props.parameter!).map((obj: any) => (
             <Debt data={obj} />
           ))}

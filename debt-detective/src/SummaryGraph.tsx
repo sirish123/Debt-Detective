@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Parameter from "./parameter";
 import {
   Radar,
   RadarChart,
@@ -7,6 +6,8 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
 } from "recharts";
+
+// Plot the Radar Chart using the data passed as props
 
 const SummaryGraph = (props: any) => {
   const data = [
