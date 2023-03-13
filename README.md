@@ -24,7 +24,6 @@ To help quantify technical debt, we have identified five key parameters.
 
 <p>
     <img src="Images/packageVulnerability.png">
-<br/>
     <img src="Images/communityActiveness.png">
 
 </p>
