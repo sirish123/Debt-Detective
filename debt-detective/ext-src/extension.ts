@@ -72,7 +72,7 @@ async function getDepOfPkg(doc: vscode.TextDocument) {
  * creates a react panel and populates it with data from backend
  */
 export function activate(context: vscode.ExtensionContext) {
-  const handler = (doc: vscode.TextDocument) => {
+  const handler = async (doc: vscode.TextDocument) => {
     if (!doc.fileName.endsWith(".py")) {
       return;
     }
@@ -86,7 +86,13 @@ export function activate(context: vscode.ExtensionContext) {
 
     console.log("inside handler");
 
-    getDepOfPkg(doc);
+    //get the whole code in the file and send it as a api call to backend
+    const code: string = doc.getText();
+    console.log(code);
+
+    await axios.post("http://localhost:8000/code", { code: code });
+
+    //getDepOfPkg(doc);
   };
 
   if (vscode.window.activeTextEditor) {
