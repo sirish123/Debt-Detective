@@ -185,13 +185,16 @@ def security():
         input_data = f.read()
     
     python_dict_vul= json.loads(input_data);
-    resDict = {}
-    resDict["SEVERITY"] = python_dict_vul["results"][4]["issue_severity"]
-    resDict["CONFIDENCE"] = python_dict_vul["results"][4]["issue_confidence"]
-    resDict["PROBLEM"] =  python_dict_vul["results"][4]["issue_text"]
-    resDict["LINENUMBER"] = python_dict_vul["results"][4]["line_number"]
-    resDict["COLOFFSET"] = python_dict_vul["results"][4]["col_offset"]
-    return resDict;
+    SECURITY_ARRAY = []
+    for i in range(len(python_dict_vul["results"])):
+        resDict = {}
+        resDict["SEVERITY"] = python_dict_vul["results"][i]["issue_severity"]
+        resDict["CONFIDENCE"] = python_dict_vul["results"][i]["issue_confidence"]
+        resDict["PROBLEM"] =  python_dict_vul["results"][i]["issue_text"]
+        resDict["LINENUMBER"] = python_dict_vul["results"][i]["line_number"]
+        resDict["COLOFFSET"] = python_dict_vul["results"][i]["col_offset"]
+        SECURITY_ARRAY.append(resDict)
+    return SECURITY_ARRAY;
 
 
 # gets data from osv database for the given package
