@@ -273,3 +273,8 @@ async def pkg(request: Request):
         print(key)
         print(value)
     return {"message": "Hello World"}
+
+@app.post("/code")
+async def code(request: Request):
+    data = await request.json()
+    print(data)
