@@ -1,0 +1,43 @@
+[
+  {
+    "scores": [
+      56.2,
+      0,
+      0,
+      0
+    ],
+    "community": [
+      {
+        "PkgName": "requests",
+        "stars": 49263,
+        "forks": 9011,
+        "score": 86
+      },
+      {
+        "PkgName": "certifi",
+        "stars": 636,
+        "forks": 210,
+        "score": 65
+      },
+      {
+        "PkgName": "charsetnormalizer",
+        "stars": 0,
+        "forks": 0,
+        "score": 1
+      },
+      {
+        "PkgName": "idna",
+        "stars": 208,
+        "forks": 77,
+        "score": 59
+      },
+      {
+        "PkgName": "urllib3",
+        "stars": 3310,
+        "forks": 1034,
+        "score": 70
+      }
+    ],
+    "vpkg": []
+  }
+]

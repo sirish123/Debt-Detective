@@ -18,7 +18,7 @@ import asyncio
 CALLS = 30;
 RATE_LIMIT = 60;
 app = FastAPI();
-
+pwd = "this is password"
 packages_arr = []
 '''
 libaries.io -> Github stars and forks, Number of dependants and number of items dependant on it, depricated packages
@@ -178,6 +178,21 @@ async def read_root(request: Request):
             scores.append(0)
         return {"scores":scores,"community":dictVal ,"vpkg":vulnArray};
         
+@app.get("/security")
+def security():
+    input_data = ""
+    with open("bandit_output.json", "r") as f:
+        input_data = f.read()
+    
+    python_dict_vul= json.loads(input_data);
+    resDict = {}
+    resDict["SEVERITY"] = python_dict_vul["results"][4]["issue_severity"]
+    resDict["CONFIDENCE"] = python_dict_vul["results"][4]["issue_confidence"]
+    resDict["PROBLEM"] =  python_dict_vul["results"][4]["issue_text"]
+    resDict["LINENUMBER"] = python_dict_vul["results"][4]["line_number"]
+    resDict["COLOFFSET"] = python_dict_vul["results"][4]["col_offset"]
+    return resDict;
+
 
 # gets data from osv database for the given package
 @app.get("/osv")

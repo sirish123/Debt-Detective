@@ -16,3 +16,6 @@ To install the required modules install the dependencies using
     
 How to start the backend server:
     uvicorn main:app --reload
+
+To run bandit and then store in a file in json format:
+    bandit main.py -f json -o bandit_output.json
