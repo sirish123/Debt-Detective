@@ -176,7 +176,7 @@ async def read_root(request: Request):
             scores.append((vulScore/vulCount)*10);
         for i in range(3):
             scores.append(0)
-        return {"scores":scores,"community":dictVal ,"vpkg":vulnArray};
+        return {"scores":scores,"community":dictVal ,"vpkg":vulnArray}
         
 @app.get("/security")
 def security():
@@ -184,7 +184,7 @@ def security():
     with open("bandit_output.json", "r") as f:
         input_data = f.read()
     
-    python_dict_vul= json.loads(input_data);
+    python_dict_vul= json.loads(input_data)
     SECURITY_ARRAY = []
     for i in range(len(python_dict_vul["results"])):
         resDict = {}
@@ -194,7 +194,7 @@ def security():
         resDict["LINENUMBER"] = python_dict_vul["results"][i]["line_number"]
         resDict["COLOFFSET"] = python_dict_vul["results"][i]["col_offset"]
         SECURITY_ARRAY.append(resDict)
-    return SECURITY_ARRAY;
+    return SECURITY_ARRAY
 
 
 # gets data from osv database for the given package

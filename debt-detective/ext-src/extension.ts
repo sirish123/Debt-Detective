@@ -17,6 +17,35 @@ declare module namespace {
 
 let message = "starting..";
 
+let analysis_code = {
+  Security: [
+    {
+      SEVERITY: "MEDIUM",
+      CONFIDENCE: "HIGH",
+      PROBLEM:
+        "Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.",
+      LINENUMBER: 208,
+      COLOFFSET: 19,
+    },
+    {
+      SEVERITY: "HIGH",
+      CONFIDENCE: "HIGH",
+      PROBLEM: "Audit url open for permitted schemes.",
+      LINENUMBER: 28,
+      COLOFFSET: 10,
+    },
+    {
+      SEVERITY: "LOW",
+      CONFIDENCE: "HIGH",
+      PROBLEM: "Audit url",
+      LINENUMBER: 29,
+      COLOFFSET: 10,
+    },
+  ],
+  Standard: [],
+  Depreciated: [],
+};
+
 /*
  * @param doc: vscode.TextDocument
  * @returns: void
