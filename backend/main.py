@@ -279,5 +279,12 @@ async def pkg(request: Request):
 
 @app.post("/code")
 async def code(request: Request):
+    with open ("requirements.txt","w+") as f:
+        for items in dependency_list:
+            f.write(items+"\n")
+    try:
+        subprocess.run("bandit main.py -f json -o bandit_output.json > bandit_output.json",shell=True)
+    except Exception as e:
+        logging.error(traceback.format_exc())
     data = await request.json()
     print(data)
