@@ -92,6 +92,66 @@ function compareInstalledAndRequiredVersions(
   diagnosticCollection.set(doc.uri, conflicts);
 }
 
+function showSquizzleForSecurity(
+  doc: vscode.TextDocument,
+  diagnosticCollection: vscode.DiagnosticCollection
+) {
+  let analysis_code = {
+    Security: [
+      {
+        SEVERITY: "MEDIUM",
+        CONFIDENCE: "HIGH",
+        PROBLEM:
+          "Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.",
+        LINENUMBER: 208,
+        COLOFFSET: 19,
+      },
+      {
+        SEVERITY: "HIGH",
+        CONFIDENCE: "HIGH",
+        PROBLEM: "Audit url open for permitted schemes.",
+        LINENUMBER: 28,
+        COLOFFSET: 10,
+      },
+      {
+        SEVERITY: "LOW",
+        CONFIDENCE: "HIGH",
+        PROBLEM: "Audit url",
+        LINENUMBER: 29,
+        COLOFFSET: 10,
+      },
+    ],
+    Standard: [],
+    Depreciated: [],
+  };
+
+  const diagnostics = new Array<vscode.Diagnostic>();
+  for (let i = 0; i < analysis_code.Security.length; i++) {
+    let line = analysis_code.Security[i].LINENUMBER;
+    let col = analysis_code.Security[i].COLOFFSET;
+    let msg = analysis_code.Security[i].PROBLEM;
+    let code = "Confidence: " + analysis_code.Security[i].CONFIDENCE;
+    let severity = analysis_code.Security[i].SEVERITY;
+    let severity_color;
+    if (severity == "LOW") {
+      severity_color = vscode.DiagnosticSeverity.Information;
+    } else if (severity == "MEDIUM") {
+      severity_color = vscode.DiagnosticSeverity.Warning;
+    } else if (severity == "HIGH") {
+      severity_color = vscode.DiagnosticSeverity.Error;
+    }
+    // diagnostics.push({
+    //   severity: severity_color,
+    //   message: msg,
+    //   code: code,
+    //   source: "debt-detective",
+    //   range: new vscode.Range(line, col, line, col + 100),
+    // });
+  }
+
+  diagnosticCollection.set(doc.uri, diagnostics);
+}
+
 /*
  * @param doc: vscode.TextDocument
  * @returns: void
@@ -175,60 +235,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     //await axios.post("http://localhost:8000/code", { code: code });
 
-    let analysis_code = {
-      Security: [
-        {
-          SEVERITY: "MEDIUM",
-          CONFIDENCE: "HIGH",
-          PROBLEM:
-            "Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.",
-          LINENUMBER: 208,
-          COLOFFSET: 19,
-        },
-        {
-          SEVERITY: "HIGH",
-          CONFIDENCE: "HIGH",
-          PROBLEM: "Audit url open for permitted schemes.",
-          LINENUMBER: 28,
-          COLOFFSET: 10,
-        },
-        {
-          SEVERITY: "LOW",
-          CONFIDENCE: "HIGH",
-          PROBLEM: "Audit url",
-          LINENUMBER: 29,
-          COLOFFSET: 10,
-        },
-      ],
-      Standard: [],
-      Depreciated: [],
-    };
-
-    const diagnostics = new Array<vscode.Diagnostic>();
-    for (let i = 0; i < analysis_code.Security.length; i++) {
-      let line = analysis_code.Security[i].LINENUMBER;
-      let col = analysis_code.Security[i].COLOFFSET;
-      let msg = analysis_code.Security[i].PROBLEM;
-      let code = "Confidence: " + analysis_code.Security[i].CONFIDENCE;
-      let severity = analysis_code.Security[i].SEVERITY;
-      let severity_color;
-      if (severity == "LOW") {
-        severity_color = vscode.DiagnosticSeverity.Information;
-      } else if (severity == "MEDIUM") {
-        severity_color = vscode.DiagnosticSeverity.Warning;
-      } else if (severity == "HIGH") {
-        severity_color = vscode.DiagnosticSeverity.Error;
-      }
-      // diagnostics.push({
-      //   severity: severity_color,
-      //   message: msg,
-      //   code: code,
-      //   source: "debt-detective",
-      //   range: new vscode.Range(line, col, line, col + 100),
-      // });
-    }
-
-    diagnosticCollection.set(doc.uri, diagnostics);
+    showSquizzleForSecurity(doc, diagnosticCollection);
 
     getDepOfPkg(doc);
   };
