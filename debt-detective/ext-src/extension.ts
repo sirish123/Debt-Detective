@@ -238,6 +238,23 @@ export function activate(context: vscode.ExtensionContext) {
     showSquizzleForSecurity(doc, diagnosticCollection);
 
     getDepOfPkg(doc);
+
+     // Highlighting the code
+    const startPos = new vscode.Position(0, 0);
+    const endPos = new vscode.Position(0, 5);
+    const range = new vscode.Range(startPos, endPos);
+
+    const decoration = {
+      range,
+      hoverMessage: "Hello World",
+    };
+
+    const decorationType = vscode.window.createTextEditorDecorationType({
+      isWholeLine: false,
+      backgroundColor: "rgba(0, 128, 0, 0.5)",
+    });
+    vscode.window.activeTextEditor?.setDecorations(decorationType, [decoration]);
+
   };
 
   if (vscode.window.activeTextEditor) {
