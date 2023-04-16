@@ -9,15 +9,15 @@ import json
 import sys
 from ratelimit import limits,sleep_and_retry
 import subprocess
-import  math
+import math
 from collections import OrderedDict
 import numpy as np
 import os
 import asyncio
 
-CALLS = 30;
-RATE_LIMIT = 60;
-app = FastAPI();
+CALLS = 30
+RATE_LIMIT = 60
+app = FastAPI()
 pwd = "this is password"
 packages_arr = []
 '''
