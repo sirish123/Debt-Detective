@@ -9,15 +9,14 @@ import json
 import sys
 from ratelimit import limits,sleep_and_retry
 import subprocess
-import math
+import  math
 from collections import OrderedDict
 import numpy as np
-import os
-import asyncio
 
-CALLS = 30
-RATE_LIMIT = 60
-app = FastAPI()
+
+CALLS = 30;
+RATE_LIMIT = 60;
+app = FastAPI();
 pwd = "this is password"
 packages_arr = []
 '''
@@ -193,6 +192,7 @@ def security():
         resDict["PROBLEM"] =  python_dict_vul["results"][i]["issue_text"]
         resDict["LINENUMBER"] = python_dict_vul["results"][i]["line_number"]
         resDict["COLOFFSET"] = python_dict_vul["results"][i]["col_offset"]
+        resDict["CWE_ID"] = python_dict_vul["results"][i]["issue_cwe"]["id"]
         SECURITY_ARRAY.append(resDict)
     return SECURITY_ARRAY
 
@@ -279,12 +279,59 @@ async def pkg(request: Request):
 
 @app.post("/code")
 async def code(request: Request):
-    with open ("requirements.txt","w+") as f:
-        for items in dependency_list:
-            f.write(items+"\n")
+    # with open ("requirements.txt","w+") as f:
+    #     for items in dependency_list:
+    #         f.write(items+"\n")
     try:
         subprocess.run("bandit main.py -f json -o bandit_output.json > bandit_output.json",shell=True)
     except Exception as e:
         logging.error(traceback.format_exc())
     data = await request.json()
     print(data)
+@app.post("/linter")
+async def linter(request: Request):
+    print(request);
+    input_data = ""
+    with open("bandit_output.json", "r") as f:
+        input_data = f.read()
+    
+    python_dict_linter= json.loads(input_data)
+    try:
+        subprocess.run("pylint example.py --output-format=json > pylint_output.json",shell=True)
+    except Exception as e:
+        logging.error(traceback.format_exc())
+    # data = await request.json()
+    return {"message": "Hello World"}
+
+@app.get("/code")
+async def linter(code: str):
+    with open("pylint_output.py", "w+") as f:
+        f.write(code)
+    try:
+        subprocess.run("pylint pylint_output.py --output-format=json > pylint_output.json",shell=True)
+    except Exception as e:
+        return {"message": "Hello World"}
+    input_data = ""
+    with open("pylint_output.json", "r") as f:
+        input_data = f.read()
+    python_dict_vul= json.loads(input_data)
+    try:
+        subprocess.run("bandit  pylint_output.py -f json -o bandit_output.json",shell=True)
+    except Exception as e:
+        logging.error(traceback.format_exc())
+    input_data = ""
+    with open("bandit_output.json", "r") as f:
+        input_data = f.read()
+    python_dict_bandit= json.loads(input_data)
+    SECURITY_ARRAY = []
+    for i in range(len(python_dict_bandit["results"])):
+        resDict = {}
+        resDict["SEVERITY"] = python_dict_bandit["results"][i]["issue_severity"]
+        resDict["CONFIDENCE"] = python_dict_bandit["results"][i]["issue_confidence"]
+        resDict["PROBLEM"] =  python_dict_bandit["results"][i]["issue_text"]
+        resDict["LINENUMBER"] = python_dict_bandit["results"][i]["line_number"]
+        resDict["COLOFFSET"] = python_dict_bandit["results"][i]["col_offset"]
+        resDict["CWE_ID"] = python_dict_bandit["results"][i]["issue_cwe"]["id"]
+        SECURITY_ARRAY.append(resDict)
+    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": python_dict_vul}
+    
