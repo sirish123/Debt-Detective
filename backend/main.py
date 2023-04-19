@@ -286,7 +286,7 @@ async def linter(code: str):
     pylint_score = 0
     results = None
     try:
-        # subprocess.run("pylint --rcfile=.pylintrc pylint_output.py --output-format=json > pylint_output.json",shell=True)
+        subprocess.run("pylint --rcfile=.pylintrc pylint_output.py --output-format=json > pylint_output.json",shell=True)
         # subprocess.run("pylint --output-format=json your_file.py > pylint_report.json",shell=True)
         file_path = os.getcwd() + "/pylint_output.py"
         results = Run([file_path],do_exit=False)
