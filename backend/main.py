@@ -12,12 +12,12 @@ import subprocess
 import  math
 from collections import OrderedDict
 import numpy as np
-
+from pylint.lint import Run
+import os
 
 CALLS = 30;
 RATE_LIMIT = 60;
 app = FastAPI();
-pwd = "this is password"
 packages_arr = []
 '''
 libaries.io -> Github stars and forks, Number of dependants and number of items dependant on it, depricated packages
@@ -76,11 +76,6 @@ def calcalculateLibrariesIOScore(pythonDict,name,versionsArray):
     #contributors
     except:
         currScore+=0
-    # try:
-    #     url = "https://libraries.io/api/{source}/{name}/dependent_repositories?api_key=7b7f69d0b46f645c7cfc7c6231db6ae6".format(source="Pypi",name=name);
-    #     dict2 = requests.get(url).json();
-    #     currScore += math.ceil(math.log2(dict2["contributions_count"]))
-    # except:
     try:
         currScore += dict["contributors"]
     except:
@@ -114,9 +109,7 @@ async def read_root(request: Request):
                 packages_arr.append(name)
             except:
                 return {"error":curr_string}
-            # dictVal.append(name+"*"+version)
             url = "https://libraries.io/api/{package}/{name}?api=7b7f69d0b46f645c7cfc7c6231db6ae6?".format(package="Pypi",name=name)
-            # dictVal.append(url)
             if(url==""):
                 continue
             pythonDic = ((requests.get(url)))
@@ -155,20 +148,15 @@ async def read_root(request: Request):
                     cveDict = requests.get(url).json()
                     tempes =0
                     tempis =0
-                    # return {"randasdf":cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"][0]["exploitabilityScore"]}
                     for i in range(len(cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"])):
-                        # return {"randasdf":cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"][1]["exploitabilityScore"]}
                         tempes += cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"][i]["exploitabilityScore"];
                         tempis += cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"][i]["impactScore"];
                         vulCount +=1
-                    # return {"pass":"complete"}
                     vulScore += (tempis + tempes)
 
                 except:
                     logging.error(traceback.format_exc())
-                    # return {"CVE":[name,x,len(cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"])]}
                     continue;
-        # scores = [0.0 for x in range(5)]
         scores = [];
         scores.append(communityScore/count);
         if(vulCount!=0):
@@ -214,7 +202,6 @@ async def safety(packages: Request):
 
 @app.get("/stack")
 def scrapeStack():
-    # print(packages_arr)
     packages_arr = ["numpy", "pandas","tensorflow","requests"]   
     final_votes = []
     final_questions = []
@@ -251,22 +238,14 @@ def scrapeStack():
         getresults(packages_arr[i])
         
     for i in range(len(final_questions)):
-        # print(questions_list[i].text)   
         final_questions[i] = final_questions[i].text  
     for i in range(len(final_votes)):
         final_votes[i] = int(final_votes[i])
-        
-    # print(len(final_questions))  
     questions_dict = {}
     for i in range(len(final_votes)):
         questions_dict[final_questions[i]] = final_votes[i]
-        
-    # keys = list(questions_dict.keys())
-    # values = list(questions_dict.values())
     sorted_dict = dict(sorted(questions_dict.items(), key=lambda x: x[1], reverse=True)) 
     sorted_dict = dict(list(sorted_dict.items())[:10]) 
-    # print(sorted_dict)
-    # res = json.dump(sorted_dict)
     return {"res" : sorted_dict}  
 
 @app.get("/pkg")
@@ -277,11 +256,8 @@ async def pkg(request: Request):
         print(value)
     return {"message": "Hello World"}
 
-@app.post("/code")
+@app.post("/coder")
 async def code(request: Request):
-    # with open ("requirements.txt","w+") as f:
-    #     for items in dependency_list:
-    #         f.write(items+"\n")
     try:
         subprocess.run("bandit main.py -f json -o bandit_output.json > bandit_output.json",shell=True)
     except Exception as e:
@@ -307,8 +283,14 @@ async def linter(request: Request):
 async def linter(code: str):
     with open("pylint_output.py", "w+") as f:
         f.write(code)
+    pylint_score = 0
+    results = None
     try:
-        subprocess.run("pylint pylint_output.py --output-format=json > pylint_output.json",shell=True)
+        # subprocess.run("pylint --rcfile=.pylintrc pylint_output.py --output-format=json > pylint_output.json",shell=True)
+        # subprocess.run("pylint --output-format=json your_file.py > pylint_report.json",shell=True)
+        file_path = os.getcwd() + "/pylint_output.py"
+        results = Run([file_path],do_exit=False)
+        # pylint_score = results.linter.stats['global_note']
     except Exception as e:
         return {"message": "Hello World"}
     input_data = ""
@@ -333,5 +315,7 @@ async def linter(code: str):
         resDict["COLOFFSET"] = python_dict_bandit["results"][i]["col_offset"]
         resDict["CWE_ID"] = python_dict_bandit["results"][i]["issue_cwe"]["id"]
         SECURITY_ARRAY.append(resDict)
-    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": python_dict_vul}
+    tempJson = (results.linter.stats)
+
+    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": python_dict_vul, "PYLINT_SCORE": tempJson.global_note}
     
