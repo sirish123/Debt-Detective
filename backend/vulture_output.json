@@ -1,0 +1,1 @@
+{"vulture_output": [{"line_number": 2, "message": "unused import os (90% confidence)"}, {"line_number": 7, "message": "unused function add_numbers (60% confidence)"}]}
