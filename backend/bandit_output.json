@@ -1,115 +1,58 @@
 {
   "errors": [],
-  "generated_at": "2023-04-08T09:47:40Z",
+  "generated_at": "2023-04-19T18:09:52Z",
   "metrics": {
     "_totals": {
-      "CONFIDENCE.HIGH": 5,
+      "CONFIDENCE.HIGH": 1,
       "CONFIDENCE.LOW": 0,
-      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.MEDIUM": 1,
       "CONFIDENCE.UNDEFINED": 0,
       "SEVERITY.HIGH": 0,
-      "SEVERITY.LOW": 4,
+      "SEVERITY.LOW": 1,
       "SEVERITY.MEDIUM": 1,
       "SEVERITY.UNDEFINED": 0,
-      "loc": 200,
+      "loc": 39,
       "nosec": 0,
       "skipped_tests": 0
     },
-    "main.py": {
-      "CONFIDENCE.HIGH": 5,
+    "pylint_output.py": {
+      "CONFIDENCE.HIGH": 1,
       "CONFIDENCE.LOW": 0,
-      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.MEDIUM": 1,
       "CONFIDENCE.UNDEFINED": 0,
       "SEVERITY.HIGH": 0,
-      "SEVERITY.LOW": 4,
+      "SEVERITY.LOW": 1,
       "SEVERITY.MEDIUM": 1,
       "SEVERITY.UNDEFINED": 0,
-      "loc": 200,
+      "loc": 39,
       "nosec": 0,
       "skipped_tests": 0
     }
   },
   "results": [
     {
-      "code": "10 from ratelimit import limits,sleep_and_retry\n11 import subprocess\n12 import  math\n",
-      "col_offset": 0,
-      "filename": "main.py",
-      "issue_confidence": "HIGH",
+      "code": "10     def getresults(package):\n11         password =\"pwd\"\n12         URL = \"https://stackoverflow.com/questions/tagged/{pname}?tab=votes&pagesize=15\".format(pname=package)\n",
+      "col_offset": 18,
+      "filename": "pylint_output.py",
+      "issue_confidence": "MEDIUM",
       "issue_cwe": {
-        "id": 78,
-        "link": "https://cwe.mitre.org/data/definitions/78.html"
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
       },
       "issue_severity": "LOW",
-      "issue_text": "Consider possible security implications associated with the subprocess module.",
+      "issue_text": "Possible hardcoded password: 'pwd'",
       "line_number": 11,
       "line_range": [
         11
       ],
-      "more_info": "https://bandit.readthedocs.io/en/1.7.4/blacklists/blacklist_imports.html#b404-import-subprocess",
-      "test_id": "B404",
-      "test_name": "blacklist"
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
     },
     {
-      "code": "102         try:\n103             subprocess.run(\"safety check -r requirements.txt --output json > system_check.txt\",shell=True)\n104         except Exception as e:\n",
-      "col_offset": 12,
-      "filename": "main.py",
-      "issue_confidence": "HIGH",
-      "issue_cwe": {
-        "id": 78,
-        "link": "https://cwe.mitre.org/data/definitions/78.html"
-      },
-      "issue_severity": "LOW",
-      "issue_text": "Starting a process with a partial executable path",
-      "line_number": 103,
-      "line_range": [
-        103
-      ],
-      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b607_start_process_with_partial_path.html",
-      "test_id": "B607",
-      "test_name": "start_process_with_partial_path"
-    },
-    {
-      "code": "102         try:\n103             subprocess.run(\"safety check -r requirements.txt --output json > system_check.txt\",shell=True)\n104         except Exception as e:\n",
-      "col_offset": 12,
-      "filename": "main.py",
-      "issue_confidence": "HIGH",
-      "issue_cwe": {
-        "id": 78,
-        "link": "https://cwe.mitre.org/data/definitions/78.html"
-      },
-      "issue_severity": "LOW",
-      "issue_text": "subprocess call with shell=True seems safe, but may be changed in the future, consider rewriting without shell",
-      "line_number": 103,
-      "line_range": [
-        103
-      ],
-      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b602_subprocess_popen_with_shell_equals_true.html",
-      "test_id": "B602",
-      "test_name": "subprocess_popen_with_shell_equals_true"
-    },
-    {
-      "code": "135                 count +=1\n136             except:\n137                 continue;\n",
-      "col_offset": 12,
-      "filename": "main.py",
-      "issue_confidence": "HIGH",
-      "issue_cwe": {
-        "id": 703,
-        "link": "https://cwe.mitre.org/data/definitions/703.html"
-      },
-      "issue_severity": "LOW",
-      "issue_text": "Try, Except, Continue detected.",
-      "line_number": 136,
-      "line_range": [
-        136
-      ],
-      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b112_try_except_continue.html",
-      "test_id": "B112",
-      "test_name": "try_except_continue"
-    },
-    {
-      "code": "207 \n208         response = urlopen(URL)     \n209         html = response.read()    \n",
+      "code": "13         print(URL)\n14         response = urlopen(URL)     \n15         html = response.read()    \n",
       "col_offset": 19,
-      "filename": "main.py",
+      "filename": "pylint_output.py",
       "issue_confidence": "HIGH",
       "issue_cwe": {
         "id": 22,
@@ -117,9 +60,9 @@
       },
       "issue_severity": "MEDIUM",
       "issue_text": "Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.",
-      "line_number": 208,
+      "line_number": 14,
       "line_range": [
-        208
+        14
       ],
       "more_info": "https://bandit.readthedocs.io/en/1.7.4/blacklists/blacklist_calls.html#b310-urllib-urlopen",
       "test_id": "B310",
