@@ -44,20 +44,12 @@ function compareInstalledAndRequiredVersions(
     idx++;
     if (pkg in installed) {
       try {
-        //cur_data[pkg] = "1.0.0";
-        //make it 1.0
-        //remove the last thing after the dot
-
         let isConflict = false;
         const cur_data_ver = cur_data[pkg];
         const cur_data_ver_list = cur_data[pkg].split(".");
 
         const req_ver = required[pkg];
         const req_ver_list = required[pkg].split(".");
-
-        //compare the first two elements of the list
-        //handle the case where the length of one of the list is 1
-        //here these are version numbers
 
         if (req_ver_list.length == 1) {
           if (parseFloat(cur_data_ver_list[0]) < parseFloat(req_ver_list[0])) {
@@ -94,35 +86,39 @@ function compareInstalledAndRequiredVersions(
 
 function showSquizzleForSecurity(
   doc: vscode.TextDocument,
-  diagnosticCollection: vscode.DiagnosticCollection
+  diagnosticCollection: vscode.DiagnosticCollection,
+  data: any
 ) {
-  let analysis_code = {
-    Security: [
+  let analysis_code = data;
+
+  let temporary = {
+    SECURITY_ARRAY: [
       {
         SEVERITY: "MEDIUM",
         CONFIDENCE: "HIGH",
         PROBLEM:
           "Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.",
-        LINENUMBER: 208,
+        LINENUMBER: 14,
         COLOFFSET: 19,
-      },
-      {
-        SEVERITY: "HIGH",
-        CONFIDENCE: "HIGH",
-        PROBLEM: "Audit url open for permitted schemes.",
-        LINENUMBER: 28,
-        COLOFFSET: 10,
-      },
-      {
-        SEVERITY: "LOW",
-        CONFIDENCE: "HIGH",
-        PROBLEM: "Audit url",
-        LINENUMBER: 29,
-        COLOFFSET: 10,
+        CWE_ID: 22,
       },
     ],
-    Standard: [],
-    Depreciated: [],
+    LINTER: [
+      {
+        type: "convention",
+        module: "pylint_output",
+        obj: "",
+        line: 61,
+        column: 0,
+        endLine: null,
+        endColumn: null,
+        path: "pylint_output.py",
+        symbol: "missing-final-newline",
+        message: "Final newline missing",
+        "message-id": "C0304",
+      },
+    ],
+    PYLINT_SCORE: 5.7894736842105265,
   };
 
   const diagnostics = new Array<vscode.Diagnostic>();
@@ -140,13 +136,13 @@ function showSquizzleForSecurity(
     } else if (severity == "HIGH") {
       severity_color = vscode.DiagnosticSeverity.Error;
     }
-    // diagnostics.push({
-    //   severity: severity_color,
-    //   message: msg,
-    //   code: code,
-    //   source: "debt-detective",
-    //   range: new vscode.Range(line, col, line, col + 100),
-    // });
+    diagnostics.push({
+      severity: severity_color,
+      message: msg,
+      code: code,
+      source: "debt-detective",
+      range: new vscode.Range(line, col, line, col + 100),
+    });
   }
 
   diagnosticCollection.set(doc.uri, diagnostics);
@@ -213,7 +209,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   const handler = async (doc: vscode.TextDocument, isPkgRequired: boolean) => {
     if (doc.fileName.includes("requirements.txt")) {
-      compareInstalledAndRequiredVersions(doc, diagnosticCollection);
+      //compareInstalledAndRequiredVersions(doc, diagnosticCollection);
     }
 
     if (!doc.fileName.endsWith(".py")) {
@@ -231,37 +227,38 @@ export function activate(context: vscode.ExtensionContext) {
 
     //get the whole code in the file and send it as a api call to backend
     const code: string = doc.getText();
-    //console.log(code);
+    console.log(code);
 
-    //await axios.post("http://localhost:8000/code", { code: code });
+    let url = "http://localhost:8000/code/";
 
-    showSquizzleForSecurity(doc, diagnosticCollection);
+    url += "?code=" + code;
 
-    if (isPkgRequired) {
-      getDepOfPkg(doc);
-    }
+    const response = await axios.get(url);
+    console.log(response.data);
+
+    showSquizzleForSecurity(doc, diagnosticCollection, response.data);
+
+    // if (isPkgRequired) {
+    getDepOfPkg(doc);
+    //}
 
     // Highlighting the code
-    const startPos = new vscode.Position(0, 0);
-    const endPos = new vscode.Position(0, 5);
-    const range = new vscode.Range(startPos, endPos);
+    // const startPos = new vscode.Position(0, 0);
+    // const endPos = new vscode.Position(0, 5);
+    // const range = new vscode.Range(startPos, endPos);
 
-    const decoration = {
-      range,
-      hoverMessage: "Hello World",
-    };
+    // const decoration = {
+    //   range,
+    //   hoverMessage: "Hello World",
+    // };
 
-    const decorationType = vscode.window.createTextEditorDecorationType({
-      isWholeLine: false,
-      backgroundColor: "rgba(0, 128, 0, 0.5)",
-    });
-    vscode.window.activeTextEditor?.setDecorations(decorationType, [
-      decoration,
-    ]);
-
-    if (isPkgRequired) {
-      getDepOfPkg(doc);
-    }
+    // const decorationType = vscode.window.createTextEditorDecorationType({
+    //   isWholeLine: false,
+    //   backgroundColor: "rgba(0, 128, 0, 0.5)",
+    // });
+    // vscode.window.activeTextEditor?.setDecorations(decorationType, [
+    //   decoration,
+    // ]);
   };
 
   if (vscode.window.activeTextEditor) {
