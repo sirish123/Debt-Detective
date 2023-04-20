@@ -20,6 +20,11 @@
         "command": "debtdetective.venv",
         "title": "Create Virtual Environment",
         "category": "Debt Detective"
+      },
+      {
+        "command": "debtdetective.fullsearch",
+        "title": "Full Search",
+        "category": "Debt Detective"
       }
     ],
     "viewsContainers": {
