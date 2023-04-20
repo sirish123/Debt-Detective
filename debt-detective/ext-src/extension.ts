@@ -121,20 +121,20 @@ function showSquizzleForSecurity(
     PYLINT_SCORE: 5.7894736842105265,
   };
 
+  analysis_code = temporary;
+
   const diagnostics = new Array<vscode.Diagnostic>();
-  for (let i = 0; i < analysis_code.Security.length; i++) {
-    let line = analysis_code.Security[i].LINENUMBER;
-    let col = analysis_code.Security[i].COLOFFSET;
-    let msg = analysis_code.Security[i].PROBLEM;
-    let code = "Confidence: " + analysis_code.Security[i].CONFIDENCE;
-    let severity = analysis_code.Security[i].SEVERITY;
-    let severity_color;
+  for (let i = 0; i < analysis_code.SECURITY_ARRAY.length; i++) {
+    let line = analysis_code.SECURITY_ARRAY[i].LINENUMBER;
+    let col = analysis_code.SECURITY_ARRAY[i].COLOFFSET;
+    let msg = analysis_code.SECURITY_ARRAY[i].PROBLEM;
+    let code = "Confidence: " + analysis_code.SECURITY_ARRAY[i].CONFIDENCE;
+    let severity = analysis_code.SECURITY_ARRAY[i].SEVERITY;
+    let severity_color: vscode.DiagnosticSeverity;
     if (severity == "LOW") {
       severity_color = vscode.DiagnosticSeverity.Information;
-    } else if (severity == "MEDIUM") {
+    } else {
       severity_color = vscode.DiagnosticSeverity.Warning;
-    } else if (severity == "HIGH") {
-      severity_color = vscode.DiagnosticSeverity.Error;
     }
     diagnostics.push({
       severity: severity_color,
@@ -146,6 +146,43 @@ function showSquizzleForSecurity(
   }
 
   diagnosticCollection.set(doc.uri, diagnostics);
+
+  // Highlighting the code
+
+  for (let i = 0; i < analysis_code.LINTER.length; i++) {
+    let line = analysis_code.LINTER[i].line;
+    let col = analysis_code.LINTER[i].column;
+    let endLine = 0;
+    let endCol = 0;
+
+    if (analysis_code.LINTER[i].endLine === null) {
+      endLine = line;
+    } else {
+      endLine = analysis_code.LINTER[i].endLine;
+    }
+
+    if (analysis_code.LINTER[i].endColumn === null) {
+      endCol = col + 100;
+    } else {
+      endCol = analysis_code.LINTER[i].endColumn;
+    }
+    const startPos = new vscode.Position(line, col);
+    const endPos = new vscode.Position(endLine, endCol);
+    const range = new vscode.Range(startPos, endPos);
+
+    const decoration = {
+      range,
+      hoverMessage: analysis_code.LINTER[i].message,
+    };
+
+    const decorationType = vscode.window.createTextEditorDecorationType({
+      isWholeLine: false,
+      backgroundColor: "rgba(0, 128, 0, 0.5)",
+    });
+    vscode.window.activeTextEditor?.setDecorations(decorationType, [
+      decoration,
+    ]);
+  }
 }
 
 /*
@@ -239,26 +276,8 @@ export function activate(context: vscode.ExtensionContext) {
     showSquizzleForSecurity(doc, diagnosticCollection, response.data);
 
     // if (isPkgRequired) {
-    getDepOfPkg(doc);
+    //getDepOfPkg(doc);
     //}
-
-    // Highlighting the code
-    // const startPos = new vscode.Position(0, 0);
-    // const endPos = new vscode.Position(0, 5);
-    // const range = new vscode.Range(startPos, endPos);
-
-    // const decoration = {
-    //   range,
-    //   hoverMessage: "Hello World",
-    // };
-
-    // const decorationType = vscode.window.createTextEditorDecorationType({
-    //   isWholeLine: false,
-    //   backgroundColor: "rgba(0, 128, 0, 0.5)",
-    // });
-    // vscode.window.activeTextEditor?.setDecorations(decorationType, [
-    //   decoration,
-    // ]);
   };
 
   if (vscode.window.activeTextEditor) {
