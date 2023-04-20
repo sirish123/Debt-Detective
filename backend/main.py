@@ -9,7 +9,7 @@ import json
 import sys
 from ratelimit import limits,sleep_and_retry
 import subprocess
-import  math
+import math
 from collections import OrderedDict
 import numpy as np
 from pylint.lint import Run
