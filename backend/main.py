@@ -7,13 +7,13 @@ from urllib.request import urlopen
 import requests
 import json
 import sys
-from ratelimit import limits,sleep_and_retry
 import subprocess
 import math
-from collections import OrderedDict
 import numpy as np
 from pylint.lint import Run
 import os
+import re
+
 
 CALLS = 30;
 RATE_LIMIT = 60;
@@ -306,6 +306,8 @@ async def linter(code: str):
         input_data = f.read()
     python_dict_bandit= json.loads(input_data)
     SECURITY_ARRAY = []
+    total_security_score = 0
+    code_security_score = 0
     for i in range(len(python_dict_bandit["results"])):
         resDict = {}
         resDict["SEVERITY"] = python_dict_bandit["results"][i]["issue_severity"]
@@ -314,8 +316,55 @@ async def linter(code: str):
         resDict["LINENUMBER"] = python_dict_bandit["results"][i]["line_number"]
         resDict["COLOFFSET"] = python_dict_bandit["results"][i]["col_offset"]
         resDict["CWE_ID"] = python_dict_bandit["results"][i]["issue_cwe"]["id"]
+        severity_score = 0
+        if(resDict["SEVERITY"] == "LOW"):
+            severity_score = 1
+        elif(resDict["SEVERITY"] == "MEDIUM"):
+            severity_score = 2
+        elif(resDict["SEVERITY"] == "HIGH"):
+            severity_score = 3
+        confidence_score =0
+        if(resDict["CONFIDENCE"] == "LOW"):
+            confidence_score = 1
+        elif(resDict["CONFIDENCE"] == "MEDIUM"):
+            confidence_score = 2
+        elif(resDict["CONFIDENCE"] == "HIGH"):
+            confidence_score = 3
+        code_security_score += (severity_score*confidence_score);
+        total_security_score += 9
         SECURITY_ARRAY.append(resDict)
+    security_score = (code_security_score/total_security_score)*100
+    severity_score = 100-(security_score)
     tempJson = (results.linter.stats)
+    try:
+        vulture_output = subprocess.check_output(['vulture', 'pylint_output.py'], stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        vulture_output = e.output
 
-    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": python_dict_vul, "PYLINT_SCORE": tempJson.global_note}
+    vulture_output_str = vulture_output.decode().replace("'", "")
+    
+
+
+    pattern = r'^([\w\.]+):(\d+):\s(.+)$'
+
+
+    output_lines = []
+    for line in vulture_output_str.split('\n'):
+        match = re.match(pattern, line.strip())
+        if match:
+            line_number = int(match.group(2))
+            message = match.group(3).strip("'")
+            output_lines.append((line_number, message))
+
+
+    output_dict = {'vulture_output': [{'line_number': line_number, 'message': message} for line_number, message in output_lines]}
+    output_list = [{'line_number': line_number, 'message': message} for line_number, message in output_lines]
+
+
+    vulture_json = json.dumps(output_dict)
+
+
+    with open('vulture_output.json', 'w') as f:
+        json.dump(output_dict, f)
+    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": python_dict_vul, "PYLINT_SCORE": tempJson.global_note, "VULTURE_OUTPUT": vulture_json,"SECURITY_SCORE":security_score}
     
