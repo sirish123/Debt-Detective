@@ -16,7 +16,7 @@ declare module namespace {
   }
 }
 
-let message = "starting..";
+let message = "loading";
 
 function compareInstalledAndRequiredVersions(
   doc: vscode.TextDocument,
@@ -44,20 +44,12 @@ function compareInstalledAndRequiredVersions(
     idx++;
     if (pkg in installed) {
       try {
-        //cur_data[pkg] = "1.0.0";
-        //make it 1.0
-        //remove the last thing after the dot
-
         let isConflict = false;
         const cur_data_ver = cur_data[pkg];
         const cur_data_ver_list = cur_data[pkg].split(".");
 
         const req_ver = required[pkg];
         const req_ver_list = required[pkg].split(".");
-
-        //compare the first two elements of the list
-        //handle the case where the length of one of the list is 1
-        //here these are version numbers
 
         if (req_ver_list.length == 1) {
           if (parseFloat(cur_data_ver_list[0]) < parseFloat(req_ver_list[0])) {
@@ -94,62 +86,103 @@ function compareInstalledAndRequiredVersions(
 
 function showSquizzleForSecurity(
   doc: vscode.TextDocument,
-  diagnosticCollection: vscode.DiagnosticCollection
+  diagnosticCollection: vscode.DiagnosticCollection,
+  data: any
 ) {
-  let analysis_code = {
-    Security: [
+  let analysis_code = data;
+
+  let temporary = {
+    SECURITY_ARRAY: [
       {
         SEVERITY: "MEDIUM",
         CONFIDENCE: "HIGH",
         PROBLEM:
           "Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.",
-        LINENUMBER: 208,
+        LINENUMBER: 14,
         COLOFFSET: 19,
-      },
-      {
-        SEVERITY: "HIGH",
-        CONFIDENCE: "HIGH",
-        PROBLEM: "Audit url open for permitted schemes.",
-        LINENUMBER: 28,
-        COLOFFSET: 10,
-      },
-      {
-        SEVERITY: "LOW",
-        CONFIDENCE: "HIGH",
-        PROBLEM: "Audit url",
-        LINENUMBER: 29,
-        COLOFFSET: 10,
+        CWE_ID: 22,
       },
     ],
-    Standard: [],
-    Depreciated: [],
+    LINTER: [
+      {
+        type: "convention",
+        module: "pylint_output",
+        obj: "",
+        line: 61,
+        column: 0,
+        endLine: null,
+        endColumn: null,
+        path: "pylint_output.py",
+        symbol: "missing-final-newline",
+        message: "Final newline missing",
+        "message-id": "C0304",
+      },
+    ],
+    PYLINT_SCORE: 5.7894736842105265,
   };
 
+  analysis_code = temporary;
+
   const diagnostics = new Array<vscode.Diagnostic>();
-  for (let i = 0; i < analysis_code.Security.length; i++) {
-    let line = analysis_code.Security[i].LINENUMBER;
-    let col = analysis_code.Security[i].COLOFFSET;
-    let msg = analysis_code.Security[i].PROBLEM;
-    let code = "Confidence: " + analysis_code.Security[i].CONFIDENCE;
-    let severity = analysis_code.Security[i].SEVERITY;
-    let severity_color;
+  for (let i = 0; i < analysis_code.SECURITY_ARRAY.length; i++) {
+    let line = analysis_code.SECURITY_ARRAY[i].LINENUMBER;
+    let col = analysis_code.SECURITY_ARRAY[i].COLOFFSET;
+    let msg = analysis_code.SECURITY_ARRAY[i].PROBLEM;
+    let code = "Confidence: " + analysis_code.SECURITY_ARRAY[i].CONFIDENCE;
+    let severity = analysis_code.SECURITY_ARRAY[i].SEVERITY;
+    let severity_color: vscode.DiagnosticSeverity;
     if (severity == "LOW") {
       severity_color = vscode.DiagnosticSeverity.Information;
-    } else if (severity == "MEDIUM") {
+    } else {
       severity_color = vscode.DiagnosticSeverity.Warning;
-    } else if (severity == "HIGH") {
-      severity_color = vscode.DiagnosticSeverity.Error;
     }
-    // diagnostics.push({
-    //   severity: severity_color,
-    //   message: msg,
-    //   code: code,
-    //   source: "debt-detective",
-    //   range: new vscode.Range(line, col, line, col + 100),
-    // });
+    diagnostics.push({
+      severity: severity_color,
+      message: msg,
+      code: code,
+      source: "debt-detective",
+      range: new vscode.Range(line, col, line, col + 100),
+    });
   }
 
   diagnosticCollection.set(doc.uri, diagnostics);
+
+  // Highlighting the code
+
+  for (let i = 0; i < analysis_code.LINTER.length; i++) {
+    let line = analysis_code.LINTER[i].line;
+    let col = analysis_code.LINTER[i].column;
+    let endLine = 0;
+    let endCol = 0;
+
+    if (analysis_code.LINTER[i].endLine === null) {
+      endLine = line;
+    } else {
+      endLine = analysis_code.LINTER[i].endLine;
+    }
+
+    if (analysis_code.LINTER[i].endColumn === null) {
+      endCol = col + 100;
+    } else {
+      endCol = analysis_code.LINTER[i].endColumn;
+    }
+    const startPos = new vscode.Position(line, col);
+    const endPos = new vscode.Position(endLine, endCol);
+    const range = new vscode.Range(startPos, endPos);
+
+    const decoration = {
+      range,
+      hoverMessage: analysis_code.LINTER[i].message,
+    };
+
+    const decorationType = vscode.window.createTextEditorDecorationType({
+      isWholeLine: false,
+      backgroundColor: "rgba(0, 128, 0, 0.5)",
+    });
+    vscode.window.activeTextEditor?.setDecorations(decorationType, [
+      decoration,
+    ]);
+  }
 }
 
 /*
@@ -160,7 +193,7 @@ function showSquizzleForSecurity(
 async function getDepOfPkg(doc: vscode.TextDocument) {
   const text = doc.getText();
 
-  message = "updating...";
+  message = "loading";
 
   const textArr: string[] = text.split(/\r\n|\n/);
 
@@ -188,7 +221,7 @@ async function getDepOfPkg(doc: vscode.TextDocument) {
   //   `venv\\Scripts\\activate && pipdeptree -p ${packages[0]} > output.txt`
   // );
 
-  message = "updating2...";
+  message = "loading";
   vscode.tasks.executeTask(
     new vscode.Task(
       { type: "pkginstaller" },
@@ -211,9 +244,9 @@ export function activate(context: vscode.ExtensionContext) {
   const diagnosticCollection =
     vscode.languages.createDiagnosticCollection("debt-detective");
 
-  const handler = async (doc: vscode.TextDocument) => {
+  const handler = async (doc: vscode.TextDocument, isPkgRequired: boolean) => {
     if (doc.fileName.includes("requirements.txt")) {
-      compareInstalledAndRequiredVersions(doc, diagnosticCollection);
+      //compareInstalledAndRequiredVersions(doc, diagnosticCollection);
     }
 
     if (!doc.fileName.endsWith(".py")) {
@@ -231,39 +264,31 @@ export function activate(context: vscode.ExtensionContext) {
 
     //get the whole code in the file and send it as a api call to backend
     const code: string = doc.getText();
-    //console.log(code);
+    console.log(code);
 
-    //await axios.post("http://localhost:8000/code", { code: code });
+    let url = "http://localhost:8000/code/";
 
-    showSquizzleForSecurity(doc, diagnosticCollection);
+    url += "?code=" + code;
 
-    getDepOfPkg(doc);
+    const response = await axios.get(url);
+    console.log(response.data);
 
-     // Highlighting the code
-    const startPos = new vscode.Position(0, 0);
-    const endPos = new vscode.Position(0, 5);
-    const range = new vscode.Range(startPos, endPos);
+    showSquizzleForSecurity(doc, diagnosticCollection, response.data);
 
-    const decoration = {
-      range,
-      hoverMessage: "Hello World",
-    };
-
-    const decorationType = vscode.window.createTextEditorDecorationType({
-      isWholeLine: false,
-      backgroundColor: "rgba(0, 128, 0, 0.5)",
-    });
-    vscode.window.activeTextEditor?.setDecorations(decorationType, [decoration]);
-
+    // if (isPkgRequired) {
+    //getDepOfPkg(doc);
+    //}
   };
 
   if (vscode.window.activeTextEditor) {
-    handler(vscode.window.activeTextEditor.document);
+    handler(vscode.window.activeTextEditor.document, true);
   }
 
-  const didOpen = vscode.workspace.onDidOpenTextDocument((doc) => handler(doc));
+  const didOpen = vscode.workspace.onDidOpenTextDocument((doc) =>
+    handler(doc, true)
+  );
   const didChange = vscode.workspace.onDidChangeTextDocument((e) =>
-    handler(e.document)
+    handler(e.document, false)
   );
 
   const venvHelper = vscode.commands.registerCommand(
@@ -300,7 +325,16 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  const didSave = vscode.workspace.onDidSaveTextDocument((doc) => handler(doc));
+  let sidePanel = new ReactPanel(
+    context.extensionUri,
+    context.extensionPath,
+    message,
+    vscode.ViewColumn.One
+  );
+
+  const didSave = vscode.workspace.onDidSaveTextDocument((doc) =>
+    handler(doc, false)
+  );
 
   //regex parsing
   const onDidEndTask = vscode.tasks.onDidEndTask(async () => {
@@ -363,50 +397,39 @@ export function activate(context: vscode.ExtensionContext) {
 
       console.log(required);
 
-      // //post to localhost:8000 with query param {val: temp}
+      //post to localhost:8000 with query param {val: temp}
 
-      // let url: string = "http://localhost:8000";
+      let url: string = "http://localhost:8000";
 
-      // //make url as localhost:8000?val=temp
-      // url += `?val=${temp}`;
-      // console.log(url);
+      //make url as localhost:8000?val=temp
+      url += `?val=${temp}`;
+      console.log(url);
 
-      // const jsonObject: any = [];
+      const jsonObject: any = [];
 
-      // try {
-      //   const data = await axios.post(url);
+      try {
+        const data = await axios.post(url);
 
-      //   jsonObject.push(data.data);
+        jsonObject.push(data.data);
 
-      //   //write to json file
-      //   if (!vscode.workspace.workspaceFolders) return;
-      //   else {
-      //     //create a json file named analysis.json
-      //     const jsonPath =
-      //       vscode.workspace.workspaceFolders[0].uri.fsPath + "\\analysis.json";
-      //     fs.writeFileSync(jsonPath, JSON.stringify(jsonObject, null, 2));
-      //   }
+        //write to json file
+        if (!vscode.workspace.workspaceFolders) return;
+        else {
+          //create a json file named analysis.json
+          const jsonPath =
+            vscode.workspace.workspaceFolders[0].uri.fsPath + "\\analysis.json";
+          fs.writeFileSync(jsonPath, JSON.stringify(jsonObject, null, 2));
+        }
 
-      //   message = "received data";
-      //   console.log(data);
-      // } catch (err) {
-      //   console.log("catched error");
-      //   message = "received";
-      // }
+        message = "loading";
+        console.log(data);
+      } catch (err) {
+        console.log("catched error");
+        message = "loading";
+      }
 
-      // message = JSON.stringify(jsonObject);
-
-      // context.subscriptions.push(
-      //   vscode.window.registerWebviewViewProvider(
-      //     "react-webview.webview",
-      //     new ReactPanel(
-      //       context.extensionUri,
-      //       context.extensionPath,
-      //       message,
-      //       vscode.ViewColumn.One
-      //     )
-      //   )
-      // );
+      message = JSON.stringify(jsonObject);
+      sidePanel.update(message);
     } else {
       console.log("no file");
     }
@@ -417,6 +440,10 @@ export function activate(context: vscode.ExtensionContext) {
     onDidEndTask,
     venvHelper,
     didOpen,
-    didChange
+    didChange,
+    vscode.window.registerWebviewViewProvider(
+      "react-webview.webview",
+      sidePanel
+    )
   );
 }

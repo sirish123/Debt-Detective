@@ -76,10 +76,14 @@ class App extends React.Component<
       <div className="App bg-dark">
         <p>
           {/* The "parameter" prop is parsed as JSON and then mapped through to render a list of "Debt" components */}
-          {/* {JSON.parse(this.props.parameter!).map((obj: any) => (
-            <Debt data={obj} />
-          ))} */}
-          <Debt data={obj} />
+
+          {this.props.parameter! && this.props.parameter === "loading" ? (
+            <h1 style={{ background: "white" }}>Loading</h1>
+          ) : (
+            JSON.parse(this.props.parameter!).map((obj: any) => (
+              <Debt data={obj} />
+            ))
+          )}
         </p>
 
         {/* <Debt data={JSON.parse(this.props.parameter!).get(0)} /> */}

@@ -73,6 +73,11 @@ class ReactPanel implements WebviewViewProvider {
     });
   }
 
+  public update(data: any) {
+    this._data = data;
+    this._view.webview.html = this._getHtmlForWebview();
+  }
+
   public static createOrShow(
     extensionUri: Uri,
     extensionPath: string,

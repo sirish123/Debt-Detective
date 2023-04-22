@@ -1,0 +1,15 @@
+[
+    {
+        "type": "error",
+        "module": "pylint_output",
+        "obj": "",
+        "line": 1,
+        "column": 22,
+        "endLine": null,
+        "endColumn": null,
+        "path": "pylint_output.py",
+        "symbol": "syntax-error",
+        "message": "Parsing failed: 'invalid syntax (<unknown>, line 1)'",
+        "message-id": "E0001"
+    }
+]
