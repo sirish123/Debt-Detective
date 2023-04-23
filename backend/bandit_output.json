@@ -1,30 +1,319 @@
 {
-  "errors": [
-    {
-      "filename": "pylint_output.py",
-      "reason": "syntax error while parsing AST from file"
-    }
-  ],
-  "generated_at": "2023-04-23T11:00:03Z",
+  "errors": [],
+  "generated_at": "2023-04-23T12:38:46Z",
   "metrics": {
     "_totals": {
-      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.HIGH": 15,
       "CONFIDENCE.LOW": 0,
       "CONFIDENCE.MEDIUM": 0,
       "CONFIDENCE.UNDEFINED": 0,
       "SEVERITY.HIGH": 0,
-      "SEVERITY.LOW": 0,
-      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.LOW": 14,
+      "SEVERITY.MEDIUM": 1,
       "SEVERITY.UNDEFINED": 0,
-      "loc": 1,
+      "loc": 352,
       "nosec": 0,
       "skipped_tests": 0
     },
     "pylint_output.py": {
-      "loc": 1,
+      "CONFIDENCE.HIGH": 15,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 14,
+      "SEVERITY.MEDIUM": 1,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 352,
       "nosec": 0,
       "skipped_tests": 0
     }
   },
-  "results": []
+  "results": [
+    {
+      "code": "10 from ratelimit import limits,sleep_and_retry\n11 import subprocess\n12 import math\n",
+      "col_offset": 0,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Consider possible security implications associated with the subprocess module.",
+      "line_number": 11,
+      "line_range": [
+        11
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/blacklists/blacklist_imports.html#b404-import-subprocess",
+      "test_id": "B404",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "116         try:\n117             subprocess.run(\"safety check -r requirements.txt --output json > system_check.txt\",shell=True)\n118         except Exception as e:\n",
+      "col_offset": 12,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Starting a process with a partial executable path",
+      "line_number": 117,
+      "line_range": [
+        117
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b607_start_process_with_partial_path.html",
+      "test_id": "B607",
+      "test_name": "start_process_with_partial_path"
+    },
+    {
+      "code": "116         try:\n117             subprocess.run(\"safety check -r requirements.txt --output json > system_check.txt\",shell=True)\n118         except Exception as e:\n",
+      "col_offset": 12,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "subprocess call with shell=True seems safe, but may be changed in the future, consider rewriting without shell",
+      "line_number": 117,
+      "line_range": [
+        117
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b602_subprocess_popen_with_shell_equals_true.html",
+      "test_id": "B602",
+      "test_name": "subprocess_popen_with_shell_equals_true"
+    },
+    {
+      "code": "148                 count +=1\n149             except:\n150                 continue\n",
+      "col_offset": 12,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Try, Except, Continue detected.",
+      "line_number": 149,
+      "line_range": [
+        149
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b112_try_except_continue.html",
+      "test_id": "B112",
+      "test_name": "try_except_continue"
+    },
+    {
+      "code": "233 \n234         response = urlopen(URL)\n235         html = response.read()    \n",
+      "col_offset": 19,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 22,
+        "link": "https://cwe.mitre.org/data/definitions/22.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.",
+      "line_number": 234,
+      "line_range": [
+        234
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/blacklists/blacklist_calls.html#b310-urllib-urlopen",
+      "test_id": "B310",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "282     try:\n283         subprocess.run(\"bandit main.py -f json -o bandit_output.json > bandit_output.json\",shell=True)\n284     except Exception as e:\n",
+      "col_offset": 8,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Starting a process with a partial executable path",
+      "line_number": 283,
+      "line_range": [
+        283
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b607_start_process_with_partial_path.html",
+      "test_id": "B607",
+      "test_name": "start_process_with_partial_path"
+    },
+    {
+      "code": "282     try:\n283         subprocess.run(\"bandit main.py -f json -o bandit_output.json > bandit_output.json\",shell=True)\n284     except Exception as e:\n",
+      "col_offset": 8,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "subprocess call with shell=True seems safe, but may be changed in the future, consider rewriting without shell",
+      "line_number": 283,
+      "line_range": [
+        283
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b602_subprocess_popen_with_shell_equals_true.html",
+      "test_id": "B602",
+      "test_name": "subprocess_popen_with_shell_equals_true"
+    },
+    {
+      "code": "296     try:\n297         subprocess.run(\"pylint example.py --output-format=json > pylint_output.json\",shell=True)\n298     except Exception as e:\n",
+      "col_offset": 8,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Starting a process with a partial executable path",
+      "line_number": 297,
+      "line_range": [
+        297
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b607_start_process_with_partial_path.html",
+      "test_id": "B607",
+      "test_name": "start_process_with_partial_path"
+    },
+    {
+      "code": "296     try:\n297         subprocess.run(\"pylint example.py --output-format=json > pylint_output.json\",shell=True)\n298     except Exception as e:\n",
+      "col_offset": 8,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "subprocess call with shell=True seems safe, but may be changed in the future, consider rewriting without shell",
+      "line_number": 297,
+      "line_range": [
+        297
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b602_subprocess_popen_with_shell_equals_true.html",
+      "test_id": "B602",
+      "test_name": "subprocess_popen_with_shell_equals_true"
+    },
+    {
+      "code": "313     try:\n314         subprocess.run(\"pylint --rcfile=.pylintrc pylint_output.py --output-format=json > pylint_output.json\",shell=True)\n315         # subprocess.run(\"pylint --output-format=json your_file.py > pylint_report.json\",shell=True)\n",
+      "col_offset": 8,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Starting a process with a partial executable path",
+      "line_number": 314,
+      "line_range": [
+        314
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b607_start_process_with_partial_path.html",
+      "test_id": "B607",
+      "test_name": "start_process_with_partial_path"
+    },
+    {
+      "code": "313     try:\n314         subprocess.run(\"pylint --rcfile=.pylintrc pylint_output.py --output-format=json > pylint_output.json\",shell=True)\n315         # subprocess.run(\"pylint --output-format=json your_file.py > pylint_report.json\",shell=True)\n",
+      "col_offset": 8,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "subprocess call with shell=True seems safe, but may be changed in the future, consider rewriting without shell",
+      "line_number": 314,
+      "line_range": [
+        314
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b602_subprocess_popen_with_shell_equals_true.html",
+      "test_id": "B602",
+      "test_name": "subprocess_popen_with_shell_equals_true"
+    },
+    {
+      "code": "341     try:\n342         subprocess.run(\"bandit  pylint_output.py -f json -o bandit_output.json\",shell=True)\n343     except Exception as e:\n",
+      "col_offset": 8,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Starting a process with a partial executable path",
+      "line_number": 342,
+      "line_range": [
+        342
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b607_start_process_with_partial_path.html",
+      "test_id": "B607",
+      "test_name": "start_process_with_partial_path"
+    },
+    {
+      "code": "341     try:\n342         subprocess.run(\"bandit  pylint_output.py -f json -o bandit_output.json\",shell=True)\n343     except Exception as e:\n",
+      "col_offset": 8,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "subprocess call with shell=True seems safe, but may be changed in the future, consider rewriting without shell",
+      "line_number": 342,
+      "line_range": [
+        342
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b602_subprocess_popen_with_shell_equals_true.html",
+      "test_id": "B602",
+      "test_name": "subprocess_popen_with_shell_equals_true"
+    },
+    {
+      "code": "382     try:\n383         vulture_output = subprocess.check_output(['vulture', 'pylint_output.py'], stderr=subprocess.STDOUT)\n384     except subprocess.CalledProcessError as e:\n",
+      "col_offset": 25,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Starting a process with a partial executable path",
+      "line_number": 383,
+      "line_range": [
+        383
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b607_start_process_with_partial_path.html",
+      "test_id": "B607",
+      "test_name": "start_process_with_partial_path"
+    },
+    {
+      "code": "382     try:\n383         vulture_output = subprocess.check_output(['vulture', 'pylint_output.py'], stderr=subprocess.STDOUT)\n384     except subprocess.CalledProcessError as e:\n",
+      "col_offset": 25,
+      "filename": "pylint_output.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "subprocess call - check for execution of untrusted input.",
+      "line_number": 383,
+      "line_range": [
+        383
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.7.4/plugins/b603_subprocess_without_shell_equals_true.html",
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true"
+    }
+  ]
 }

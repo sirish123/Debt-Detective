@@ -100,7 +100,7 @@ def calcalculateLibrariesIOScore(pythonDict,name,versionsArray):
         community_subparameters["contributors"] = dict["contributors"]
     except:
         currScore+=0
-    return [currScore,community_subparameters]
+    return [currScore,dict]
 
 # test route
 @app.post("/")
@@ -399,16 +399,23 @@ async def linter(code: str):
             message = match.group(3).strip("'")
             output_lines.append((line_number, message))
 
+    VULTURE_ARRAY = []
 
-    output_dict = {vulture_output: [{line_number: line_number, message: message} for line_number, message in output_lines]}
-    output_list = [{line_number: line_number, message: message} for line_number, message in output_lines]
+    for line_number, message in output_lines:
+        vul_dict_response = {}
+        vul_dict_response["line_number"] = line_number
+        vul_dict_response["message"] = message
+        VULTURE_ARRAY.append(vul_dict_response)
+
+    # output_dict = {"vulture_output": [{"line_number": line_number, "message": message} for line_number, message in output_lines]}
 
 
-    vulture_json = json.dumps(output_dict)
+
+    # vulture_json = json.dumps(output_dict)
 
 
-    with open('vulture_output.json', 'w') as f:
-        json.dump(output_dict, f)
-    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": LINTER_ARRAY, "PYLINT_SCORE": tempJson.global_note,"SECURITY_SCORE":security_score,"VULTURE_OUTPUT": vulture_json}
+    # with open('vulture_output.json', 'w') as f:
+    #     json.dump(output_dict, f)
+    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": LINTER_ARRAY, "PYLINT_SCORE": tempJson.global_note,"SECURITY_SCORE":security_score,"VULTURE_OUTPUT": VULTURE_ARRAY}
 #  "VULTURE_OUTPUT": vulture_json
     
