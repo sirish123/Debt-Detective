@@ -210,7 +210,7 @@ def scrapeStack():
         URL = "https://stackoverflow.com/questions/tagged/{pname}?tab=votes&pagesize=15".format(pname=package)
         print(URL)
 
-        response = urlopen(URL)     
+        response = urlopen(URL)
         html = response.read()    
         
         soup = BeautifulSoup(html, features="html.parser")   
@@ -282,7 +282,11 @@ async def linter(request: Request):
 @app.get("/code")
 async def linter(code: str):
     with open("pylint_output.py", "w+") as f:
-        f.write(code)
+        print(code)
+        lines = code.split("\n")
+        for line in lines:
+            f.write(line)
+        f.close()
     pylint_score = 0
     results = None
     try:
@@ -297,6 +301,22 @@ async def linter(code: str):
     with open("pylint_output.json", "r") as f:
         input_data = f.read()
     python_dict_vul= json.loads(input_data)
+    LINTER_ARRAY = []
+    seen_lines = []
+    for result in python_dict_vul:
+        if result["message"] and result["message"] == "Final newline missing":
+            continue
+        if result["line"] in seen_lines:
+            continue
+        resDict = {}
+        resDict["line"] = result["line"]
+        resDict["column"] = result["column"]
+        resDict["message"] = result["message"]
+        resDict["endLine"] = result["endLine"]
+        resDict["endColumn"] = result["endColumn"]
+        LINTER_ARRAY.append(resDict)
+        seen_lines.append(result["line"])
+
     try:
         subprocess.run("bandit  pylint_output.py -f json -o bandit_output.json",shell=True)
     except Exception as e:
@@ -314,8 +334,8 @@ async def linter(code: str):
         resDict["LINENUMBER"] = python_dict_bandit["results"][i]["line_number"]
         resDict["COLOFFSET"] = python_dict_bandit["results"][i]["col_offset"]
         resDict["CWE_ID"] = python_dict_bandit["results"][i]["issue_cwe"]["id"]
-        SECURITY_ARRAY.append(resDict)
+        SECURITY_ARRAY.append(resDict)   
     tempJson = (results.linter.stats)
 
-    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": python_dict_vul, "PYLINT_SCORE": tempJson.global_note}
+    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": LINTER_ARRAY, "PYLINT_SCORE": tempJson.global_note}
     
