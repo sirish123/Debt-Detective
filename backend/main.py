@@ -7,8 +7,10 @@ from urllib.request import urlopen
 import requests
 import json
 import sys
+from ratelimit import limits,sleep_and_retry
 import subprocess
 import math
+from collections import OrderedDict
 import numpy as np
 from pylint.lint import Run
 import os
@@ -229,7 +231,7 @@ def scrapeStack():
         URL = "https://stackoverflow.com/questions/tagged/{pname}?tab=votes&pagesize=15".format(pname=package)
         print(URL)
 
-        response = urlopen(URL)     
+        response = urlopen(URL)
         html = response.read()    
         
         soup = BeautifulSoup(html, features="html.parser")   
@@ -301,7 +303,11 @@ async def linter(request: Request):
 @app.get("/code")
 async def linter(code: str):
     with open("pylint_output.py", "w+") as f:
-        f.write(code)
+        print(code)
+        lines = code.split("\n")
+        for line in lines:
+            f.write(line)
+        f.close()
     pylint_score = 0
     results = None
     try:
@@ -316,6 +322,22 @@ async def linter(code: str):
     with open("pylint_output.json", "r") as f:
         input_data = f.read()
     python_dict_vul= json.loads(input_data)
+    LINTER_ARRAY = []
+    seen_lines = []
+    for result in python_dict_vul:
+        if result["message"] and result["message"] == "Final newline missing":
+            continue
+        if result["line"] in seen_lines:
+            continue
+        resDict = {}
+        resDict["line"] = result["line"]
+        resDict["column"] = result["column"]
+        resDict["message"] = result["message"]
+        resDict["endLine"] = result["endLine"]
+        resDict["endColumn"] = result["endColumn"]
+        LINTER_ARRAY.append(resDict)
+        seen_lines.append(result["line"])
+
     try:
         subprocess.run("bandit  pylint_output.py -f json -o bandit_output.json",shell=True)
     except Exception as e:
@@ -352,6 +374,8 @@ async def linter(code: str):
         code_security_score += (severity_score*confidence_score);
         total_security_score += 25
         SECURITY_ARRAY.append(resDict)
+    if total_security_score == 0:
+        total_security_score = 1
     security_score = (code_security_score/total_security_score)*100
     severity_score = 100-(security_score)
     tempJson = (results.linter.stats)
@@ -376,8 +400,8 @@ async def linter(code: str):
             output_lines.append((line_number, message))
 
 
-    output_dict = {'vulture_output': [{'line_number': line_number, 'message': message} for line_number, message in output_lines]}
-    output_list = [{'line_number': line_number, 'message': message} for line_number, message in output_lines]
+    output_dict = {vulture_output: [{line_number: line_number, message: message} for line_number, message in output_lines]}
+    output_list = [{line_number: line_number, message: message} for line_number, message in output_lines]
 
 
     vulture_json = json.dumps(output_dict)
@@ -385,5 +409,6 @@ async def linter(code: str):
 
     with open('vulture_output.json', 'w') as f:
         json.dump(output_dict, f)
-    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": python_dict_vul, "PYLINT_SCORE": tempJson.global_note, "VULTURE_OUTPUT": vulture_json,"SECURITY_SCORE":security_score}
+    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": LINTER_ARRAY, "PYLINT_SCORE": tempJson.global_note,"SECURITY_SCORE":security_score,"VULTURE_OUTPUT": vulture_json}
+#  "VULTURE_OUTPUT": vulture_json
     
