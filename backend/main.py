@@ -381,8 +381,8 @@ async def linter(code: str):
             output_lines.append((line_number, message))
 
 
-    output_dict = {vulture_output: [{line_number: line_number, message: message} for line_number, message in output_lines]}
-    output_list = [{line_number: line_number, message: message} for line_number, message in output_lines]
+    output_dict = {"vulture_output": [{"line_number": line_number, "message": message} for line_number, message in output_lines]}
+
 
 
     vulture_json = json.dumps(output_dict)

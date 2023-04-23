@@ -1,68 +1,92 @@
 [
   {
     "scores": [
-      68.85714285714286,
-      52.75,
+      51.6,
+      53,
       0,
-      0,
+      35.55555555555556,
       0
     ],
     "community": [
       {
-        "PkgName": "Flask",
-        "stars": 62645,
-        "forks": 15584,
-        "score": 79
-      },
-      {
-        "PkgName": "click",
-        "stars": 13626,
-        "forks": 1320,
-        "score": 75
-      },
-      {
-        "PkgName": "colorama",
-        "stars": 3088,
-        "forks": 225,
+        "PkgName": "fastapi",
+        "stars": 56882,
+        "forks": 4734,
         "score": 65
       },
       {
-        "PkgName": "itsdangerous",
-        "stars": 2638,
-        "forks": 214,
-        "score": 60
+        "PkgName": "pydantic",
+        "stars": 13309,
+        "forks": 1217,
+        "score": 65
       },
       {
-        "PkgName": "Jinja2",
-        "stars": 9141,
-        "forks": 1547,
-        "score": 72
+        "PkgName": "typingextensions",
+        "stars": 0,
+        "forks": 0,
+        "score": 1
       },
       {
-        "PkgName": "MarkupSafe",
-        "stars": 527,
-        "forks": 138,
-        "score": 62
+        "PkgName": "starlette",
+        "stars": 8159,
+        "forks": 739,
+        "score": 57
       },
       {
-        "PkgName": "Werkzeug",
-        "stars": 6330,
-        "forks": 1686,
-        "score": 69
+        "PkgName": "anyio",
+        "stars": 0,
+        "forks": 0,
+        "score": 23
+      },
+      {
+        "PkgName": "idna",
+        "stars": 210,
+        "forks": 78,
+        "score": 59
+      },
+      {
+        "PkgName": "sniffio",
+        "stars": 86,
+        "forks": 16,
+        "score": 37
+      },
+      {
+        "PkgName": "numpy",
+        "stars": 23265,
+        "forks": 7997,
+        "score": 83
+      },
+      {
+        "PkgName": "ratelimit",
+        "stars": 395,
+        "forks": 100,
+        "score": 40
+      },
+      {
+        "PkgName": "requests",
+        "stars": 49372,
+        "forks": 9051,
+        "score": 86
       }
     ],
     "vpkg": [
       {
-        "CVE": "CVE-2023-25577",
-        "advisory": "Werkzeug 2.2.3 includes a fix for CVE-2023-25577: Prior to version 2.2.3, Werkzeugs multipart form data parser will parse an unlimited number of parts, including file parts. Parts can be a small amount of bytes, but each requires CPU time to parse and may use more memory as Python data. If a request can be made to an endpoint that accesses request.data, request.form, request.files, or request.get_data(parse_form_data=False), it can cause unexpectedly high resource usage. This allows an attacker to cause a denial of service by sending crafted multipart data to an endpoint that will parse it. The amount of CPU time required can block worker processes from handling legitimate requests. The amount of RAM required can trigger an out of memory kill of the process. Unlimited file parts can use up memory and file handles. If many concurrent requests are sent continuously, this can exhaust or kill all available workers.\r\nhttps://github.com/pallets/werkzeug/security/advisories/GHSA-xg9f-g7g7-2323",
-        "package_name": "Werkzeug",
-        "analyzed_version": ""
+        "CVE": "CVE-2021-34141",
+        "advisory": "Numpy 1.22.0 includes a fix for CVE-2021-34141: An incomplete string comparison in the numpy.core component in NumPy before 1.22.0 allows attackers to trigger slightly incorrect copying by constructing specific string objects. \r\nNOTE: the vendor states that this reported code behavior is \"completely harmless.\"\r\nhttps://github.com/numpy/numpy/issues/18993",
+        "package_name": "typing",
+        "analyzed_version": "3.7.4."
       },
       {
-        "CVE": "CVE-2023-23934",
-        "advisory": "Werkzeug 2.2.3 includes a fix for CVE-2023-23934: Browsers may allow \"nameless\" cookies that look like =value instead of key=value. A vulnerable browser may allow a compromised application on an adjacent subdomain to exploit this to set a cookie like =__Host-test=bad for another subdomain. Werkzeug prior to 2.2.3 will parse the cookie =__Host-test=bad as __Host-test=bad. If a Werkzeug application is running next to a vulnerable or malicious subdomain which sets such a cookie using a vulnerable browser, the Werkzeug application will see the bad cookie value but the valid cookie key.\r\nhttps://github.com/pallets/werkzeug/security/advisories/GHSA-px8h-6qxv-m22q",
-        "package_name": "Werkzeug",
-        "analyzed_version": ""
+        "CVE": "CVE-2021-41496",
+        "advisory": "Numpy 1.22.0 includes a fix for CVE-2021-41496: Buffer overflow in the array_from_pyobj function of fortranobject.c, which allows attackers to conduct a Denial of Service attacks by carefully constructing an array with negative values. \r\nNOTE: The vendor does not agree this is a vulnerability; the negative dimensions can only be created by an already privileged user (or internally).\r\nhttps://github.com/numpy/numpy/issues/19000",
+        "package_name": "typing",
+        "analyzed_version": "3.7.4."
+      },
+      {
+        "CVE": "CVE-2021-41495",
+        "advisory": "Numpy 1.22.2  includes a fix for CVE-2021-41495: Null Pointer Dereference vulnerability exists in numpy.sort in NumPy in the PyArray_DescrNew function due to missing return-value validation, which allows attackers to conduct DoS attacks by repetitively creating sort arrays. \r\nNOTE: While correct that validation is missing, an error can only occur due to an exhaustion of memory. If the user can exhaust memory, they are already privileged. Further, it should be practically impossible to construct an attack which can target the memory exhaustion to occur at exactly this place.\r\nhttps://github.com/numpy/numpy/issues/19038",
+        "package_name": "typing",
+        "analyzed_version": "3.7.4."
       }
     ]
   }
