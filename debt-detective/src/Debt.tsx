@@ -40,6 +40,12 @@ const Debt = (props: any) => {
       return (
         <CommunityRenderaComponent data={props.data} /> // if the user selects category 2, render the CommunityRenderaComponent with the "data" prop
       );
+    }else if( curSelect == 3){
+      return(
+        <h5 className="m-2 p-2 border border-light">
+          Squiggles in your code indicate that there is a problem with your code. The more squiggles, the more problems there are. The squiggles are color coded to indicate the severity of the problem. The squiggles are also grouped by type.
+        </h5>
+      );
     }
   };
 
