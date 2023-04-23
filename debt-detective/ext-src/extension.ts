@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import ReactPanel from "./panel";
 import axios from "axios";
 import * as fs from "fs";
+import { Upgrade } from "./upgrade";
 
 export let installed: { [key: string]: string } = {};
 let required: { [key: string]: string } = {};
@@ -70,12 +71,9 @@ function compareInstalledAndRequiredVersions(
             range: new vscode.Range(idx, 0, idx, 100),
             message: `Package ${pkg} is outdated. Required version:>= ${req_ver}, version in txt file: ${cur_data_ver} `,
             severity: vscode.DiagnosticSeverity.Warning,
-            source: "debt-detective",
+            source: "debt-detective-version",
             code: "debt-detective",
           });
-          // vscode.window.showWarningMessage(
-          //   `Package ${pkg} is outdated. Required version:>= ${req_ver}, version in txt file: ${cur_data_ver} `
-          // );
         }
       } catch (err) {}
     }
@@ -83,6 +81,10 @@ function compareInstalledAndRequiredVersions(
 
   diagnosticCollection.set(doc.uri, conflicts);
 }
+
+let securityScore: number = 0;
+let standardScore: number = 0;
+let depricatedScore: number = 0;
 
 function showSquizzleForSecurity(
   doc: vscode.TextDocument,
@@ -250,7 +252,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   const handler = async (doc: vscode.TextDocument, isPkgRequired: boolean) => {
     if (isPkgRequired && doc.fileName.includes("requirements.txt")) {
-      compareInstalledAndRequiredVersions(doc, diagnosticCollection2);
+      compareInstalledAndRequiredVersions(doc, diagnosticCollection);
       return;
     }
 
@@ -274,15 +276,22 @@ export function activate(context: vscode.ExtensionContext) {
 
     let url = "http://localhost:8000/code";
 
-    // console.log("before axios call");
-    // const response = await axios.get(url, {
-    //   params: {
-    //     code: code,
-    //   },
-    // });
-    // console.log(response.data);
+    console.log("before axios call");
+    const response = await axios.get(url, {
+      params: {
+        code: code,
+      },
+    });
+    console.log(response.data);
 
-    //showSquizzleForSecurity(doc, diagnosticCollection, response.data);
+    try {
+      securityScore = response.data.SECURITY_SCORE;
+      standardScore = response.data.PYLINT_SCORE;
+    } catch (e) {
+      console.log(e);
+    }
+
+    showSquizzleForSecurity(doc, diagnosticCollection, response.data);
 
     // if (isPkgRequired) {
     getDepOfPkg(doc);
@@ -298,9 +307,16 @@ export function activate(context: vscode.ExtensionContext) {
       handler(doc, true);
     }
   });
-  // const didChange = vscode.workspace.onDidChangeTextDocument((e) =>
-  //   handler(e.document, false)
-  // );
+  const didChange = vscode.workspace.onDidChangeTextDocument((e) => {
+    if (e.document.fileName.includes("requirements.txt")) {
+      handler(e.document, true);
+    }
+  });
+
+  const codeActionProvider = vscode.languages.registerCodeActionsProvider(
+    "text",
+    new Upgrade(context)
+  );
 
   const venvHelper = vscode.commands.registerCommand(
     "debtdetective.venv",
@@ -420,7 +436,9 @@ export function activate(context: vscode.ExtensionContext) {
 
       try {
         const data = await axios.post(url);
-
+        data.data.scores[2] = standardScore;
+        data.data.scores[3] = securityScore;
+        //console.log(data.data);
         jsonObject.push(data.data);
 
         //write to json file
@@ -463,9 +481,11 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     onFireDetective,
-    //onDidEndTask,
+    onDidEndTask,
+    codeActionProvider,
     venvHelper,
     didOpen,
+    didChange,
     vscode.window.registerWebviewViewProvider(
       "react-webview.webview",
       sidePanel

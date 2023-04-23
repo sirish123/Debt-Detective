@@ -9,7 +9,7 @@
         "api_key": false,
         "local_database_path": null,
         "safety_version": "2.3.5",
-        "timestamp": "2023-04-22 16:41:37",
+        "timestamp": "2023-04-23 16:16:36",
         "packages_found": 45,
         "vulnerabilities_found": 35,
         "vulnerabilities_ignored": 0,
@@ -34,7 +34,7 @@
         "git": {
             "branch": "master",
             "tag": "",
-            "commit": "13f452c248bd132725566522fe8b7c63562a07ed",
+            "commit": "f9187de839a3ad5173e005906b85716539ff7e93",
             "dirty": true,
             "origin": "https://github.com/Ganesh-P03/SE_tool_team5.git"
         },
@@ -308,6 +308,28 @@
     "announcements": [],
     "vulnerabilities": [
         {
+            "vulnerability_id": "44715",
+            "package_name": "numpy",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<1.22.2",
+            "all_vulnerable_specs": [
+                "<1.22.2"
+            ],
+            "analyzed_version": "1.21.5",
+            "advisory": "Numpy 1.22.2  includes a fix for CVE-2021-41495: Null Pointer Dereference vulnerability exists in numpy.sort in NumPy in the PyArray_DescrNew function due to missing return-value validation, which allows attackers to conduct DoS attacks by repetitively creating sort arrays. \r\nNOTE: While correct that validation is missing, an error can only occur due to an exhaustion of memory. If the user can exhaust memory, they are already privileged. Further, it should be practically impossible to construct an attack which can target the memory exhaustion to occur at exactly this place.\r\nhttps://github.com/numpy/numpy/issues/19038",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2021-41495",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/44715/f17"
+        },
+        {
             "vulnerability_id": "44717",
             "package_name": "numpy",
             "ignored": {},
@@ -350,28 +372,6 @@
             "severity": null,
             "affected_versions": [],
             "more_info_url": "https://pyup.io/v/44716/f17"
-        },
-        {
-            "vulnerability_id": "44715",
-            "package_name": "numpy",
-            "ignored": {},
-            "ignored_reason": null,
-            "ignored_expires": null,
-            "vulnerable_spec": "<1.22.2",
-            "all_vulnerable_specs": [
-                "<1.22.2"
-            ],
-            "analyzed_version": "1.21.5",
-            "advisory": "Numpy 1.22.2  includes a fix for CVE-2021-41495: Null Pointer Dereference vulnerability exists in numpy.sort in NumPy in the PyArray_DescrNew function due to missing return-value validation, which allows attackers to conduct DoS attacks by repetitively creating sort arrays. \r\nNOTE: While correct that validation is missing, an error can only occur due to an exhaustion of memory. If the user can exhaust memory, they are already privileged. Further, it should be practically impossible to construct an attack which can target the memory exhaustion to occur at exactly this place.\r\nhttps://github.com/numpy/numpy/issues/19038",
-            "is_transitive": false,
-            "published_date": null,
-            "fixed_versions": [],
-            "closest_versions_without_known_vulnerabilities": [],
-            "resources": [],
-            "CVE": "CVE-2021-41495",
-            "severity": null,
-            "affected_versions": [],
-            "more_info_url": "https://pyup.io/v/44715/f17"
         },
         {
             "vulnerability_id": "51959",
@@ -422,30 +422,6 @@
             "more_info_url": "https://pyup.io/v/51953/f17"
         },
         {
-            "vulnerability_id": "51950",
-            "package_name": "tensorflow",
-            "ignored": {},
-            "ignored_reason": null,
-            "ignored_expires": null,
-            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
-            "all_vulnerable_specs": [
-                "<2.8.4",
-                ">=2.9.0rc0,<2.9.3",
-                ">=2.10.0rc0,<2.10.1"
-            ],
-            "analyzed_version": "2.10.0",
-            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41891: If 'tf.raw_ops.TensorListConcat' is given 'element_shape=[]', it results segmentation fault which can be used to trigger a denial of service attack.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-66vq-54fq-6jvv",
-            "is_transitive": false,
-            "published_date": null,
-            "fixed_versions": [],
-            "closest_versions_without_known_vulnerabilities": [],
-            "resources": [],
-            "CVE": "CVE-2022-41891",
-            "severity": null,
-            "affected_versions": [],
-            "more_info_url": "https://pyup.io/v/51950/f17"
-        },
-        {
             "vulnerability_id": "51963",
             "package_name": "tensorflow",
             "ignored": {},
@@ -468,6 +444,30 @@
             "severity": null,
             "affected_versions": [],
             "more_info_url": "https://pyup.io/v/51963/f17"
+        },
+        {
+            "vulnerability_id": "51950",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41891: If 'tf.raw_ops.TensorListConcat' is given 'element_shape=[]', it results segmentation fault which can be used to trigger a denial of service attack.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-66vq-54fq-6jvv",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41891",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51950/f17"
         },
         {
             "vulnerability_id": "51948",

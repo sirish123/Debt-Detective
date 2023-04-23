@@ -7,8 +7,10 @@ from urllib.request import urlopen
 import requests
 import json
 import sys
+from ratelimit import limits,sleep_and_retry
 import subprocess
 import math
+from collections import OrderedDict
 import numpy as np
 from pylint.lint import Run
 import os
@@ -353,6 +355,8 @@ async def linter(code: str):
         code_security_score += (severity_score*confidence_score);
         total_security_score += 9
         SECURITY_ARRAY.append(resDict)
+    if total_security_score == 0:
+        total_security_score = 1
     security_score = (code_security_score/total_security_score)*100
     severity_score = 100-(security_score)
     tempJson = (results.linter.stats)
@@ -377,8 +381,8 @@ async def linter(code: str):
             output_lines.append((line_number, message))
 
 
-    output_dict = {'vulture_output': [{'line_number': line_number, 'message': message} for line_number, message in output_lines]}
-    output_list = [{'line_number': line_number, 'message': message} for line_number, message in output_lines]
+    output_dict = {vulture_output: [{line_number: line_number, message: message} for line_number, message in output_lines]}
+    output_list = [{line_number: line_number, message: message} for line_number, message in output_lines]
 
 
     vulture_json = json.dumps(output_dict)
@@ -386,5 +390,6 @@ async def linter(code: str):
 
     with open('vulture_output.json', 'w') as f:
         json.dump(output_dict, f)
-    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": python_dict_vul, "PYLINT_SCORE": tempJson.global_note, "VULTURE_OUTPUT": vulture_json,"SECURITY_SCORE":security_score}
+    return {"SECURITY_ARRAY": SECURITY_ARRAY, "LINTER": LINTER_ARRAY, "PYLINT_SCORE": tempJson.global_note,"SECURITY_SCORE":security_score,"VULTURE_OUTPUT": vulture_json}
+#  "VULTURE_OUTPUT": vulture_json
     
