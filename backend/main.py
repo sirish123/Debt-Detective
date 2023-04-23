@@ -35,52 +35,70 @@ async def add_cors_headers(request, call_next):
     response.headers["Access-Control-Allow-Headers"] = "Content-Type"
     return response
 
+
 def calcalculateLibrariesIOScore(pythonDict,name,versionsArray):
     currScore = 0
     #has readme
-    
+    community_subparameters = {}
+    community_subparameters["age_of_repo"] = 0 #
+    community_subparameters["contributors"]  = 0 
+    community_subparameters["dependents"] =0 #
+    community_subparameters["multiple_version"] = 0 #
+    community_subparameters["readme"] = 0 #
+    community_subparameters["recent_releases"] = 0 #
+    community_subparameters["stars_and_forks"] = 0 #
+
     url = "https://libraries.io/api/{source}/{name}/sourcerank?api_key=7b7f69d0b46f645c7cfc7c6231db6ae6".format(source="Pypi",name=name)
     dict = requests.get(url).json();
     currScore += dict["readme_present"];
-    #multiple versions
+    community_subparameters["readme"] =  dict["readme_present"]
+    #multiple versions 
     if len(versionsArray) >1:
         currScore+=1
+        community_subparameters["multiple_version"] = 1
     #recent release
     try:
         currScore += dict["recent_release"]
+        community_subparameters["recent_releases"] =  dict["recent_release"]
     #not brand new
     except:
         currScore+=0
     try:
         currScore += dict["not_brand_new"]
+        community_subparameters["age_of_repo"] = dict["not_brand_new"]
     #dependent packages
     except:
         currScore+=0
     try:
         currScore += 2*math.ceil(math.log2(pythonDict["dependents_count"]));
+        community_subparameters["dependents"] = 2*math.ceil(math.log2(pythonDict["dependents_count"]))
     #dependent repositories
     except:
         currScore+=0
     try:
         currScore += math.ceil(math.log2(pythonDict["dependent_repos_count"]));
+        
     # #number of stars
     except:
         currScore+=0
     try:
         currScore += math.ceil(math.log2(pythonDict["stars"]))
+        community_subparameters["stars_and_forks"] = math.ceil(math.log2(pythonDict["stars"]))
     # #number of forks
     except:
         currScore+=0
     try:
         currScore += math.ceil(math.log2(pythonDict["forks"]))
+        community_subparameters["stars_and_forks"] += math.ceil(math.log2(pythonDict["forks"]))
     #contributors
     except:
         currScore+=0
     try:
         currScore += dict["contributors"]
+        community_subparameters["contributors"] = dict["contributors"]
     except:
         currScore+=0
-    return currScore
+    return [currScore,community_subparameters]
 
 # test route
 @app.post("/")
@@ -89,7 +107,7 @@ async def read_root(request: Request):
         count = 0
         dependency_list = request.query_params["val"].split(",")
         input_data = ""
-
+        comm_sub_params = {}
         with open ("requirements.txt","w+") as f:
             for items in dependency_list:
                 f.write(items+"\n")
@@ -101,7 +119,7 @@ async def read_root(request: Request):
         with open("system_check.txt", "r") as f:
             input_data = f.read()
         python_dict_vul= json.loads(input_data);
-        dictVal = [];
+        dictVal = []
         for dependency in dependency_list:
             curr_string  = dependency[:-1]
             try:
@@ -116,17 +134,18 @@ async def read_root(request: Request):
             try:
                 pythonDict = pythonDic.json()
                 returnDict = {}
-                version = "";
-                score = calcalculateLibrariesIOScore(pythonDict,name,pythonDict["versions"]);
+                version = ""
+                [score,commuity_subparameters] = calcalculateLibrariesIOScore(pythonDict,name,pythonDict["versions"])
+                comm_sub_params = commuity_subparameters
                 communityScore += score
-                returnDict["PkgName"] = name;
+                returnDict["PkgName"] = name
                 returnDict["stars"] = pythonDict["stars"]
                 returnDict["forks"] = pythonDict["forks"]
                 returnDict["score"] = score
-                dictVal.append(returnDict);
+                dictVal.append(returnDict)
                 count +=1
             except:
-                continue;
+                continue
         vulnArray =[]
         vulCount =0
         vulScore = 0
@@ -163,7 +182,7 @@ async def read_root(request: Request):
             scores.append((vulScore/vulCount)*10);
         for i in range(3):
             scores.append(0)
-        return {"scores":scores,"community":dictVal ,"vpkg":vulnArray}
+        return {"scores":scores,"community":dictVal ,"vpkg":vulnArray,"community_subparameters": comm_sub_params}
         
 @app.get("/security")
 def security():
@@ -320,18 +339,18 @@ async def linter(code: str):
         if(resDict["SEVERITY"] == "LOW"):
             severity_score = 1
         elif(resDict["SEVERITY"] == "MEDIUM"):
-            severity_score = 2
-        elif(resDict["SEVERITY"] == "HIGH"):
             severity_score = 3
+        elif(resDict["SEVERITY"] == "HIGH"):
+            severity_score = 5
         confidence_score =0
         if(resDict["CONFIDENCE"] == "LOW"):
             confidence_score = 1
         elif(resDict["CONFIDENCE"] == "MEDIUM"):
-            confidence_score = 2
-        elif(resDict["CONFIDENCE"] == "HIGH"):
             confidence_score = 3
+        elif(resDict["CONFIDENCE"] == "HIGH"):
+            confidence_score = 5
         code_security_score += (severity_score*confidence_score);
-        total_security_score += 9
+        total_security_score += 25
         SECURITY_ARRAY.append(resDict)
     security_score = (code_security_score/total_security_score)*100
     severity_score = 100-(security_score)
