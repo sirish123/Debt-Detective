@@ -9,6 +9,12 @@
     ],
     "community": [
       {
+        "PkgName": "numpy",
+        "stars": 23265,
+        "forks": 7997,
+        "score": 83
+      },
+      {
         "PkgName": "fastapi",
         "stars": 56882,
         "forks": 4734,
@@ -49,12 +55,6 @@
         "stars": 86,
         "forks": 16,
         "score": 37
-      },
-      {
-        "PkgName": "numpy",
-        "stars": 23265,
-        "forks": 7997,
-        "score": 83
       },
       {
         "PkgName": "ratelimit",

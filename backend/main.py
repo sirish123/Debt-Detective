@@ -39,6 +39,7 @@ async def add_cors_headers(request, call_next):
 
 
 def calcalculateLibrariesIOScore(pythonDict,name,versionsArray):
+    
     currScore = 0
     #has readme
     community_subparameters = {}
