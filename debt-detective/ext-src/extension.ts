@@ -121,7 +121,7 @@ function showSquizzleForSecurity(
     PYLINT_SCORE: 5.7894736842105265,
   };
 
-  analysis_code = temporary;
+  //analysis_code = temporary;
 
   const diagnostics = new Array<vscode.Diagnostic>();
   for (let i = 0; i < analysis_code.SECURITY_ARRAY.length; i++) {
@@ -141,7 +141,7 @@ function showSquizzleForSecurity(
       message: msg,
       code: code,
       source: "debt-detective",
-      range: new vscode.Range(line, col, line, col + 100),
+      range: new vscode.Range(line - 1, col, line - 1, col + 100),
     });
   }
 
@@ -166,8 +166,8 @@ function showSquizzleForSecurity(
     } else {
       endCol = analysis_code.LINTER[i].endColumn;
     }
-    const startPos = new vscode.Position(line, col);
-    const endPos = new vscode.Position(endLine, endCol);
+    const startPos = new vscode.Position(line - 1, col);
+    const endPos = new vscode.Position(endLine - 1, endCol);
     const range = new vscode.Range(startPos, endPos);
 
     const decoration = {
@@ -244,9 +244,14 @@ export function activate(context: vscode.ExtensionContext) {
   const diagnosticCollection =
     vscode.languages.createDiagnosticCollection("debt-detective");
 
+  const diagnosticCollection2 = vscode.languages.createDiagnosticCollection(
+    "debt-detective-version-handler"
+  );
+
   const handler = async (doc: vscode.TextDocument, isPkgRequired: boolean) => {
-    if (doc.fileName.includes("requirements.txt")) {
-      //compareInstalledAndRequiredVersions(doc, diagnosticCollection);
+    if (isPkgRequired && doc.fileName.includes("requirements.txt")) {
+      compareInstalledAndRequiredVersions(doc, diagnosticCollection2);
+      return;
     }
 
     if (!doc.fileName.endsWith(".py")) {
@@ -264,32 +269,38 @@ export function activate(context: vscode.ExtensionContext) {
 
     //get the whole code in the file and send it as a api call to backend
     const code: string = doc.getText();
-    console.log(code);
+    //console.log(code);
+    console.log("got code");
 
-    let url = "http://localhost:8000/code/";
+    let url = "http://localhost:8000/code";
 
-    url += "?code=" + code;
+    // console.log("before axios call");
+    // const response = await axios.get(url, {
+    //   params: {
+    //     code: code,
+    //   },
+    // });
+    // console.log(response.data);
 
-    const response = await axios.get(url);
-    console.log(response.data);
-
-    showSquizzleForSecurity(doc, diagnosticCollection, response.data);
+    //showSquizzleForSecurity(doc, diagnosticCollection, response.data);
 
     // if (isPkgRequired) {
-    //getDepOfPkg(doc);
+    getDepOfPkg(doc);
     //}
   };
 
-  if (vscode.window.activeTextEditor) {
-    handler(vscode.window.activeTextEditor.document, true);
-  }
+  // if (vscode.window.activeTextEditor) {
+  //   handler(vscode.window.activeTextEditor.document, true);
+  // }
 
-  const didOpen = vscode.workspace.onDidOpenTextDocument((doc) =>
-    handler(doc, true)
-  );
-  const didChange = vscode.workspace.onDidChangeTextDocument((e) =>
-    handler(e.document, false)
-  );
+  const didOpen = vscode.workspace.onDidOpenTextDocument((doc) => {
+    if (doc.fileName.includes("requirements.txt")) {
+      handler(doc, true);
+    }
+  });
+  // const didChange = vscode.workspace.onDidChangeTextDocument((e) =>
+  //   handler(e.document, false)
+  // );
 
   const venvHelper = vscode.commands.registerCommand(
     "debtdetective.venv",
@@ -332,9 +343,9 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.ViewColumn.One
   );
 
-  const didSave = vscode.workspace.onDidSaveTextDocument((doc) =>
-    handler(doc, false)
-  );
+  // const didSave = vscode.workspace.onDidSaveTextDocument((doc) =>
+  //   handler(doc, false)
+  // );
 
   //regex parsing
   const onDidEndTask = vscode.tasks.onDidEndTask(async () => {
@@ -403,7 +414,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       //make url as localhost:8000?val=temp
       url += `?val=${temp}`;
-      console.log(url);
+      //console.log(url);
 
       const jsonObject: any = [];
 
@@ -429,21 +440,45 @@ export function activate(context: vscode.ExtensionContext) {
       }
 
       message = JSON.stringify(jsonObject);
-      sidePanel.update(message);
+
+      if (message && message != "null") {
+        sidePanel.update(message);
+      } else {
+        sidePanel.update("loading..");
+        console.log("no message");
+      }
     } else {
       console.log("no file");
     }
   });
 
+  const onFireDetective = vscode.commands.registerCommand(
+    "debtdetective.fullsearch",
+    () => {
+      if (vscode.window.activeTextEditor) {
+        handler(vscode.window.activeTextEditor.document, true);
+      }
+    }
+  );
+
   context.subscriptions.push(
-    didSave,
-    onDidEndTask,
+    onFireDetective,
+    //onDidEndTask,
     venvHelper,
     didOpen,
-    didChange,
     vscode.window.registerWebviewViewProvider(
       "react-webview.webview",
       sidePanel
     )
   );
 }
+
+//onDidEndTask,
+//venvHelper,
+//didOpen,
+//didChange,
+//didSave,
+// vscode.window.registerWebviewViewProvider(
+//   "react-webview.webview",
+//   sidePanel
+// )

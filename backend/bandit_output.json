@@ -1,11 +1,6 @@
 {
-  "errors": [
-    {
-      "filename": "pylint_output.py",
-      "reason": "syntax error while parsing AST from file"
-    }
-  ],
-  "generated_at": "2023-04-20T13:35:54Z",
+  "errors": [],
+  "generated_at": "2023-04-22T11:11:02Z",
   "metrics": {
     "_totals": {
       "CONFIDENCE.HIGH": 0,
@@ -16,12 +11,20 @@
       "SEVERITY.LOW": 0,
       "SEVERITY.MEDIUM": 0,
       "SEVERITY.UNDEFINED": 0,
-      "loc": 1,
+      "loc": 31,
       "nosec": 0,
       "skipped_tests": 0
     },
     "pylint_output.py": {
-      "loc": 1,
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 31,
       "nosec": 0,
       "skipped_tests": 0
     }

@@ -9,9 +9,9 @@
         "api_key": false,
         "local_database_path": null,
         "safety_version": "2.3.5",
-        "timestamp": "2023-04-20 18:49:52",
-        "packages_found": 14,
-        "vulnerabilities_found": 3,
+        "timestamp": "2023-04-22 16:41:37",
+        "packages_found": 45,
+        "vulnerabilities_found": 35,
         "vulnerabilities_ignored": 0,
         "remediations_recommended": 0,
         "telemetry": {
@@ -34,7 +34,7 @@
         "git": {
             "branch": "master",
             "tag": "",
-            "commit": "7ffd22982745de839f52127e6d24bc0566fecfe5",
+            "commit": "13f452c248bd132725566522fe8b7c63562a07ed",
             "dirty": true,
             "origin": "https://github.com/Ganesh-P03/SE_tool_team5.git"
         },
@@ -42,67 +42,261 @@
         "json_version": 1
     },
     "scanned_packages": {
-        "fastapi": {
-            "name": "fastapi",
-            "version": "0.92.0"
-        },
-        "pydantic": {
-            "name": "pydantic",
-            "version": "1.10.5"
-        },
-        "typingextensions": {
-            "name": "typingextensions",
-            "version": "4.5.0"
-        },
-        "starlette": {
-            "name": "starlette",
-            "version": "0.25.0"
-        },
-        "anyio": {
-            "name": "anyio",
-            "version": "3.6.2"
-        },
-        "idna": {
-            "name": "idna",
-            "version": "3.4"
-        },
-        "sniffio": {
-            "name": "sniffio",
-            "version": "1.3.0"
+        "pandas": {
+            "name": "pandas",
+            "version": "1.4.2"
         },
         "numpy": {
             "name": "numpy",
             "version": "1.21.5"
         },
-        "ratelimit": {
-            "name": "ratelimit",
-            "version": "2.2.1"
+        "pythondateutil": {
+            "name": "pythondateutil",
+            "version": "2.8.2"
+        },
+        "six": {
+            "name": "six",
+            "version": "1.16.0"
+        },
+        "pytz": {
+            "name": "pytz",
+            "version": "2021.3"
+        },
+        "tensorflow": {
+            "name": "tensorflow",
+            "version": "2.10.0"
+        },
+        "abslpy": {
+            "name": "abslpy",
+            "version": "1.2.0"
+        },
+        "astunparse": {
+            "name": "astunparse",
+            "version": "1.6.3"
+        },
+        "wheel": {
+            "name": "wheel",
+            "version": "0.37.1"
+        },
+        "flatbuffers": {
+            "name": "flatbuffers",
+            "version": "22.9.24"
+        },
+        "gast": {
+            "name": "gast",
+            "version": "0.4.0"
+        },
+        "googlepasta": {
+            "name": "googlepasta",
+            "version": "0.2.0"
+        },
+        "grpcio": {
+            "name": "grpcio",
+            "version": "1.42.0"
+        },
+        "h5py": {
+            "name": "h5py",
+            "version": "3.6.0"
+        },
+        "keras": {
+            "name": "keras",
+            "version": "2.10.0"
+        },
+        "keraspreprocessing": {
+            "name": "keraspreprocessing",
+            "version": "1.1.2"
+        },
+        "libclang": {
+            "name": "libclang",
+            "version": "14.0.6"
+        },
+        "opteinsum": {
+            "name": "opteinsum",
+            "version": "3.3.0"
+        },
+        "packaging": {
+            "name": "packaging",
+            "version": "21.3"
+        },
+        "pyparsing": {
+            "name": "pyparsing",
+            "version": "3.0.4"
+        },
+        "protobuf": {
+            "name": "protobuf",
+            "version": "3.19.1"
+        },
+        "setuptools": {
+            "name": "setuptools",
+            "version": "61.2.0"
+        },
+        "tensorboard": {
+            "name": "tensorboard",
+            "version": "2.10.1"
+        },
+        "googleauth": {
+            "name": "googleauth",
+            "version": "1.33.0"
+        },
+        "cachetools": {
+            "name": "cachetools",
+            "version": "4.2.2"
+        },
+        "pyasn1modules": {
+            "name": "pyasn1modules",
+            "version": "0.2.8"
+        },
+        "pyasn1": {
+            "name": "pyasn1",
+            "version": "0.4.8"
+        },
+        "rsa": {
+            "name": "rsa",
+            "version": "4.7.2"
+        },
+        "googleauthoauthlib": {
+            "name": "googleauthoauthlib",
+            "version": "0.5.3"
+        },
+        "requestsoauthlib": {
+            "name": "requestsoauthlib",
+            "version": "1.3.1"
+        },
+        "oauthlib": {
+            "name": "oauthlib",
+            "version": "3.2.1"
         },
         "requests": {
             "name": "requests",
-            "version": "2.28.2"
+            "version": "2.27.1"
         },
         "certifi": {
             "name": "certifi",
-            "version": "2022.12.7"
+            "version": "2022.9.14"
         },
         "charsetnormalizer": {
             "name": "charsetnormalizer",
-            "version": "3.0.1"
+            "version": "2.0.4"
+        },
+        "idna": {
+            "name": "idna",
+            "version": "3.4"
         },
         "urllib3": {
             "name": "urllib3",
-            "version": "1.26.14"
+            "version": "1.26.9"
         },
-        "typing": {
-            "name": "typing",
-            "version": "3.7.4.3"
+        "markdown": {
+            "name": "markdown",
+            "version": "3.3.4"
+        },
+        "tensorboarddataserver": {
+            "name": "tensorboarddataserver",
+            "version": "0.6.1"
+        },
+        "tensorboardpluginwit": {
+            "name": "tensorboardpluginwit",
+            "version": "1.8.1"
+        },
+        "werkzeug": {
+            "name": "werkzeug",
+            "version": "2.0.3"
+        },
+        "tensorflowestimator": {
+            "name": "tensorflowestimator",
+            "version": "2.10.0"
+        },
+        "tensorflowiogcsfilesystem": {
+            "name": "tensorflowiogcsfilesystem",
+            "version": "0.27.0"
+        },
+        "termcolor": {
+            "name": "termcolor",
+            "version": "2.0.1"
+        },
+        "typingextensions": {
+            "name": "typingextensions",
+            "version": "4.1.1"
+        },
+        "wrapt": {
+            "name": "wrapt",
+            "version": "1.12.1"
         }
     },
     "affected_packages": {
         "numpy": {
             "name": "numpy",
             "version": "1.21.5",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "tensorflow": {
+            "name": "tensorflow",
+            "version": "2.10.0",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "wheel": {
+            "name": "wheel",
+            "version": "0.37.1",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "keras": {
+            "name": "keras",
+            "version": "2.10.0",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "protobuf": {
+            "name": "protobuf",
+            "version": "3.19.1",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "setuptools": {
+            "name": "setuptools",
+            "version": "61.2.0",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "certifi": {
+            "name": "certifi",
+            "version": "2022.9.14",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "werkzeug": {
+            "name": "werkzeug",
+            "version": "2.0.3",
             "found": "requirements.txt",
             "insecure_versions": [],
             "secure_versions": [],
@@ -178,6 +372,760 @@
             "severity": null,
             "affected_versions": [],
             "more_info_url": "https://pyup.io/v/44715/f17"
+        },
+        {
+            "vulnerability_id": "51959",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41901: An input 'sparse_matrix' that is not a matrix with a shape with rank 0 will trigger a 'CHECK' fail in 'tf.raw_ops.SparseMatrixNNZ'.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-g9fm-r5mm-rf9f",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41901",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51959/f17"
+        },
+        {
+            "vulnerability_id": "51953",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41895: If 'MirrorPadGrad' is given outsize input 'paddings', TensorFlow will give a heap OOB error.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-gq2j-cr96-gvqx",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41895",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51953/f17"
+        },
+        {
+            "vulnerability_id": "51950",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41891: If 'tf.raw_ops.TensorListConcat' is given 'element_shape=[]', it results segmentation fault which can be used to trigger a denial of service attack.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-66vq-54fq-6jvv",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41891",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51950/f17"
+        },
+        {
+            "vulnerability_id": "51963",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41911: When printing a tensor, we get it's data as a 'const char*' array (since that's the underlying storage) and then we typecast it to the element type. However, conversions from 'char' to 'bool' are undefined if the 'char' is not '0' or '1', so sanitizers/fuzzers will crash.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-pf36-r9c6-h97j",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41911",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51963/f17"
+        },
+        {
+            "vulnerability_id": "51948",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41889: If a list of quantized tensors is assigned to an attribute, the pywrap code fails to parse the tensor and returns a 'nullptr', which is not caught. An example can be seen in 'tf.compat.v1.extract_volume_patches' by passing in quantized tensors as input 'ksizes'.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-xxcj-rhqg-m46g",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41889",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51948/f17"
+        },
+        {
+            "vulnerability_id": "51944",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41885: When 'tf.raw_ops.FusedResizeAndPadConv2D' is given a large tensor shape, it overflows.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-762h-vpvw-3rcx",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41885",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51944/f17"
+        },
+        {
+            "vulnerability_id": "51957",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41899: TensorFlow is an open source platform for machine learning. Inputs 'dense_features' or 'example_state_data' not of rank 2 will trigger a 'CHECK' fail in 'SdcaOptimizer'.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-27rc-728f-x5w2",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41899",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51957/f17"
+        },
+        {
+            "vulnerability_id": "51951",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41893: If 'tf.raw_ops.TensorListResize' is given a nonscalar value for input 'size', it results 'CHECK' fail which can be used to trigger a denial of service attack.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-67pf-62xr-q35m",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41893",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51951/f17"
+        },
+        {
+            "vulnerability_id": "51962",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41909: An input 'encoded' that is not a valid 'CompositeTensorVariant' tensor will trigger a segfault in 'tf.raw_ops.CompositeTensorVariantToComponents'.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-rjx6-v474-2ch9",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41909",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51962/f17"
+        },
+        {
+            "vulnerability_id": "51961",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41908: TensorFlow is an open source platform for machine learning. An input 'token' that is not a UTF-8 bytestring will trigger a 'CHECK' fail in 'tf.raw_ops.PyFunc'.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-mv77-9g28-cwg3",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41908",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51961/f17"
+        },
+        {
+            "vulnerability_id": "51958",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41900: The security vulnerability results in FractionalMax(AVG)Pool with illegal pooling_ratio. Attackers using Tensorflow can exploit the vulnerability. They can access heap memory which is not in the control of user, leading to a crash or remote code execution.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-xvwp-h6jv-7472",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41900",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51958/f17"
+        },
+        {
+            "vulnerability_id": "51949",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41890: If 'BCast::ToShape' is given input larger than an 'int32', it will crash, despite being supposed to handle up to an 'int64'. An example can be seen in 'tf.experimental.numpy.outer' by passing in large input to the input 'b'.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-h246-cgh4-7475",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41890",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51949/f17"
+        },
+        {
+            "vulnerability_id": "51941",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41880: When the 'BaseCandidateSamplerOp' function receives a value in 'true_classes' larger than 'range_max', a heap oob read occurs.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-8w5g-3wcv-9g2j",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41880",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51941/f17"
+        },
+        {
+            "vulnerability_id": "51960",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41907: When 'tf.raw_ops.ResizeNearestNeighborGrad' is given a large 'size' input, it overflows.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-368v-7v32-52fx",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41907",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51960/f17"
+        },
+        {
+            "vulnerability_id": "52347",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41902: The function MakeGrapplerFunctionItem takes arguments that determine the sizes of inputs and outputs. If the inputs given are greater than or equal to the sizes of the outputs, an out-of-bounds memory read or a crash is triggered.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-cg88-rpvp-cjv5",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41902",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/52347/f17"
+        },
+        {
+            "vulnerability_id": "51954",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41896: If 'ThreadUnsafeUnigramCandidateSampler' is given input 'filterbank_channel_count' greater than the allowed max size, TensorFlow will crash.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-rmg2-f698-wq35",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41896",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51954/f17"
+        },
+        {
+            "vulnerability_id": "51946",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.9.3 and 2.10.1 include a fix for CVE-2022-41887: 'tf.keras.losses.poisson' receives a 'y_pred' and 'y_true' that are passed through 'functor::mul' in 'BinaryOp'. If the resulting dimensions overflow an 'int32', TensorFlow will crash due to a size mismatch during broadcast assignment.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-8fvv-46hw-vpg3",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41887",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51946/f17"
+        },
+        {
+            "vulnerability_id": "51943",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41884: If a numpy array is created with a shape such that one element is zero and the others sum to a large number, an error will be raised. \r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-jq6x-99hj-q636",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41884",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51943/f17"
+        },
+        {
+            "vulnerability_id": "51955",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41897: If 'FractionMaxPoolGrad' is given outsize inputs 'row_pooling_sequence' and 'col_pooling_sequence', TensorFlow will crash.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-f2w8-jw48-fr7j",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41897",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51955/f17"
+        },
+        {
+            "vulnerability_id": "51945",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41886: When 'tf.raw_ops.ImageProjectiveTransformV2' is given a large output shape, it overflows.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-54pp-c6pp-7fpx",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41886",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51945/f17"
+        },
+        {
+            "vulnerability_id": "52348",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41910: The function MakeGrapplerFunctionItem takes arguments that determine the sizes of inputs and outputs. If the inputs given are greater than or equal to the sizes of the outputs, an out-of-bounds memory read or a crash is triggered.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-frqp-wp83-qggv",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41910",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/52348/f17"
+        },
+        {
+            "vulnerability_id": "51947",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41888: When running on GPU, 'tf.image.generate_bounding_box_proposals' receives a 'scores' input that must be of rank 4 but is not checked.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-6x99-gv2v-q76v",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41888",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51947/f17"
+        },
+        {
+            "vulnerability_id": "51956",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41898: If 'SparseFillEmptyRowsGrad' is given empty inputs, TensorFlow will crash.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-hq7g-wwwp-q46h",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41898",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51956/f17"
+        },
+        {
+            "vulnerability_id": "51952",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                "<2.8.4",
+                ">=2.9.0rc0,<2.9.3",
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.8.4, 2.9.3 and 2.10.1 include a fix for CVE-2022-41894: The reference kernel of the 'CONV_3D_TRANSPOSE' TensorFlow Lite operator wrongly increments the data_ptr when adding the bias to the result. Instead of 'data_ptr += num_channels;' it should be 'data_ptr += output_num_channels;' as if the number of input channels is different than the number of output channels, the wrong result will be returned and a buffer overflow will occur if num_channels > output_num_channels. An attacker can craft a model with a specific number of input channels. It is then possible to write specific values through the bias of the layer outside the bounds of the buffer. This attack only works if the reference kernel resolver is used in the interpreter.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-h6q3-vv32-2cq5",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41894",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51952/f17"
+        },
+        {
+            "vulnerability_id": "51942",
+            "package_name": "tensorflow",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=2.10.0rc0,<2.10.1",
+            "all_vulnerable_specs": [
+                ">=2.10.0rc0,<2.10.1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Tensorflow 2.10.1 includes a fix for CVE-2022-41883: When ops that have specified input sizes receive a differing number of inputs, the executor will crash.\r\nhttps://github.com/tensorflow/tensorflow/security/advisories/GHSA-w58w-79xv-6vcj",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-41883",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51942/f17"
+        },
+        {
+            "vulnerability_id": "51499",
+            "package_name": "wheel",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<0.38.1",
+            "all_vulnerable_specs": [
+                "<0.38.1"
+            ],
+            "analyzed_version": "0.37.1",
+            "advisory": "Wheel 0.38.1 includes a fix for CVE-2022-40898: An issue discovered in Python Packaging Authority (PyPA) Wheel 0.37.1 and earlier allows remote attackers to cause a denial of service via attacker controlled input to wheel cli.\r\nhttps://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-40898",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51499/f17"
+        },
+        {
+            "vulnerability_id": "51516",
+            "package_name": "keras",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<2.11.0rc1",
+            "all_vulnerable_specs": [
+                "<2.11.0rc1"
+            ],
+            "analyzed_version": "2.10.0",
+            "advisory": "Keras 2.11.0rc1 adds explicit permissions section to workflows to restrict the damage if a compromise occurs.\r\nhttps://github.com/keras-team/keras/pull/17050",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": null,
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51516/f17"
+        },
+        {
+            "vulnerability_id": "51167",
+            "package_name": "protobuf",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=3.19.0rc0,<3.19.5",
+            "all_vulnerable_specs": [
+                "<3.18.3",
+                ">=3.19.0rc0,<3.19.5",
+                ">=3.20.0rc0,<3.20.2",
+                ">=4.0.0rc0,<4.21.6"
+            ],
+            "analyzed_version": "3.19.1",
+            "advisory": "Protobuf 3.18.3, 3.19.5, 3.20.2 and 4.21.6 include a fix for CVE-2022-1941: A parsing vulnerability for the MessageSet type in the ProtocolBuffers versions prior to and including 3.16.1, 3.17.3, 3.18.2, 3.19.4, 3.20.1 and 3.21.5 for protobuf-cpp, and versions prior to and including 3.16.1, 3.17.3, 3.18.2, 3.19.4, 3.20.1 and 4.21.5 for protobuf-python can lead to out of memory failures. A specially crafted message with multiple key-value per elements creates parsing issues, and can lead to a Denial of Service against services receiving unsanitized input.\r\nhttps://github.com/protocolbuffers/protobuf/security/advisories/GHSA-8gq9-2x98-w8hf",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-1941",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/51167/f17"
+        },
+        {
+            "vulnerability_id": "52495",
+            "package_name": "setuptools",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<65.5.1",
+            "all_vulnerable_specs": [
+                "<65.5.1"
+            ],
+            "analyzed_version": "61.2.0",
+            "advisory": "Setuptools 65.5.1 includes a fix for CVE-2022-40897: Python Packaging Authority (PyPA) setuptools before 65.5.1 allows remote attackers to cause a denial of service via HTML in a crafted package or custom PackageIndex page. There is a Regular Expression Denial of Service (ReDoS) in package_index.py.\r\nhttps://pyup.io/posts/pyup-discovers-redos-vulnerabilities-in-top-python-packages",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-40897",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/52495/f17"
+        },
+        {
+            "vulnerability_id": "52365",
+            "package_name": "certifi",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<2022.12.07",
+            "all_vulnerable_specs": [
+                "<2022.12.07"
+            ],
+            "analyzed_version": "2022.9.14",
+            "advisory": "Certifi 2022.12.07 includes a fix for CVE-2022-23491: Certifi 2022.12.07 removes root certificates from \"TrustCor\" from the root store. These are in the process of being removed from Mozilla's trust store. TrustCor's root certificates are being removed pursuant to an investigation prompted by media reporting that TrustCor's ownership also operated a business that produced spyware. Conclusions of Mozilla's investigation can be found in the linked google group discussion.\r\nhttps://github.com/certifi/python-certifi/security/advisories/GHSA-43fp-rhv2-5gv8\r\nhttps://groups.google.com/a/mozilla.org/g/dev-security-policy/c/oxX69KFvsm4/m/yLohoVqtCgAJ",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-23491",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/52365/f17"
+        },
+        {
+            "vulnerability_id": "53325",
+            "package_name": "werkzeug",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<2.2.3",
+            "all_vulnerable_specs": [
+                "<2.2.3"
+            ],
+            "analyzed_version": "2.0.3",
+            "advisory": "Werkzeug 2.2.3 includes a fix for CVE-2023-25577: Prior to version 2.2.3, Werkzeug's multipart form data parser will parse an unlimited number of parts, including file parts. Parts can be a small amount of bytes, but each requires CPU time to parse and may use more memory as Python data. If a request can be made to an endpoint that accesses 'request.data', 'request.form', 'request.files', or 'request.get_data(parse_form_data=False)', it can cause unexpectedly high resource usage. This allows an attacker to cause a denial of service by sending crafted multipart data to an endpoint that will parse it. The amount of CPU time required can block worker processes from handling legitimate requests. The amount of RAM required can trigger an out of memory kill of the process. Unlimited file parts can use up memory and file handles. If many concurrent requests are sent continuously, this can exhaust or kill all available workers.\r\nhttps://github.com/pallets/werkzeug/security/advisories/GHSA-xg9f-g7g7-2323",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2023-25577",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/53325/f17"
+        },
+        {
+            "vulnerability_id": "53326",
+            "package_name": "werkzeug",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<2.2.3",
+            "all_vulnerable_specs": [
+                "<2.2.3"
+            ],
+            "analyzed_version": "2.0.3",
+            "advisory": "Werkzeug 2.2.3 includes a fix for CVE-2023-23934: Browsers may allow \"nameless\" cookies that look like '=value' instead of 'key=value'. A vulnerable browser may allow a compromised application on an adjacent subdomain to exploit this to set a cookie like '=__Host-test=bad' for another subdomain. Werkzeug prior to 2.2.3 will parse the cookie '=__Host-test=bad' as __Host-test=bad'. If a Werkzeug application is running next to a vulnerable or malicious subdomain which sets such a cookie using a vulnerable browser, the Werkzeug application will see the bad cookie value but the valid cookie key.\r\nhttps://github.com/pallets/werkzeug/security/advisories/GHSA-px8h-6qxv-m22q",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2023-23934",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/53326/f17"
         }
     ],
     "ignored_vulnerabilities": [],
@@ -188,6 +1136,55 @@
             "recommended_version": null,
             "other_recommended_versions": [],
             "more_info_url": "https://pyup.io/?from=1.21.5"
+        },
+        "tensorflow": {
+            "current_version": "2.10.0",
+            "vulnerabilities_found": 25,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=2.10.0"
+        },
+        "wheel": {
+            "current_version": "0.37.1",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=0.37.1"
+        },
+        "keras": {
+            "current_version": "2.10.0",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=2.10.0"
+        },
+        "protobuf": {
+            "current_version": "3.19.1",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=3.19.1"
+        },
+        "setuptools": {
+            "current_version": "61.2.0",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=61.2.0"
+        },
+        "certifi": {
+            "current_version": "2022.9.14",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=2022.9.14"
+        },
+        "werkzeug": {
+            "current_version": "2.0.3",
+            "vulnerabilities_found": 2,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io/?from=2.0.3"
         }
     }
 }

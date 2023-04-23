@@ -6,7 +6,7 @@
   },
   "publisher": "rebornix",
   "activationEvents": [
-    "onLanguage:python"
+    "onCommand:debtdetective.fullsearch"
   ],
   "main": "./build/ext-src/extension.js",
   "contributes": {
