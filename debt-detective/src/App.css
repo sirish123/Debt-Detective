@@ -43,6 +43,12 @@
   background-color: rgb(192, 0, 0);
 }
 
+.check-mark{
+  font-weight: 700;
+}
+
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

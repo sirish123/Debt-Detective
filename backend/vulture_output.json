@@ -1,0 +1,1 @@
+{"vulture_output": [{"line_number": 2, "message": "unused import requests (90% confidence)"}, {"line_number": 4, "message": "unused import csv (90% confidence)"}, {"line_number": 11, "message": "unused variable password (60% confidence)"}]}
