@@ -151,63 +151,63 @@ function showSquizzleForSecurity(
 
   // Highlighting the code
 
-  for (let i = 0; i < analysis_code.LINTER.length; i++) {
-    let line = analysis_code.LINTER[i].line;
-    let col = analysis_code.LINTER[i].column;
-    let endLine = 0;
-    let endCol = 0;
+  // for (let i = 0; i < analysis_code.LINTER.length; i++) {
+  //   let line = analysis_code.LINTER[i].line;
+  //   let col = analysis_code.LINTER[i].column;
+  //   let endLine = 0;
+  //   let endCol = 0;
 
-    if (analysis_code.LINTER[i].endLine === null) {
-      endLine = line;
-    } else {
-      endLine = analysis_code.LINTER[i].endLine;
-    }
+  //   if (analysis_code.LINTER[i].endLine === null) {
+  //     endLine = line;
+  //   } else {
+  //     endLine = analysis_code.LINTER[i].endLine;
+  //   }
 
-    if (analysis_code.LINTER[i].endColumn === null) {
-      endCol = col + 100;
-    } else {
-      endCol = analysis_code.LINTER[i].endColumn;
-    }
-    const startPos = new vscode.Position(line - 1, col);
-    const endPos = new vscode.Position(endLine - 1, endCol);
-    const range = new vscode.Range(startPos, endPos);
+  //   if (analysis_code.LINTER[i].endColumn === null) {
+  //     endCol = col + 100;
+  //   } else {
+  //     endCol = analysis_code.LINTER[i].endColumn;
+  //   }
+  //   const startPos = new vscode.Position(line - 1, col);
+  //   const endPos = new vscode.Position(endLine - 1, endCol);
+  //   const range = new vscode.Range(startPos, endPos);
 
-    const decoration = {
-      range,
-      hoverMessage: analysis_code.LINTER[i].message,
-    };
+  //   const decoration = {
+  //     range,
+  //     hoverMessage: analysis_code.LINTER[i].message,
+  //   };
 
-    const decorationType = vscode.window.createTextEditorDecorationType({
-      isWholeLine: false,
-      backgroundColor: "rgba(0, 128, 0, 0.5)",
-    });
-    vscode.window.activeTextEditor?.setDecorations(decorationType, [
-      decoration,
-    ]);
-  }
+  //   const decorationType = vscode.window.createTextEditorDecorationType({
+  //     isWholeLine: false,
+  //     backgroundColor: "rgba(0, 128, 0, 0.5)",
+  //   });
+  //   vscode.window.activeTextEditor?.setDecorations(decorationType, [
+  //     decoration,
+  //   ]);
+  // }
 
-  for (let i = 0; i < analysis_code.VULTURE_OUTPUT.length; i++) {
-    let line = analysis_code.VULTURE_OUTPUT[i].line_number;
+  // for (let i = 0; i < analysis_code.VULTURE_OUTPUT.length; i++) {
+  //   let line = analysis_code.VULTURE_OUTPUT[i].line_number;
 
-    let endLine = line;
+  //   let endLine = line;
 
-    const startPos = new vscode.Position(line - 1, 0);
-    const endPos = new vscode.Position(endLine - 1, 100);
-    const range = new vscode.Range(startPos, endPos);
+  //   const startPos = new vscode.Position(line - 1, 0);
+  //   const endPos = new vscode.Position(endLine - 1, 100);
+  //   const range = new vscode.Range(startPos, endPos);
 
-    const decoration = {
-      range,
-      hoverMessage: analysis_code.VULTURE_OUTPUT[i].message,
-    };
+  //   const decoration = {
+  //     range,
+  //     hoverMessage: analysis_code.VULTURE_OUTPUT[i].message,
+  //   };
 
-    const decorationType = vscode.window.createTextEditorDecorationType({
-      isWholeLine: true,
-      backgroundColor: "rgba(128, 0, 0, 0.5)",
-    });
-    vscode.window.activeTextEditor?.setDecorations(decorationType, [
-      decoration,
-    ]);
-  }
+  //   const decorationType = vscode.window.createTextEditorDecorationType({
+  //     isWholeLine: true,
+  //     backgroundColor: "rgba(128, 0, 0, 0.5)",
+  //   });
+  //   vscode.window.activeTextEditor?.setDecorations(decorationType, [
+  //     decoration,
+  //   ]);
+  // }
 }
 
 /*
