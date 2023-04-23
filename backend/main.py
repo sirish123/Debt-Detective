@@ -138,12 +138,12 @@ async def read_root(request: Request):
                 returnDict = {}
                 version = ""
                 [score,commuity_subparameters] = calcalculateLibrariesIOScore(pythonDict,name,pythonDict["versions"])
-                comm_sub_params = commuity_subparameters
                 communityScore += score
                 returnDict["PkgName"] = name
                 returnDict["stars"] = pythonDict["stars"]
                 returnDict["forks"] = pythonDict["forks"]
                 returnDict["score"] = score
+                returnDict["community_subparameters"] = commuity_subparameters
                 dictVal.append(returnDict)
                 count +=1
             except:
@@ -184,7 +184,7 @@ async def read_root(request: Request):
             scores.append((vulScore/vulCount)*10);
         for i in range(3):
             scores.append(0)
-        return {"scores":scores,"community":dictVal ,"vpkg":vulnArray,"community_subparameters": comm_sub_params}
+        return {"scores":scores,"community":dictVal ,"vpkg":vulnArray}
         
 @app.get("/security")
 def security():
