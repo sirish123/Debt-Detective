@@ -9,7 +9,7 @@
         "api_key": false,
         "local_database_path": null,
         "safety_version": "2.3.5",
-        "timestamp": "2023-04-23 16:42:36",
+        "timestamp": "2023-04-23 18:09:01",
         "packages_found": 14,
         "vulnerabilities_found": 3,
         "vulnerabilities_ignored": 0,
@@ -34,7 +34,7 @@
         "git": {
             "branch": "master",
             "tag": "",
-            "commit": "c801022188e765f1295ecc9a70b86a3beecd8fc5",
+            "commit": "6101b41362a00122211df7539785ca7c533ba67d",
             "dirty": true,
             "origin": "https://github.com/Ganesh-P03/SE_tool_team5.git"
         },
@@ -114,6 +114,28 @@
     "announcements": [],
     "vulnerabilities": [
         {
+            "vulnerability_id": "44715",
+            "package_name": "numpy",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<1.22.2",
+            "all_vulnerable_specs": [
+                "<1.22.2"
+            ],
+            "analyzed_version": "1.21.5",
+            "advisory": "Numpy 1.22.2  includes a fix for CVE-2021-41495: Null Pointer Dereference vulnerability exists in numpy.sort in NumPy in the PyArray_DescrNew function due to missing return-value validation, which allows attackers to conduct DoS attacks by repetitively creating sort arrays. \r\nNOTE: While correct that validation is missing, an error can only occur due to an exhaustion of memory. If the user can exhaust memory, they are already privileged. Further, it should be practically impossible to construct an attack which can target the memory exhaustion to occur at exactly this place.\r\nhttps://github.com/numpy/numpy/issues/19038",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2021-41495",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/v/44715/f17"
+        },
+        {
             "vulnerability_id": "44717",
             "package_name": "numpy",
             "ignored": {},
@@ -156,28 +178,6 @@
             "severity": null,
             "affected_versions": [],
             "more_info_url": "https://pyup.io/v/44716/f17"
-        },
-        {
-            "vulnerability_id": "44715",
-            "package_name": "numpy",
-            "ignored": {},
-            "ignored_reason": null,
-            "ignored_expires": null,
-            "vulnerable_spec": "<1.22.2",
-            "all_vulnerable_specs": [
-                "<1.22.2"
-            ],
-            "analyzed_version": "1.21.5",
-            "advisory": "Numpy 1.22.2  includes a fix for CVE-2021-41495: Null Pointer Dereference vulnerability exists in numpy.sort in NumPy in the PyArray_DescrNew function due to missing return-value validation, which allows attackers to conduct DoS attacks by repetitively creating sort arrays. \r\nNOTE: While correct that validation is missing, an error can only occur due to an exhaustion of memory. If the user can exhaust memory, they are already privileged. Further, it should be practically impossible to construct an attack which can target the memory exhaustion to occur at exactly this place.\r\nhttps://github.com/numpy/numpy/issues/19038",
-            "is_transitive": false,
-            "published_date": null,
-            "fixed_versions": [],
-            "closest_versions_without_known_vulnerabilities": [],
-            "resources": [],
-            "CVE": "CVE-2021-41495",
-            "severity": null,
-            "affected_versions": [],
-            "more_info_url": "https://pyup.io/v/44715/f17"
         }
     ],
     "ignored_vulnerabilities": [],

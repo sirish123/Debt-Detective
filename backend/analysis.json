@@ -3,8 +3,8 @@
     "scores": [
       51.6,
       53,
-      0,
-      35.55555555555556,
+      15,
+      22.666666666666664,
       0
     ],
     "community": [
@@ -71,6 +71,12 @@
     ],
     "vpkg": [
       {
+        "CVE": "CVE-2021-41495",
+        "advisory": "Numpy 1.22.2  includes a fix for CVE-2021-41495: Null Pointer Dereference vulnerability exists in numpy.sort in NumPy in the PyArray_DescrNew function due to missing return-value validation, which allows attackers to conduct DoS attacks by repetitively creating sort arrays. \r\nNOTE: While correct that validation is missing, an error can only occur due to an exhaustion of memory. If the user can exhaust memory, they are already privileged. Further, it should be practically impossible to construct an attack which can target the memory exhaustion to occur at exactly this place.\r\nhttps://github.com/numpy/numpy/issues/19038",
+        "package_name": "typing",
+        "analyzed_version": "3.7.4."
+      },
+      {
         "CVE": "CVE-2021-34141",
         "advisory": "Numpy 1.22.0 includes a fix for CVE-2021-34141: An incomplete string comparison in the numpy.core component in NumPy before 1.22.0 allows attackers to trigger slightly incorrect copying by constructing specific string objects. \r\nNOTE: the vendor states that this reported code behavior is \"completely harmless.\"\r\nhttps://github.com/numpy/numpy/issues/18993",
         "package_name": "typing",
@@ -81,13 +87,28 @@
         "advisory": "Numpy 1.22.0 includes a fix for CVE-2021-41496: Buffer overflow in the array_from_pyobj function of fortranobject.c, which allows attackers to conduct a Denial of Service attacks by carefully constructing an array with negative values. \r\nNOTE: The vendor does not agree this is a vulnerability; the negative dimensions can only be created by an already privileged user (or internally).\r\nhttps://github.com/numpy/numpy/issues/19000",
         "package_name": "typing",
         "analyzed_version": "3.7.4."
-      },
-      {
-        "CVE": "CVE-2021-41495",
-        "advisory": "Numpy 1.22.2  includes a fix for CVE-2021-41495: Null Pointer Dereference vulnerability exists in numpy.sort in NumPy in the PyArray_DescrNew function due to missing return-value validation, which allows attackers to conduct DoS attacks by repetitively creating sort arrays. \r\nNOTE: While correct that validation is missing, an error can only occur due to an exhaustion of memory. If the user can exhaust memory, they are already privileged. Further, it should be practically impossible to construct an attack which can target the memory exhaustion to occur at exactly this place.\r\nhttps://github.com/numpy/numpy/issues/19038",
-        "package_name": "typing",
-        "analyzed_version": "3.7.4."
       }
-    ]
+    ],
+    "community_subparameters": {
+      "basic_info_present": 1,
+      "repository_present": 1,
+      "readme_present": 1,
+      "license_present": 1,
+      "versions_present": 1,
+      "follows_semver": 0,
+      "recent_release": 1,
+      "not_brand_new": 1,
+      "one_point_oh": 1,
+      "dependent_projects": 10,
+      "dependent_repositories": 5,
+      "stars": 5,
+      "contributors": 2,
+      "subscribers": 2,
+      "all_prereleases": 0,
+      "any_outdated_dependencies": 0,
+      "is_deprecated": 0,
+      "is_unmaintained": 0,
+      "is_removed": 0
+    }
   }
 ]

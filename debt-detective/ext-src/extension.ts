@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import ReactPanel from "./panel";
 import axios from "axios";
 import * as fs from "fs";
-import { Upgrade } from "./upgrade";
+// import { Upgrade } from "./upgrade";
 
 export let installed: { [key: string]: string } = {};
 let required: { [key: string]: string } = {};
@@ -185,6 +185,29 @@ function showSquizzleForSecurity(
       decoration,
     ]);
   }
+
+  for (let i = 0; i < analysis_code.VULTURE_OUTPUT.length; i++) {
+    let line = analysis_code.VULTURE_OUTPUT[i].line_number;
+
+    let endLine = line;
+
+    const startPos = new vscode.Position(line - 1, 0);
+    const endPos = new vscode.Position(endLine - 1, 100);
+    const range = new vscode.Range(startPos, endPos);
+
+    const decoration = {
+      range,
+      hoverMessage: analysis_code.VULTURE_OUTPUT[i].message,
+    };
+
+    const decorationType = vscode.window.createTextEditorDecorationType({
+      isWholeLine: true,
+      backgroundColor: "rgba(128, 0, 0, 0.5)",
+    });
+    vscode.window.activeTextEditor?.setDecorations(decorationType, [
+      decoration,
+    ]);
+  }
 }
 
 /*
@@ -313,10 +336,10 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
-  const codeActionProvider = vscode.languages.registerCodeActionsProvider(
-    "text",
-    new Upgrade(context)
-  );
+  // const codeActionProvider = vscode.languages.registerCodeActionsProvider(
+  //   "plaintext",
+  //   new Upgrade(context)
+  // );
 
   const venvHelper = vscode.commands.registerCommand(
     "debtdetective.venv",
@@ -436,7 +459,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       try {
         const data = await axios.post(url);
-        data.data.scores[2] = standardScore;
+        data.data.scores[2] = 15;
         data.data.scores[3] = securityScore;
         //console.log(data.data);
         jsonObject.push(data.data);
@@ -482,7 +505,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     onFireDetective,
     onDidEndTask,
-    codeActionProvider,
+    // codeActionProvider,
     venvHelper,
     didOpen,
     didChange,
