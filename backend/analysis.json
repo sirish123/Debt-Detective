@@ -3,70 +3,140 @@
     "scores": [
       51.6,
       53,
-      15,
+      20,
       22.666666666666664,
-      0
+      17
     ],
     "community": [
-      {
-        "PkgName": "numpy",
-        "stars": 23265,
-        "forks": 7997,
-        "score": 83
-      },
       {
         "PkgName": "fastapi",
         "stars": 56882,
         "forks": 4734,
-        "score": 65
+        "score": 65,
+        "age_of_repo": 1,
+        "contributors": 2,
+        "dependents": 1976,
+        "multiple_version": 1,
+        "readme": 1,
+        "recent_releases": 1,
+        "stars_and_forks": 61616
       },
       {
         "PkgName": "pydantic",
-        "stars": 13309,
+        "stars": 13310,
         "forks": 1217,
-        "score": 65
+        "score": 65,
+        "age_of_repo": 1,
+        "contributors": 2,
+        "dependents": 6286,
+        "multiple_version": 1,
+        "readme": 1,
+        "recent_releases": 1,
+        "stars_and_forks": 14527
       },
       {
         "PkgName": "typingextensions",
         "stars": 0,
         "forks": 0,
-        "score": 1
+        "score": 1,
+        "age_of_repo": 1,
+        "contributors": 0,
+        "dependents": 0,
+        "multiple_version": 0,
+        "readme": 0,
+        "recent_releases": 0,
+        "stars_and_forks": 0
       },
       {
         "PkgName": "starlette",
-        "stars": 8159,
-        "forks": 739,
-        "score": 57
+        "stars": 8178,
+        "forks": 742,
+        "score": 57,
+        "age_of_repo": 1,
+        "contributors": 1,
+        "dependents": 599,
+        "multiple_version": 1,
+        "readme": 1,
+        "recent_releases": 1,
+        "stars_and_forks": 8920
       },
       {
         "PkgName": "anyio",
         "stars": 0,
         "forks": 0,
-        "score": 23
+        "score": 23,
+        "age_of_repo": 1,
+        "contributors": 0,
+        "dependents": 209,
+        "multiple_version": 1,
+        "readme": 0,
+        "recent_releases": 0,
+        "stars_and_forks": 0
       },
       {
         "PkgName": "idna",
         "stars": 210,
         "forks": 78,
-        "score": 59
+        "score": 59,
+        "age_of_repo": 1,
+        "contributors": 1,
+        "dependents": 3071,
+        "multiple_version": 1,
+        "readme": 1,
+        "recent_releases": 0,
+        "stars_and_forks": 288
       },
       {
         "PkgName": "sniffio",
         "stars": 86,
         "forks": 16,
-        "score": 37
+        "score": 37,
+        "age_of_repo": 1,
+        "contributors": 1,
+        "dependents": 174,
+        "multiple_version": 1,
+        "readme": 1,
+        "recent_releases": 0,
+        "stars_and_forks": 102
+      },
+      {
+        "PkgName": "numpy",
+        "stars": 23266,
+        "forks": 7997,
+        "score": 83,
+        "age_of_repo": 1,
+        "contributors": 2,
+        "dependents": 47102,
+        "multiple_version": 1,
+        "readme": 1,
+        "recent_releases": 1,
+        "stars_and_forks": 31263
       },
       {
         "PkgName": "ratelimit",
         "stars": 395,
         "forks": 100,
-        "score": 40
+        "score": 40,
+        "age_of_repo": 1,
+        "contributors": 1,
+        "dependents": 102,
+        "multiple_version": 1,
+        "readme": 1,
+        "recent_releases": 0,
+        "stars_and_forks": 495
       },
       {
         "PkgName": "requests",
         "stars": 49372,
         "forks": 9051,
-        "score": 86
+        "score": 86,
+        "age_of_repo": 1,
+        "contributors": 2,
+        "dependents": 49094,
+        "multiple_version": 1,
+        "readme": 1,
+        "recent_releases": 1,
+        "stars_and_forks": 58423
       }
     ],
     "vpkg": [
@@ -88,27 +158,6 @@
         "package_name": "typing",
         "analyzed_version": "3.7.4."
       }
-    ],
-    "community_subparameters": {
-      "basic_info_present": 1,
-      "repository_present": 1,
-      "readme_present": 1,
-      "license_present": 1,
-      "versions_present": 1,
-      "follows_semver": 0,
-      "recent_release": 1,
-      "not_brand_new": 1,
-      "one_point_oh": 1,
-      "dependent_projects": 10,
-      "dependent_repositories": 5,
-      "stars": 5,
-      "contributors": 2,
-      "subscribers": 2,
-      "all_prereleases": 0,
-      "any_outdated_dependencies": 0,
-      "is_deprecated": 0,
-      "is_unmaintained": 0,
-      "is_removed": 0
-    }
+    ]
   }
 ]

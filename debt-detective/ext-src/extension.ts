@@ -310,6 +310,7 @@ export function activate(context: vscode.ExtensionContext) {
     try {
       securityScore = response.data.SECURITY_SCORE;
       standardScore = response.data.PYLINT_SCORE;
+      depricatedScore = response.data.VULTURE_OUTPUT.length;
     } catch (e) {
       console.log(e);
     }
@@ -459,8 +460,13 @@ export function activate(context: vscode.ExtensionContext) {
 
       try {
         const data = await axios.post(url);
-        data.data.scores[2] = 15;
+        if (standardScore >= 0 && standardScore <= 100) {
+          data.data.scores[2] = standardScore;
+        } else {
+          data.data.scores[2] = 20;
+        }
         data.data.scores[3] = securityScore;
+        data.data.scores[4] = depricatedScore;
         //console.log(data.data);
         jsonObject.push(data.data);
 

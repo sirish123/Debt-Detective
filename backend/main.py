@@ -74,7 +74,7 @@ def calcalculateLibrariesIOScore(pythonDict,name,versionsArray):
         currScore+=0
     try:
         currScore += 2*math.ceil(math.log2(pythonDict["dependents_count"]));
-        community_subparameters["dependents"] = 2*math.ceil(math.log2(pythonDict["dependents_count"]))
+        community_subparameters["dependents"] = pythonDict["dependents_count"]
     #dependent repositories
     except:
         currScore+=0
@@ -86,13 +86,13 @@ def calcalculateLibrariesIOScore(pythonDict,name,versionsArray):
         currScore+=0
     try:
         currScore += math.ceil(math.log2(pythonDict["stars"]))
-        community_subparameters["stars_and_forks"] = math.ceil(math.log2(pythonDict["stars"]))
+        community_subparameters["stars_and_forks"] = pythonDict["stars"]
     # #number of forks
     except:
         currScore+=0
     try:
         currScore += math.ceil(math.log2(pythonDict["forks"]))
-        community_subparameters["stars_and_forks"] += math.ceil(math.log2(pythonDict["forks"]))
+        community_subparameters["stars_and_forks"] += pythonDict["forks"]
     #contributors
     except:
         currScore+=0
@@ -101,7 +101,7 @@ def calcalculateLibrariesIOScore(pythonDict,name,versionsArray):
         community_subparameters["contributors"] = dict["contributors"]
     except:
         currScore+=0
-    return [currScore,dict]
+    return [currScore,community_subparameters]
 
 # test route
 @app.post("/")
@@ -144,7 +144,8 @@ async def read_root(request: Request):
                 returnDict["stars"] = pythonDict["stars"]
                 returnDict["forks"] = pythonDict["forks"]
                 returnDict["score"] = score
-                returnDict["community_subparameters"] = commuity_subparameters
+                for key in commuity_subparameters:
+                    returnDict[key] = commuity_subparameters[key]
                 dictVal.append(returnDict)
                 count +=1
             except:
