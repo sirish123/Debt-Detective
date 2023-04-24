@@ -56,14 +56,21 @@ This consists of two folders debt-detective(frontend),backend
 ## Screenshots
 
 <p>
-<h1>Phase-1<h1>
+<h1>Phase-1</h1>
+<h3>Code entropy graph</h3>
     <img src="Images/codeEntropyGraph.png">
+<h3>5 Major parameters</h3>
     <img src="Images/colorCoding.png">
-     <img src="Images/CVE.png">
-    <img src="Images/activeness.png">
-<h1>Phase-2<h1>
+<h3>CVE details</h3>
+    <img src="Images/CVE.png">
+ <h3>Community Activeness graph</h3>
+<img src="Images/activeness.png">
+<h1>Phase-2</h1>
+<h3>Highlighting feature</h3>
 <img src="Images/code_highlighting.png">
+<h3>Score Calculation metric for Community,Package Vulnerability and Code Vulnerability </h3>
     <img src="Images/com_score.png">
      <img src="Images/exp_Score.png">
     <img src="Images/vul_score.png">
+<h3>Subparameter elaboration</h3>
 </p>

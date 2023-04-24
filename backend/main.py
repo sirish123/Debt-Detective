@@ -226,7 +226,7 @@ async def safety(packages: Request):
     return {
         "data": packages_info
     }
-
+#stackoverflow attempt to get suggestion on error
 @app.get("/stack")
 def scrapeStack():
     packages_arr = ["numpy", "pandas","tensorflow","requests"]   
@@ -274,7 +274,7 @@ def scrapeStack():
     sorted_dict = dict(sorted(questions_dict.items(), key=lambda x: x[1], reverse=True)) 
     sorted_dict = dict(list(sorted_dict.items())[:10]) 
     return {"res" : sorted_dict}  
-
+#dummy route for testing purposes
 @app.get("/pkg")
 async def pkg(request: Request): 
     data = request.query_params
@@ -282,7 +282,7 @@ async def pkg(request: Request):
         print(key)
         print(value)
     return {"message": "Hello World"}
-
+#bandit subroutine to get proper output in json format
 @app.post("/coder")
 async def code(request: Request):
     try:
@@ -316,6 +316,7 @@ async def linter(code: str):
         f.close()
     pylint_score = 0
     results = None
+    #pylint subprocess run to fetch and infer results of static code anlyser
     try:
         subprocess.run("pylint --rcfile=.pylintrc pylint_output.py --output-format=json > pylint_output.json",shell=True)
         # subprocess.run("pylint --output-format=json your_file.py > pylint_report.json",shell=True)
@@ -343,7 +344,7 @@ async def linter(code: str):
         resDict["endColumn"] = result["endColumn"]
         LINTER_ARRAY.append(resDict)
         seen_lines.append(result["line"])
-
+    #bandit security tool subprocess piece
     try:
         subprocess.run("bandit  pylint_output.py -f json -o bandit_output.json",shell=True)
     except Exception as e:
