@@ -56,8 +56,14 @@ This consists of two folders debt-detective(frontend),backend
 ## Screenshots
 
 <p>
+<h1>Phase-1<h1>
     <img src="Images/codeEntropyGraph.png">
     <img src="Images/colorCoding.png">
      <img src="Images/CVE.png">
     <img src="Images/activeness.png">
-    </p>
+<h1>Phase-2<h1>
+<img src="Images/code_highlighting.png">
+    <img src="Images/com_score.png">
+     <img src="Images/exp_Score.png">
+    <img src="Images/vul_score.png">
+</p>

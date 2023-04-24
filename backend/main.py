@@ -17,9 +17,9 @@ import os
 import re
 
 
-CALLS = 30;
-RATE_LIMIT = 60;
-app = FastAPI();
+CALLS = 30
+RATE_LIMIT = 60
+app = FastAPI()
 packages_arr = []
 '''
 libaries.io -> Github stars and forks, Number of dependants and number of items dependant on it, depricated packages
@@ -40,7 +40,7 @@ async def add_cors_headers(request, call_next):
 
 def calcalculateLibrariesIOScore(pythonDict,name,versionsArray):
     
-    currScore = 0
+    cuurent_score = 0
     #has readme
     community_subparameters = {}
     community_subparameters["age_of_repo"] = 0 #
@@ -52,56 +52,56 @@ def calcalculateLibrariesIOScore(pythonDict,name,versionsArray):
     community_subparameters["stars_and_forks"] = 0 #
 
     url = "https://libraries.io/api/{source}/{name}/sourcerank?api_key=7b7f69d0b46f645c7cfc7c6231db6ae6".format(source="Pypi",name=name)
-    dict = requests.get(url).json();
-    currScore += dict["readme_present"];
+    dict = requests.get(url).json()
+    cuurent_score += dict["readme_present"]
     community_subparameters["readme"] =  dict["readme_present"]
     #multiple versions 
     if len(versionsArray) >1:
-        currScore+=1
+        cuurent_score+=1
         community_subparameters["multiple_version"] = 1
     #recent release
     try:
-        currScore += dict["recent_release"]
+        cuurent_score += dict["recent_release"]
         community_subparameters["recent_releases"] =  dict["recent_release"]
     #not brand new
     except:
-        currScore+=0
+        cuurent_score+=0
     try:
-        currScore += dict["not_brand_new"]
+        cuurent_score += dict["not_brand_new"]
         community_subparameters["age_of_repo"] = dict["not_brand_new"]
     #dependent packages
     except:
-        currScore+=0
+        cuurent_score+=0
     try:
-        currScore += 2*math.ceil(math.log2(pythonDict["dependents_count"]));
+        cuurent_score += 2*math.ceil(math.log2(pythonDict["dependents_count"]))
         community_subparameters["dependents"] = pythonDict["dependents_count"]
     #dependent repositories
     except:
-        currScore+=0
+        cuurent_score+=0
     try:
-        currScore += math.ceil(math.log2(pythonDict["dependent_repos_count"]));
+        cuurent_score += math.ceil(math.log2(pythonDict["dependent_repos_count"]))
         
     # #number of stars
     except:
-        currScore+=0
+        cuurent_score+=0
     try:
-        currScore += math.ceil(math.log2(pythonDict["stars"]))
+        cuurent_score += math.ceil(math.log2(pythonDict["stars"]))
         community_subparameters["stars_and_forks"] = pythonDict["stars"]
     # #number of forks
     except:
-        currScore+=0
+        cuurent_score+=0
     try:
-        currScore += math.ceil(math.log2(pythonDict["forks"]))
+        cuurent_score += math.ceil(math.log2(pythonDict["forks"]))
         community_subparameters["stars_and_forks"] += pythonDict["forks"]
     #contributors
     except:
-        currScore+=0
+        cuurent_score+=0
     try:
-        currScore += dict["contributors"]
+        cuurent_score += dict["contributors"]
         community_subparameters["contributors"] = dict["contributors"]
     except:
-        currScore+=0
-    return [currScore,community_subparameters]
+        cuurent_score+=0
+    return [cuurent_score,community_subparameters]
 
 # test route
 @app.post("/")
@@ -111,6 +111,7 @@ async def read_root(request: Request):
         dependency_list = request.query_params["val"].split(",")
         input_data = ""
         comm_sub_params = {}
+        # Write dependencies to a file and check for vulnerabilities using the 'safety' package
         with open ("requirements.txt","w+") as f:
             for items in dependency_list:
                 f.write(items+"\n")
@@ -119,10 +120,12 @@ async def read_root(request: Request):
         except Exception as e:
             logging.error(traceback.format_exc())
             return {"no":"error"}
+        # Read the output of the 'safety' package and convert it to a JSON object
         with open("system_check.txt", "r") as f:
             input_data = f.read()
-        python_dict_vul= json.loads(input_data);
+        python_dict_vul= json.loads(input_data)
         dictVal = []
+        # Loop through each dependency, get its information from libraries.io and calculate a community score
         for dependency in dependency_list:
             curr_string  = dependency[:-1]
             try:
@@ -153,37 +156,38 @@ async def read_root(request: Request):
         vulnArray =[]
         vulCount =0
         vulScore = 0
+        # Loop through each vulnerability and get its information from NVD
         if(len(python_dict_vul["vulnerabilities"])!=0):
             for i in range(len(python_dict_vul["vulnerabilities"])):
                 python_vulnerable_packages = {}
                 python_vulnerable_packages["CVE"] = python_dict_vul["vulnerabilities"][i]["CVE"]
                 if(python_vulnerable_packages["CVE"]==0):
-                    continue;
-                python_vulnerable_packages["advisory"] = python_dict_vul["vulnerabilities"][i]["advisory"].replace("'","");
+                    continue
+                python_vulnerable_packages["advisory"] = python_dict_vul["vulnerabilities"][i]["advisory"].replace("'","")
                 # python_vulnerable_packages["advisory"] 
                 # new_string = python_vulnerable_packages["advisory"].replace("'","")
                 python_vulnerable_packages["package_name"] = name
                 python_vulnerable_packages["analyzed_version"] = version
-                vulnArray.append(python_vulnerable_packages);
+                vulnArray.append(python_vulnerable_packages)
                 try:
                     url = "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId={cve}".format(cve = python_vulnerable_packages["CVE"])
-                    x=0;
+                    x=0
                     cveDict = requests.get(url).json()
                     tempes =0
                     tempis =0
                     for i in range(len(cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"])):
-                        tempes += cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"][i]["exploitabilityScore"];
-                        tempis += cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"][i]["impactScore"];
+                        tempes += cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"][i]["exploitabilityScore"]
+                        tempis += cveDict["vulnerabilities"][0]["cve"]["metrics"]["cvssMetricV31"][i]["impactScore"]
                         vulCount +=1
                     vulScore += (tempis + tempes)
 
                 except:
                     logging.error(traceback.format_exc())
-                    continue;
-        scores = [];
-        scores.append(communityScore/count);
+                    continue
+        scores = []
+        scores.append(communityScore/count)
         if(vulCount!=0):
-            scores.append((vulScore/vulCount)*10);
+            scores.append((vulScore/vulCount)*10)
         for i in range(3):
             scores.append(0)
         return {"scores":scores,"community":dictVal ,"vpkg":vulnArray}
@@ -289,7 +293,7 @@ async def code(request: Request):
     print(data)
 @app.post("/linter")
 async def linter(request: Request):
-    print(request);
+    print(request)
     input_data = ""
     with open("bandit_output.json", "r") as f:
         input_data = f.read()
@@ -351,7 +355,7 @@ async def linter(code: str):
     SECURITY_ARRAY = []
     total_security_score = 0
     code_security_score = 0
-    for i in range(len(python_dict_bandit["results"])):
+    for i in range(len(python_dict_bandit["results"])): # for each vulnerability found by bandit loop through and get scores
         resDict = {}
         resDict["SEVERITY"] = python_dict_bandit["results"][i]["issue_severity"]
         resDict["CONFIDENCE"] = python_dict_bandit["results"][i]["issue_confidence"]
@@ -373,7 +377,7 @@ async def linter(code: str):
             confidence_score = 3
         elif(resDict["CONFIDENCE"] == "HIGH"):
             confidence_score = 5
-        code_security_score += (severity_score*confidence_score);
+        code_security_score += (severity_score*confidence_score)
         total_security_score += 25
         SECURITY_ARRAY.append(resDict)
     if total_security_score == 0:
@@ -381,6 +385,8 @@ async def linter(code: str):
     security_score = (code_security_score/total_security_score)*100
     severity_score = 100-(security_score)
     tempJson = (results.linter.stats)
+
+    # for the vulture part of the code regex to split and get the line number and the message to be provides in json format
     try:
         vulture_output = subprocess.check_output(['vulture', 'pylint_output.py'], stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
