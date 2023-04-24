@@ -73,4 +73,5 @@ This consists of two folders debt-detective(frontend),backend
      <img src="Images/exp_Score.png">
     <img src="Images/vul_score.png">
 <h3>Subparameter elaboration</h3>
+ <img src="Images/comunity_sub.png">
 </p>
